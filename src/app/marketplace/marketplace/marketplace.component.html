@@ -1,0 +1,8 @@
+<app-header></app-header>
+<ng-container *ngIf="auth.isLogedIn(); else Default">
+      <app-sidebar></app-sidebar>
+</ng-container>
+
+<ng-template #Default>
+      <router-outlet></router-outlet>
+</ng-template>

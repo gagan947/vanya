@@ -1,0 +1,140 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="container mx-auto">
+      <div class="py-5">
+            <div (click)="back()" class="flex items-center space-x-1 cursor-pointer text-primary text-md font-medium">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2" d="M5 12h14M5 12l6 6m-6-6l6-6" />
+                  </svg>
+                  <p>Return to the application</p>
+            </div>
+
+            <div class="mt-5 bg-[#F9F9F9] rounded-lg shadow-md lg:w-2/3 p-8">
+                  <ng-container *ngIf="!userInfo">
+                        <p class="text-xs text-red-600 mb-2"><strong>Notice: </strong> Your profile has not been
+                              registered
+                              yet.
+                              Please complete the registration
+                              process.</p>
+                  </ng-container>
+                  <form [formGroup]="updateInfoForm">
+                        <div class="flex justify-center items-center">
+                              <div class="relative">
+                                    <img [src]="userInfo?.profile_image ? userInfo?.profile_image : profile_img"
+                                          class="rounded-full border border-primary h-32 w-32"
+                                          (click)="vievImage(userInfo?.profile_image ? userInfo?.profile_image : profile_img)">
+                                    <input type="file" #file class="hidden" id="edit_profile"
+                                          formControlName="profile_img" (change)="fileChangeEvent($event)">
+                                    <div *ngIf="isEditable"
+                                          class="absolute bottom-0 right-0 bg-primary-gradient text-white rounded-full p-1 cursor-pointer"
+                                          (click)="file.click()">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
+                                                viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                      d="M12 8c-2.168 0-4 1.832-4 4s1.832 4 4 4s4-1.832 4-4s-1.832-4-4-4m0 6c-1.065 0-2-.935-2-2s.935-2 2-2s2 .935 2 2s-.935 2-2 2" />
+                                                <path fill="currentColor"
+                                                      d="M20 5h-2.586l-2.707-2.707A1 1 0 0 0 14 2h-4a1 1 0 0 0-.707.293L6.586 5H4c-1.103 0-2 .897-2 2v11c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2M4 18V7h3c.266 0 .52-.105.707-.293L10.414 4h3.172l2.707 2.707A1 1 0 0 0 17 7h3l.002 11z" />
+                                          </svg>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="flex justify-between items-center mt-5">
+                              <p class="font-medium text-base text-[#1C1C1C]">Personal Data</p>
+                              <ng-container *ngIf="!isEditable">
+                                    <button (click)="isEditable = true"
+                                          class="bg-primary-gradient border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">{{userInfo
+                                          ? 'Edit' : 'Register'}}</button>
+                              </ng-container>
+                              <ng-container *ngIf="isEditable">
+                                    <button [disabled]="updateInfoForm.invalid" (click)="updateInfo()"
+                                          [ngClass]="updateInfoForm.invalid ? 'cursor-not-allowed':'cursor-pointer'"
+                                          class="bg-primary-gradient border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Save</button>
+                              </ng-container>
+                        </div>
+                        <div class="mt-5">
+                              <div class="flex items-center gap-3">
+                                    <p class="font-medium text-gray-400 w-2/5">Profile Name</p>
+                                    <input type="text"
+                                          class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                          formControlName="profile_name" [ngClass]="isEditable ? 'editable' : ''"
+                                          [readonly]="!isEditable">
+                              </div>
+                              <div class="my-4 grid space-y-2">
+                                    <p class="font-medium text-base text-[#1C1C1C] my-4">Address</p>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 w-2/5">Street</p>
+                                          <input type="text"
+                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="address" [ngClass]="isEditable ? 'editable' : ''"
+                                                [readonly]="!isEditable">
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                          <p class="font-medium text-gray-400 w-2/5">City</p>
+                                          <input type="text"
+                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="city" [ngClass]="isEditable ? 'editable' : ''"
+                                                [readonly]="!isEditable">
+                                    </div>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 w-2/5">State</p>
+                                          <input type="text"
+                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="state" [ngClass]="isEditable ? 'editable' : ''"
+                                                [readonly]="!isEditable">
+                                    </div>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 w-2/5">Country</p>
+                                          <input type="text"
+                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="country" [ngClass]="isEditable ? 'editable' : ''"
+                                                [readonly]="!isEditable">
+                                    </div>
+                              </div>
+                              <div class="grid md:grid-cols-2 grid-cols-1 gap-x-10">
+                                    <div class="">
+                                          <p class="text-sm font-normal text-gray-400">
+                                                You are currently using a personal account. To use
+                                                the Carbonfuture platform for your company and
+                                                to share the account with other employees,
+                                                please upgrade to a business account.
+                                          </p>
+                                    </div>
+                                    <div class="flex justify-end items-center">
+                                          <a
+                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary-gradient hover:text-white flex items-center space-x-2 cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
+                                                      viewBox="0 0 24 24">
+                                                      <path fill="currentColor"
+                                                            d="M7 20v-2h10v2zm4-4V7.825L8.4 10.4L7 9l5-5l5 5l-1.4 1.4L13 7.825V16z" />
+                                                </svg>
+                                                Upgrade
+                                                to Business
+                                                Account</a>
+                                    </div>
+                                    <div class="my-4 md:col-span-2">
+                                          <p class="font-medium text-base text-[#1C1C1C] my-4">Banking Account</p>
+                                    </div>
+                                    <div class="md:col-span-2 flex justify-end items-center">
+                                          <a
+                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary-gradient hover:text-white flex items-center space-x-2 cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
+                                                      viewBox="0 0 24 24">
+                                                      <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                                                </svg>Add banking account</a>
+                                    </div>
+                              </div>
+                        </div>
+                        <p-dialog styleClass="bg-white p-2 rounded-lg shadow-md" [modal]="true" [(visible)]="visible"
+                              [style]="{ width: '25rem' }">
+                              <image-cropper [imageChangedEvent]="imageChangedEvent" [aspectRatio]="3 / 3" format="png"
+                                    [roundCropper]="true" (imageCropped)="imageCropped($event)"></image-cropper>
+                              <div class="flex justify-end m-2">
+                                    <button
+                                          class="bg-primary-gradient text-white hover:bg-transparent hover:text-primary border border-primary text-sm rounded-md py-1 px-4"
+                                          (click)="onDone()">Done</button>
+                              </div>
+                        </p-dialog>
+                  </form>
+            </div>
+      </div>
+</div>

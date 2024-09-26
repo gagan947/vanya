@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+      width: 3px;
+      height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+      background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+      background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+      background: #555;
+}
+
+
+.table-div ::-webkit-scrollbar {
+      width: 2px;
+      height: 4px;
+}
+
+.table-div ::-webkit-scrollbar-thumb {
+      background: #dadada;
+}
+
+.table-div ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+}
+
+.p-dialog-mask.p-component-overlay {
+      pointer-events: auto;
+      backdrop-filter: brightness(0.4);
+}
+
+.p-confirm-dialog.p-component .p-dialog-header .p-dialog-title,
+.p-dynamic-dialog .p-dialog-header .p-dialog-title {
+      @apply text-2xl font-semibold mb-3
+}
+
+.p-confirm-dialog.p-component .p-dialog-content .p-confirm-dialog-message {
+      @apply text-lg font-semibold mb-5
+}
+
+.p-confirm-dialog.p-component .p-dialog-footer {
+      @apply flex justify-end items-end
+}
+
+.p-steps .p-steps-number {
+      @apply hidden
+}
+
+.p-steps .p-steps-current {
+      @apply bg-[#E1F4DE] text-primary font-medium p-2 rounded-full shadow-md border-2 border-white mb-1
+}
+
+.p-steps.p-component ul {
+      @apply items-center gap-4 overflow-auto
+}
+
+
+.p-galleria-item-nav.p-galleria-item-prev {
+      @apply absolute bottom-[3.2rem] text-white h-fit top-auto left-auto right-48 z-50 cursor-pointer
+}
+
+.p-galleria-item-nav.p-galleria-item-next {
+      @apply absolute bottom-[3.2rem] text-white h-fit top-auto left-auto right-40 z-50 cursor-pointer
+}
+
+.animated-slider .p-carousel-item {
+      @apply border-l border-[#595959]
+}
+
+.p-carousel-prev,
+.p-carousel-next {
+      color: white;
+      position: absolute !important;
+}
+
+.p-carousel-prev {
+      @apply bottom-0 left-[47%];
+}
+
+.p-carousel-next {
+      @apply bottom-0 left-[52%];
+}
+
+.p-hidden-accessible input {
+      @apply w-0 opacity-0
+}
+
+.p-multiselect-label.p-placeholder {
+      @apply text-[#9ba3ae]
+}
+
+.p-multiselect-header, .p-multiselect-close {
+      display: none !important
+}
+
+.p-checkbox.p-component {
+      @apply mr-2
+}
+
+.p-multiselect-item {
+      @apply py-1 px-5 hover:bg-primary-gradient hover:text-white
+}
+
+.p-multiselect-item.p-highlight {
+      @apply bg-primary-gradient text-white
+}
+
+.ql-toolbar.ql-snow {
+      border: 0px solid #ccc !important;
+      border-bottom-width: 1px !important;
+}
+
+.ql-container.ql-snow {
+      border: none !important;
+}
+
+.revert-tailwind {
+      all: initial;
+}
+
+.revert-tailwind>* {
+      all: revert;
+}
+
+.p-multiselect-label {
+      white-space: normal !important;
+}
+
+.p-dialog-header-icon {
+      @apply focus:outline-none
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+      -moz-appearance: textfield;
+}
+
+.iti--allow-dropdown,
+.dropdown-menu.country-dropdown.show {
+      width: 100% !important;
+}
+
+.iti__flag-box,
+.iti__country-name {
+      font-size: small;
+}
+
+.iti__country {
+      padding: 1px 10px !important;
+}
+
+input#country-search-box:focus {
+      outline: none;
+}
+
+.iti__country-list {
+      box-shadow: none !important;
+}
+
+.NgxEditor__MenuBar {
+      padding: 0 !important;
+      color: #2b2b2b;
+      font-size: smaller;
+}
+
+.NgxEditor__Seperator {
+      display: none;
+}
+
+.p-paginator {
+      justify-content: end !important;
+      gap: 0.5rem !important;
+      opacity: 0.8 !important;
+      padding-top: 0.5rem;
+}
+
+.p-paginator-page {
+      padding: 0.5rem !important;
+}
+
+.p-paginator-rpp-options {
+      padding: 0 0.5rem;
+      border: 1px solid gray;
+      border-radius: 5px;
+}
+
+.p-dialog .p-dialog-header-icons {
+      gap: 1rem !important;
+}

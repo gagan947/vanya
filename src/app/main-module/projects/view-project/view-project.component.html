@@ -1,0 +1,210 @@
+<!-- <app-loader *ngIf="loading"></app-loader>
+<div class="container p-4">
+      <ng-container *ngIf="projectData">
+            <div class="grid grid-cols-2 gap-3">
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Project Name :</strong>
+                              <span>{{projectData.project_name}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center gap-3">
+                              <strong class="whitespace-nowrap">Subtitle :</strong>
+                              <span>{{projectData.project_subtitle}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Start Date :</strong>
+                              <span>{{projectData?.start_date | date:'longDate'}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>End Date :</strong>
+                              <span>{{projectData?.end_date}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Total Carbon Credits :</strong>
+                              <span>{{projectData.credits}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Current Phase :</strong>
+                              <span>{{getProjectPhase(projectData?.current_phase)}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Location :</strong>
+                              <span>{{projectData.location}}</span>
+                        </div>
+                  </div> -->
+<!-- <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Documents Attached :</strong>
+                              <img [src]="projectData.projectstory_image">
+                        </div>
+                  </div> -->
+<!-- <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Amount Worth :</strong>
+                              <span>{{projectData.amount_worth}}</span>
+                        </div>
+                  </div> -->
+<!-- <div class="col-span-2">
+                        <div class="flex justify-between align-center">
+                              <strong>Verification Status :</strong>
+                              <span
+                                    [ngClass]="getStatusClass(projectData.verification_status)">{{getStatusLabel(projectData.verification_status)}}</span>
+                        </div>
+                  </div>
+                  <div class="col-span-2 flex justify-end mt-5">
+                        <div class="flex gap-4 align-center">
+                              <button (click)="changeProjectStatus('Rejected')" *ngIf="role == 'Approver'"
+                                    class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 text-sm">
+                                    Reject</button>
+                              <button (click)="changeProjectStatus('Approved')" *ngIf="role == 'Approver'"
+                                    class="text-white bg-primary-gradient px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 text-sm">
+                                    Approve</button>
+                        </div>
+                  </div>
+            </div>
+      </ng-container>
+</div> -->
+
+<div class="container mx-auto py-8">
+
+      <!-- Project Header -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6 sticky top-0">
+
+            <div class="flex justify-between items-center">
+                  <h1 class="text-3xl font-bold text-green-600 mb-2">{{ projectData.project_name }}</h1>
+                  <div class="flex justify-end mt-5">
+                        <div class="flex gap-4 align-center">
+                              <button (click)="changeProjectStatus('Rejected')" *ngIf="role == 'Approver'"
+                                    class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 text-sm">
+                                    Reject</button>
+                              <button (click)="changeProjectStatus('Approved')" *ngIf="role == 'Approver'"
+                                    class="text-white bg-primary-gradient px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 text-sm">
+                                    Approve</button>
+                        </div>
+                  </div>
+            </div>
+            <p class="text-lg text-gray-600 flex items-center gap-2">{{getProjectType(projectData.project_type)}}
+                  | <img [src]="flagUrl" class="w-5 h-4"> {{ projectData.country }}
+            </p>
+      </div>
+
+      <!-- Project Details -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Project Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                        <p><span class="font-semibold">Location:</span> {{ projectData.location }}</p>
+                        <p><span class="font-semibold">Start Date:</span> {{ projectData.start_date }}</p>
+                        <p><span class="font-semibold">End Date:</span> {{ projectData.end_date ? projectData.end_date :
+                              'Ongoing' }}</p>
+                        <p><span class="font-semibold">Registry Details:</span> {{ projectData.registry_details }}</p>
+                  </div>
+                  <div>
+                        <p><span class="font-semibold">Area in Acres:</span> {{ projectData.area_in_acres }}</p>
+                        <p><span class="font-semibold">Area in Hectares:</span> {{ projectData.area_in_hectars }}</p>
+                        <p><span class="font-semibold">New or Existing Project:</span> {{
+                              projectData.new_or_existing_project }}</p>
+                        <p><span class="font-semibold">Methodology:</span> {{ projectData.methodology }}</p>
+                  </div>
+            </div>
+      </div>
+
+      <!-- Metrics & Status -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Project Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                        <p><span class="font-semibold">NDVI:</span> {{ projectData.ndvi }}</p>
+                        <p><span class="font-semibold">Carbon:</span> {{ projectData.carbon }}</p>
+                        <p><span class="font-semibold">NPAR:</span> {{ projectData.npar }}</p>
+                        <p><span class="font-semibold">PAR:</span> {{ projectData.par }}</p>
+                  </div>
+                  <div>
+                        <p><span class="font-semibold">Credits:</span> {{ projectData.credits }}</p>
+                        <p><span class="font-semibold">Remaining Credit:</span> {{ projectData.remaining_credit }}</p>
+                        <p><span class="font-semibold">Current
+                                    Phase:</span>{{getProjectPhase(projectData?.current_phase)}}</p>
+                        <p><span class="font-semibold">Verification Status:</span><span
+                                    [ngClass]="getStatusClass(projectData.verification_status)">{{getStatusLabel(projectData.verification_status)}}</span>
+                        </p>
+                  </div>
+            </div>
+      </div>
+
+      <!-- Impact & Funding -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Impact & Funding</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                        <p><span class="font-semibold">Impact Metrics:</span> {{ projectData.impact_metrics }}</p>
+                        <p><span class="font-semibold">Local Benefits:</span> {{ projectData.local_benefits }}</p>
+                  </div>
+                  <div>
+                        <p><span class="font-semibold">Funding & Investment Details:</span> {{
+                              projectData.funding_invstmnt_details }}</p>
+                        <p><span class="font-semibold">Stakeholder Information:</span> {{
+                              projectData.stakeholder_information }}</p>
+                  </div>
+            </div>
+      </div>
+
+      <!-- Risk Assessment & Address -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <h2 class="text-2xl font-bold mb-4">Risk Assessment & Address</h2>
+            <p><span class="font-semibold">Risk Assessment:</span> {{ projectData.risk_assessment }}</p>
+            <p><span class="font-semibold">Project Address:</span> {{ projectData.address }}</p>
+      </div>
+
+      <!-- Media & Links -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Project Media</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div *ngIf="projectMedia.image_1URL">
+                        <img [src]="imgUrl + projectMedia.image_1URL" alt="Image 1"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image1_text }}</p>
+                  </div>
+                  <div *ngIf="projectMedia.image_2URL">
+                        <img [src]="imgUrl + projectMedia.image_2URL" alt="Image 2"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image2_text }}</p>
+                  </div>
+                  <div *ngIf="projectMedia.image_3URL">
+                        <img [src]="imgUrl + projectMedia.image_3URL" alt="Image 3"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image3_text }}</p>
+                  </div>
+                  <div *ngIf="projectMedia.image_4URL">
+                        <img [src]="imgUrl + projectMedia.image_4URL" alt="Image 3"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image4_text }}</p>
+                  </div>
+                  <div *ngIf="projectMedia.image_5URL">
+                        <img [src]="imgUrl + projectMedia.image_5URL" alt="Image 3"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image5_text }}</p>
+                  </div>
+                  <div *ngIf="projectMedia.image_6URL">
+                        <img [src]="imgUrl + projectMedia.image_6URL" alt="Image 3"
+                              class="rounded-md w-full h-48 object-cover mb-2">
+                        <p>{{ projectMedia.image6_text }}</p>
+                  </div>
+            </div>
+            <!-- <div class="mt-6">
+              <a href="{{ kml_link }}" class="text-blue-500 underline" target="_blank">KML Link</a>
+              <a href="{{ video_URL }}" class="text-blue-500 underline ml-4" target="_blank">Watch Video</a>
+          </div>  -->
+      </div>
+</div>

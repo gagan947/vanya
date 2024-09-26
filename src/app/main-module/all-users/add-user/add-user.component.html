@@ -1,0 +1,259 @@
+<div id="right-panel" class="container mx-auto">
+    <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">{{user_id ? 'Update' : 'Add'}} User</h1>
+    <div class="p-5 px-10 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)" class="">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
+                <div class="grid gap-1 col-span-1">
+                    <label for="" class="text-sm text-gray-700">*First name</label>
+                    <input type="text"
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                        [ngClass]="userForm.controls['firstName'].errors &&
+                              userForm.controls['firstName'].touched ? 'outline-red-600' : ''"
+                        formControlName="firstName">
+                    <!-- error text S -->
+                    <p *ngIf="userForm.controls['firstName'].errors && userForm.controls['firstName'].touched"
+                        class="flex text-sm text-red-600 justify-between items-center mt-2">
+                        {{ getErrorMessage('firstName') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                fill="#F80000" />
+                        </svg></p>
+                </div>
+                <div class="grid gap-1 col-span-1">
+                    <label for="text-sm text-gray-700" class="">*Last name</label>
+                    <input type="text"
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                        [ngClass]="userForm.controls['lastName'].errors &&
+                              userForm.controls['lastName'].touched ? 'outline-red-600' : ''"
+                        formControlName="lastName">
+                    <!-- error text S -->
+                    <p *ngIf="userForm.controls['lastName'].errors && userForm.controls['lastName'].touched"
+                        class="flex text-sm text-red-600 justify-between items-center mt-2">
+                        {{ getErrorMessage('lastName') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                fill="#F80000" />
+                        </svg></p>
+                </div>
+                <div class="grid gap-1 col-span-1">
+                    <label for="" class="text-sm text-gray-700">*Email</label>
+                    <input type="email"
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                        [ngClass]="userForm.controls['email'].errors &&
+                              userForm.controls['email'].touched ? 'outline-red-600' : ''" formControlName="email">
+                    <!-- error text S -->
+                    <p *ngIf="userForm.controls['email'].errors && userForm.controls['email'].touched"
+                        class="flex text-sm text-red-600 justify-between items-center mt-2">
+                        {{ getErrorMessage('email') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                fill="#F80000" />
+                        </svg></p>
+                </div>
+                <div *ngIf="!user_id" class="grid gap-1 col-span-1">
+                    <label for="" class="text-sm text-gray-700">*Role</label>
+                    <select
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                        [ngClass]="userForm.controls['role_id'].errors &&
+                              userForm.controls['role_id'].touched ? 'outline-red-600' : ''" formControlName="role_id">
+                        <option [value]="3">Approver </option>
+                        <option [value]="2">Buyer</option>
+                        <option [value]="1">Seller</option>
+                    </select>
+                    <!-- error text S -->
+                    <p *ngIf="userForm.controls['role_id'].errors && userForm.controls['role_id'].touched"
+                        class="flex text-sm text-red-600 justify-between items-center mt-2">
+                        {{ getErrorMessage('role_id') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                fill="#F80000" />
+                        </svg></p>
+                </div>
+                <div *ngIf="user_id" class="grid gap-1 col-span-1">
+                    <label for="" class="text-sm text-gray-700">Status</label>
+                    <select
+                        class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                        [ngClass]="userForm.controls['status'].errors &&
+                              userForm.controls['status'].touched ? 'outline-red-600' : ''" formControlName="status">
+                        <option [value]="1">Active</option>
+                        <option [value]="0">Inactive</option>
+                    </select>
+                    <!-- error text S -->
+                    <p *ngIf="userForm.controls['status'].errors && userForm.controls['status'].touched"
+                        class="flex text-sm text-red-600 justify-between items-center mt-2">
+                        {{ getErrorMessage('status') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                fill="#F80000" />
+                        </svg></p>
+                </div>
+
+                <ng-container *ngIf="!user_id">
+                    <div class="grid gap-1 col-span-1">
+                        <label class="text-sm text-gray-700">*Phone</label>
+                        <ngx-intl-tel-input
+                            [cssClass]="'custom border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full'"
+                            [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                            [selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India" [maxLength]="15"
+                            [phoneValidation]="true" formControlName="phone_number"></ngx-intl-tel-input>
+                        <p *ngIf="
+                                  userForm.controls['phone_number'].errors &&
+                                  userForm.controls['phone_number'].touched
+                                " class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('phone_number') }}
+                            <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg>
+                        </p>
+                    </div>
+                    <div class="grid gap-1 col-span-1">
+                        <label for="" class="text-sm text-gray-700">*Company</label>
+                        <input type="text"
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                            [ngClass]="userForm.controls['company_name'].errors &&
+                              userForm.controls['company_name'].touched ? 'outline-red-600' : ''"
+                            formControlName="company_name">
+                        <!-- error text S -->
+                        <p *ngIf="userForm.controls['company_name'].errors && userForm.controls['company_name'].touched"
+                            class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('company_name') }} <svg width="17" height="17" viewBox="0 0 17 17"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg></p>
+                    </div>
+                    <div class="grid gap-1 relative">
+                        <label class="text-sm text-gray-700">*Password</label>
+                        <input [type]="showPassword ? 'text': 'password'"
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
+                            [ngClass]="userForm.controls['password'].errors &&
+                              userForm.controls['password'].touched ? 'outline-red-600' : ''" placeholder=""
+                            formControlName="password">
+                        <button type="button" class="absolute right-3 top-[2.2rem]"
+                            (click)="showPassword = !showPassword">
+                            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                viewBox="0 0 256 256">
+                                <rect width="256" height="256" fill="none" />
+                                <path fill="currentColor"
+                                    d="M228 175a8 8 0 0 1-10.92-3l-19-33.2A123.2 123.2 0 0 1 162 155.46l5.87 35.22a8 8 0 0 1-6.58 9.21a8.4 8.4 0 0 1-1.29.11a8 8 0 0 1-7.88-6.69l-5.77-34.58a133 133 0 0 1-36.68 0l-5.77 34.58A8 8 0 0 1 96 200a8.4 8.4 0 0 1-1.32-.11a8 8 0 0 1-6.58-9.21l5.9-35.22a123.2 123.2 0 0 1-36.06-16.69L39 172a8 8 0 1 1-13.94-8l20-35a153.5 153.5 0 0 1-19.3-20a8 8 0 1 1 12.46-10c16.6 20.54 45.64 45 89.78 45s73.18-24.49 89.78-45a8 8 0 1 1 12.44 10a153.5 153.5 0 0 1-19.3 20l20 35a8 8 0 0 1-2.92 11" />
+                            </svg>
+
+                            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                viewBox="0 0 15 15">
+                                <rect width="15" height="15" fill="none" />
+                                <path fill="currentColor" fill-rule="evenodd"
+                                    d="M7.5 11c-2.697 0-4.97-1.378-6.404-3.5C2.53 5.378 4.803 4 7.5 4s4.97 1.378 6.404 3.5C12.47 9.622 10.197 11 7.5 11m0-8C4.308 3 1.656 4.706.076 7.235a.5.5 0 0 0 0 .53C1.656 10.294 4.308 12 7.5 12s5.844-1.706 7.424-4.235a.5.5 0 0 0 0-.53C13.344 4.706 10.692 3 7.5 3m0 6.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <p *ngIf="
+                              userForm.controls['password'].errors &&
+                              userForm.controls['password'].touched
+                            " class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('password') }}
+                            <svg width="13" height="13" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg>
+                        </p>
+                    </div>
+                    <div class="grid gap-1 col-span-1">
+                        <label for="" class="text-sm text-gray-700">*Country</label>
+                        <select
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                            [ngClass]="userForm.controls['country'].errors &&
+                              userForm.controls['country'].touched ? 'outline-red-600' : ''" formControlName="country"
+                            (change)="getStates($event)">
+                            <option *ngFor="let country of countries" [value]="country.isoCode">{{country.name}}
+                            </option>
+                        </select>
+                        <!-- error text S -->
+                        <p *ngIf="userForm.controls['country'].errors && userForm.controls['country'].touched"
+                            class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('country') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg></p>
+                    </div>
+                    <div class="grid gap-1 col-span-1">
+                        <label for="" class="text-sm text-gray-700">*State</label>
+                        <select
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                            [ngClass]="userForm.controls['state'].errors &&
+                              userForm.controls['state'].touched ? 'outline-red-600' : ''" formControlName="state"
+                            (change)="getCities($event)">
+                            <option *ngFor="let state of states" [value]="state.isoCode">{{state.name}}</option>
+                        </select>
+                        <!-- error text S -->
+                        <p *ngIf="userForm.controls['state'].errors && userForm.controls['state'].touched"
+                            class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('state') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg></p>
+                    </div>
+                    <div class="grid gap-1 col-span-1">
+                        <label for="" class="text-sm text-gray-700">*City</label>
+                        <select
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                            [ngClass]="userForm.controls['city'].errors &&
+                              userForm.controls['city'].touched ? 'outline-red-600' : ''" formControlName="city">
+                            <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
+                        </select>
+                        <!-- error text S -->
+                        <p *ngIf="userForm.controls['city'].errors && userForm.controls['city'].touched"
+                            class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('city') }} <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg></p>
+                    </div>
+                    <div class="grid gap-1 col-span-1">
+                        <label for="" class="text-sm text-gray-700">*Address</label>
+                        <input type="text"
+                            class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                            [ngClass]="userForm.controls['address'].errors &&
+                              userForm.controls['address'].touched ? 'outline-red-600' : ''" formControlName="address">
+                        <!-- error text S -->
+                        <p *ngIf="userForm.controls['address'].errors && userForm.controls['address'].touched"
+                            class="flex text-sm text-red-600 justify-between items-center mt-2">
+                            {{ getErrorMessage('address') }}
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                    fill="#F80000" />
+                            </svg>
+                        </p>
+                    </div>
+                </ng-container>
+                <div class="mt-4">
+                    <div class="pt-2 flex gap-1 align-center">
+                        <button type="reset"
+                            class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 font-medium"
+                            routerLink="/main/dashboard/users">Cancel</button>
+                        <button type="submit"
+                            class="text-white bg-primary-gradient px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

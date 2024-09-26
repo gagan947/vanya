@@ -1,0 +1,148 @@
+<div *ngIf="sidebarVisible2" id="overlay"></div>
+<app-loader *ngIf="loading"></app-loader>
+<p-sidebar [(visible)]="sidebarVisible2" [baseZIndex]="900" (onShow)="getCartItems()" [showCloseIcon]="false"
+      [dismissible]="true" styleClass="bg-white shadow-lg p-4 transition-all duration-500" position="right">
+      <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+            <div class="fixed inset-0 overflow-hidden">
+                  <div class="absolute inset-0 overflow-hidden">
+                        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                              <div class="pointer-events-auto w-screen max-w-md">
+                                    <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                          <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                                                <div class="flex items-start justify-between">
+                                                      <h2 class="text-2xl font-medium text-gray-900"
+                                                            id="slide-over-title">
+                                                            cart</h2>
+                                                      <div class="ml-3 flex h-7 items-center">
+                                                            <button type="button" (click)="close()"
+                                                                  class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
+                                                                  <span class="absolute -inset-0.5"></span>
+                                                                  <span class="sr-only">Close panel</span>
+                                                                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                                        stroke-width="1.5" stroke="currentColor"
+                                                                        aria-hidden="true">
+                                                                        <path stroke-linecap="round"
+                                                                              stroke-linejoin="round"
+                                                                              d="M6 18L18 6M6 6l12 12" />
+                                                                  </svg>
+                                                            </button>
+                                                      </div>
+                                                </div>
+                                                <h1 *ngIf="cartItems?.length < 1"
+                                                      class="text-xl font-semibold text-red-500 mt-10">No Data Found In
+                                                      Your
+                                                      Cart !</h1>
+                                                <div class="mt-8">
+                                                      <div class="flow-root">
+                                                            <ul role="list" class="-my-6 divide-y divide-gray-200">
+                                                                  <li class="flex py-6" *ngFor="let item of cartItems">
+                                                                        <div
+                                                                              class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                                              <img [src]="baseUrl + item.thumbnail"
+                                                                                    alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                                                                    class="h-full w-full object-cover object-center">
+                                                                        </div>
+
+                                                                        <div class="ml-4 flex flex-1 flex-col">
+                                                                              <div>
+                                                                                    <div
+                                                                                          class="flex justify-between text-base font-medium text-gray-900">
+                                                                                          <h3>
+                                                                                                <a
+                                                                                                      href="#">{{item.project_name}}</a>
+                                                                                          </h3>
+                                                                                          <p class="ml-4">
+                                                                                                {{item.price_per_carbon_credit
+                                                                                                *
+                                                                                                item?.carbon_credits?.toString().split('.')[0]
+                                                                                                | currency:'USD'}}</p>
+                                                                                    </div>
+                                                                                    <p
+                                                                                          class="mt-1 text-sm text-gray-500">
+                                                                                          {{item.project_subtitle}}</p>
+                                                                              </div>
+                                                                              <div
+                                                                                    class="flex flex-1 items-end justify-between text-sm">
+                                                                                    <div
+                                                                                          class="text-gray-500 flex gap-3 items-center">
+                                                                                          Qty
+                                                                                          <div
+                                                                                                class="border px-4 pr-6 py-1 rounded-md text-[#2B2B2B] relative">
+                                                                                                {{
+                                                                                                item?.carbon_credits?.toString().split('.')[0]
+                                                                                                }} &nbsp;
+                                                                                                tCO₂e
+                                                                                                <button
+                                                                                                      (click)="increment(item)"
+                                                                                                      class="absolute top-1 right-1 cursor-pointer text-gray-600">
+                                                                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                            width="0.8em"
+                                                                                                            height="0.8em"
+                                                                                                            viewBox="0 0 24 24">
+                                                                                                            <rect width="24"
+                                                                                                                  height="24"
+                                                                                                                  fill="none" />
+                                                                                                            <path fill="currentColor"
+                                                                                                                  d="M3 19h18a1.002 1.002 0 0 0 .823-1.569l-9-13c-.373-.539-1.271-.539-1.645 0l-9 13A.999.999 0 0 0 3 19" />
+                                                                                                      </svg>
+                                                                                                </button>
+
+                                                                                                <button
+                                                                                                      (click)="decrement(item)"
+                                                                                                      class="absolute bottom-1 right-1 cursor-pointer text-gray-600">
+                                                                                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                            width="0.8em"
+                                                                                                            height="0.8em"
+                                                                                                            viewBox="0 0 24 24">
+                                                                                                            <rect width="24"
+                                                                                                                  height="24"
+                                                                                                                  fill="none" />
+                                                                                                            <path fill="currentColor"
+                                                                                                                  d="M11.178 19.569a.998.998 0 0 0 1.644 0l9-13A.999.999 0 0 0 21 5H3a1.002 1.002 0 0 0-.822 1.569z" />
+                                                                                                      </svg>
+                                                                                                </button>
+
+                                                                                          </div>
+                                                                                    </div>
+
+                                                                                    <div class="flex">
+                                                                                          <button type="button"
+                                                                                                (click)="deleteFromCart(item)"
+                                                                                                class="font-medium text-red-600 hover:text-red-500">Remove</button>
+                                                                                    </div>
+                                                                              </div>
+                                                                              <p *ngIf="item?.carbon_credits?.toString().split('.')[0] > item.remaining_credit"
+                                                                                    class="text-xs text-red-500">Not
+                                                                                    Available!</p>
+                                                                        </div>
+                                                                  </li>
+                                                            </ul>
+                                                      </div>
+                                                </div>
+                                          </div>
+
+                                          <ng-container *ngIf="cartItems?.length > 0">
+                                                <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                                                      <div
+                                                            class="flex justify-between text-base font-medium text-gray-900">
+                                                            <p>Subtotal</p>
+                                                            <p>{{getTotal(cartItems) | currency:'USD'}}</p>
+                                                      </div>
+                                                      <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes
+                                                            calculated at
+                                                            checkout.</p>
+                                                      <div class="mt-6">
+                                                            <button (click)="checkOut(cartItems)"
+                                                                  class="flex items-center w-full justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
+                                                      </div>
+                                                </div>
+                                          </ng-container>
+
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</p-sidebar>

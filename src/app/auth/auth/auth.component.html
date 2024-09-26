@@ -1,0 +1,24 @@
+<div class="">
+      <div class="grid grid-cols-1 md:grid-cols-4 h-screen">
+            <div class="lg:col-span-3 md:col-span-2 hidden md:block">
+                  <div class="relative">
+                        <img src="assets/images/login_bg.jpg" class="h-screen w-full">
+                        <div class="absolute top-28 left-[2vw] w-3/4 text-center p-4">
+                              <p class="text-2xl font-medium text-white">"Climate change is real. It is happening right
+                                    now, it is the most urgent threat facing our entire species and we need to work
+                                    collectively together and stop procrastinating."</p>
+                              <p class="text-xl font-medium mt-10 text-white">Leonardo Di Caprio. Actor &
+                                    Environmentalist</p>
+
+                              <button routerLink="/marketplace"
+                                    class="text-white border-2 border-primary font-medium py-2 rounded-lg px-8 hover:bg-primary-gradient hover:text-white mt-20">
+                                    See All
+                                    Projects</button>
+                        </div>
+                  </div>
+            </div>
+            <div class="lg:col-span-1 md:col-span-2 overflow-y-auto overflow-x-hidden px-2">
+                  <router-outlet></router-outlet>
+            </div>
+      </div>
+</div>
