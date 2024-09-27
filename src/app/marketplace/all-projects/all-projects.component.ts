@@ -53,6 +53,6 @@ export class AllProjectsComponent {
 
   encryptId (id: number): string {
     const secretKey = 'Vanya@321'
-    return CryptoJS.AES.encrypt(id.toString(), secretKey).toString()
+    return CryptoJS.AES.encrypt(id?.toString(), secretKey).toString()
   }
 }

@@ -193,7 +193,8 @@ input#country-search-box:focus {
 }
 
 .p-paginator-page {
-      padding: 0.5rem !important;
+      padding: 0.3rem 0.5rem !important;
+      font-size: small;
 }
 
 .p-paginator-rpp-options {
@@ -204,4 +205,20 @@ input#country-search-box:focus {
 
 .p-dialog .p-dialog-header-icons {
       gap: 1rem !important;
+}
+
+.pagination-dropdown .p-overlay {
+      @apply bg-white px-3
+}
+
+.pagination-dropdown .p-dropdown {
+      @apply w-14
+}
+
+.pagination-dropdown .p-dropdown .p-icon-wrapper svg {
+      @apply w-3 h-3
+}
+
+.p-paginator-page.p-highlight {
+      @apply bg-primary-gradient text-white rounded-full h-6 w-6
 }

@@ -137,8 +137,8 @@
                               </tbody>
                         </table>
                   </div>
-                  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="120"
-                        [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+                  <p-paginator styleClass="pagination-dropdown" (onPageChange)="onPageChange($event)" [first]="first"
+                        [rows]="rows" [totalRecords]="500" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
 
             </div>
             <p-confirmDialog [closable]="false" styleClass="bg-white px-10 py-5 rounded-lg shadow-md"></p-confirmDialog>

@@ -16,6 +16,7 @@ export class AllUsersComponent {
   visible: boolean = false
   ref: DynamicDialogRef | undefined
   role: string | null | undefined
+  loading: boolean = false
 
   constructor (
     private toastr: ToastrService,
@@ -42,15 +43,18 @@ export class AllUsersComponent {
   }
 
   getUsersList () {
+    this.loading = true
     let formData = new URLSearchParams()
-    formData.set('page', '1')
-    formData.set('page_size', '10')
+    formData.set('page', (this.page + 1).toString() )
+    formData.set('page_size', this.rows.toString())
     let apiUrl = `getAllUserList`
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.users = res.finalList
+        this.loading = false
       } else {
         this.toastr.error(res.msg)
+        this.loading = false
       }
     })
   }
@@ -67,6 +71,7 @@ export class AllUsersComponent {
       rejectIcon: 'none',
 
       accept: () => {
+        this.loading = true
         let apiUrl = `deleteUser`
         let formData = new URLSearchParams()
         formData.set('id', user_id.toString())
@@ -77,8 +82,10 @@ export class AllUsersComponent {
             if (res.success) {
               this.toastr.success(res.msg)
               this.getUsersList()
+              this.loading = false
             } else {
               this.toastr.error(res.message)
+              this.loading = false
             }
           })
       }
@@ -108,11 +115,14 @@ export class AllUsersComponent {
   }
 
   first: number = 0
-
   rows: number = 10
+  page:number = 0
 
-  onPageChange (event: { first: number; rows: number }) {
+  onPageChange (event: { first: number; rows: number; page:number }) {
     this.first = event.first
     this.rows = event.rows
+    this.page = event.page    
+
+    this.getUsersList()
   }
 }

@@ -211,7 +211,7 @@ export class ProjectsComponent {
 
   first: number = 0
 
-  rows: number = 10
+  rows: number = 5
 
   onPageChange (event: { first: number; rows: number }) {
     this.first = event.first

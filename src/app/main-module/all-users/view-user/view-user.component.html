@@ -45,7 +45,7 @@
                     Full name
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    John Doe
+                    <span>{{userData.name}}</span>
                 </dd>
             </div>
             <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -53,7 +53,7 @@
                     Email address
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                    johndoeexample.com
+                    <span>{{userData.email}}</span>
                 </dd>
             </div>
             <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -73,5 +73,23 @@
                     Anytown, USA 12345
                 </dd>
             </div>
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Role
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <span>{{userData.role}}</span>
+                </dd>
+            </div>
+            <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                    Status
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <span [ngClass]="userData.status == 1 ? 'text-primary' : 'text-red-500'">{{ userData.status == 1 ?
+                        'Active' : 'Inactive' }}</span>
+                </dd>
+            </div>
         </dl>
     </div>
+</div>
