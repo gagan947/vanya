@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms'
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms'
 
 export function strongPasswordValidator (
   control: AbstractControl
@@ -31,4 +31,19 @@ export function strongPasswordValidator (
     }
   }
   return null
+}
+
+
+export function dateRangeValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const startDate = control.get('start_date')?.value;
+    const endDate = control.get('end_date')?.value;
+
+    if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+      return { dateRangeInvalid: true };
+    }else{
+      return { dateRangeInvalid: false };
+    }
+    return null;
+  };
 }

@@ -8,7 +8,7 @@
                         routerLink="/marketplace/projects/project-detail" [queryParams]="{id:encryptId(project.id)}">
                         <div class="relative">
                               <img [src]=" project.thumbnail ? imageurl + project.thumbnail : '/assets/images/about_inner_bg.jpg'"
-                                    class="rounded-lg h-[40vh] w-full object-contain" alt="">
+                                    class="rounded-lg md:h-64 w-full" alt="">
                         </div>
                         <div class="p-2 grid gap-y-2">
                               <div class="flex justify-between items-center">

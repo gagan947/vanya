@@ -9,6 +9,7 @@ import { ProjectDataService } from 'src/app/services/project-data.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
+import { dateRangeValidator } from 'src/app/auth/validator'
 
 @Component({
   selector: 'app-add-project',
@@ -238,7 +239,7 @@ export class AddProjectComponent {
       npar: ['', Validators.required],
       par: ['', Validators.required],
       current_phase: ['', Validators.required]
-    })
+    },{ validator: dateRangeValidator() })
 
     this.impactBenefitsForm = this.fb.group({
       impact_metrics: [''],
