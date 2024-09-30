@@ -8,7 +8,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { MainModuleModule } from '../main-module/main-module.module'
 import { ProjectOverviewComponent } from './project-overview/project-overview.component'
 import { FormsModule } from '@angular/forms';
-import { MessageDialogComponent } from './message-dialog/message-dialog.component'
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { ContactUsComponent } from './contact-us/contact-us.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     MarketplaceComponent,
     ProjectDetailComponent,
     ProjectOverviewComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    ContactUsComponent
   ],
   imports: [
     FormsModule,

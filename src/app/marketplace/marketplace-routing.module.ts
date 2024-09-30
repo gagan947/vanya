@@ -4,6 +4,7 @@ import { AllProjectsComponent } from './all-projects/all-projects.component'
 import { MarketplaceComponent } from './marketplace/marketplace.component'
 import { ProjectDetailComponent } from './project-detail/project-detail.component'
 import { ProjectOverviewComponent } from './project-overview/project-overview.component'
+import { ContactUsComponent } from './contact-us/contact-us.component'
 
 const routes: Routes = [
   {
@@ -27,9 +28,13 @@ const routes: Routes = [
       {
         path: 'project-overview',
         component: ProjectOverviewComponent
-      }
+      },
+      {
+        path: 'contact-us',
+        component: ContactUsComponent
+      },
     ]
-  }
+  },
 ]
 
 @NgModule({
