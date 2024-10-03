@@ -53,7 +53,7 @@ export class ProjectsComponent {
     this.loading = true
     this.service
       .get(
-        `projects/${ApiUrl}?pageNo=1&pageSize=10&userid=${localStorage.getItem(
+        `projects/${ApiUrl}?pageNo=${this.page + 1}&pageSize=${this.rows}&userid=${localStorage.getItem(
           'user'
         )}`
       )
@@ -61,16 +61,19 @@ export class ProjectsComponent {
         next: res => {
           if (res.status == 200) {
             this.projectList = res.projectinfo
-            this.totalCount = res.totalCount
+            this.totalCount = res.totalCount[0].total
             this.loading = false
           } else {
             this.loading = false
+            this.projectList = []
           }
         },
         error: err => {
           this.loading = false
         }
       })
+      console.log(this.projectList);
+      
   }
 
   showDialog (project_id: number) {
@@ -210,11 +213,14 @@ export class ProjectsComponent {
   }
 
   first: number = 0
+  rows: number = 10
+  page:number = 0
 
-  rows: number = 5
-
-  onPageChange (event: { first: number; rows: number }) {
+  onPageChange (event: { first: number; rows: number;page:number }) {
     this.first = event.first
     this.rows = event.rows
+    this.page = event.page    
+
+    this.getAllProjects()
   }
 }

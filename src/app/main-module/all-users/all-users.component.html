@@ -100,7 +100,7 @@
                         </table>
                   </div>
                   <p-paginator styleClass="pagination-dropdown" (onPageChange)="onPageChange($event)" [first]="first"
-                        [rows]="rows" [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+                        [rows]="rows" [totalRecords]="totalCount" [rowsPerPageOptions]="[5, 10, 20]"></p-paginator>
             </div>
       </div>
       <p-confirmDialog [closable]="false" styleClass="bg-white px-10 py-5 rounded-lg shadow-md"></p-confirmDialog>

@@ -20,7 +20,7 @@ export class SidebarDataService {
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
-      { label: 'Transaction History', link: '/hdgh', icon: 'bank-transfer' },
+      { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
       { label: 'Sales Report', link: '/dgfh', icon: 'report-line' },
       { label: 'Certificates', link: '/tey', icon: 'certificate' },
       {
@@ -43,7 +43,7 @@ export class SidebarDataService {
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
-      { label: 'Transaction History', link: '/u7t', icon: 'bank-transfer' },
+      { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
       { label: 'Sales Report', link: '/srr', icon: 'report-line' },
       { label: 'Certificates', link: '/utu', icon: 'certificate' },
       {

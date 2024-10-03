@@ -15,7 +15,8 @@ import { MainHeaderComponent } from './main-header/main-header.component'
 import { ViewProjectComponent } from './projects/view-project/view-project.component'
 import { AddProjectComponent } from './projects/add-project/add-project.component'
 import { MainComponent } from './main/main.component'
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     MainHeaderComponent,
     ViewProjectComponent,
     AddProjectComponent,
-    MainComponent
+    MainComponent,
+    TransactionHistoryComponent
   ],
   imports: [
     CommonModule,

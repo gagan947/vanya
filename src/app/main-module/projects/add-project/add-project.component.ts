@@ -9,7 +9,7 @@ import { ProjectDataService } from 'src/app/services/project-data.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
-import { dateRangeValidator } from 'src/app/auth/validator'
+import { dateRangeValidator, whiteSpaceValidator } from 'src/app/auth/validator'
 
 @Component({
   selector: 'app-add-project',
@@ -219,7 +219,7 @@ export class AddProjectComponent {
       project_type: ['', Validators.required],
       sustainableDevelopmentGoals: ['', Validators.required],
       specificSDGTargets: [''],
-      country: ['', Validators.required],
+      country: ['', [Validators.required,whiteSpaceValidator.cannotContainSpace]],
       projectArea: ['', [Validators.required, Validators.min(0)]],
       location: ['', Validators.required],
       address: [''],
@@ -684,6 +684,8 @@ export class AddProjectComponent {
       return `It must be a positive number`
     } else if (control?.hasError('max')) {
       return `this can not be grater than Total credits`
+    } else if (control?.hasError('cannotContainSpace')) {
+      return `this field can not contain space`
     }
     return ''
   }

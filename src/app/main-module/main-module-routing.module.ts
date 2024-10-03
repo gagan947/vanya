@@ -6,6 +6,7 @@ import { AddUserComponent } from './all-users/add-user/add-user.component'
 import { ProjectsComponent } from './projects/projects.component'
 import { AddProjectComponent } from './projects/add-project/add-project.component'
 import { MainComponent } from './main/main.component'
+import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
 
 const routes: Routes = [
   {
@@ -36,7 +37,11 @@ const routes: Routes = [
       {
         path: 'projects/add-project',
         component: AddProjectComponent
-      }
+      },
+      {
+        path: 'transaction-history',
+        component: TransactionHistoryComponent
+      },
     ]
   }
 ]

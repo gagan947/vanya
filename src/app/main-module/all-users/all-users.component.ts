@@ -17,6 +17,7 @@ export class AllUsersComponent {
   ref: DynamicDialogRef | undefined
   role: string | null | undefined
   loading: boolean = false
+  totalCount: any
 
   constructor (
     private toastr: ToastrService,
@@ -51,6 +52,7 @@ export class AllUsersComponent {
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.users = res.finalList
+        this.totalCount = res.count[0].total
         this.loading = false
       } else {
         this.toastr.error(res.msg)
