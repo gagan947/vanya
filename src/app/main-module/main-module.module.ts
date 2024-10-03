@@ -17,6 +17,7 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { MainComponent } from './main/main.component'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
+import { CreditHistoryComponent } from './credit-history/credit-history.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TransactionHistoryComponent } from './transaction-history/transaction-h
     ViewProjectComponent,
     AddProjectComponent,
     MainComponent,
-    TransactionHistoryComponent
+    TransactionHistoryComponent,
+    CreditHistoryComponent
   ],
   imports: [
     CommonModule,

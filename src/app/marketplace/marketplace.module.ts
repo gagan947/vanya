@@ -9,7 +9,7 @@ import { MainModuleModule } from '../main-module/main-module.module'
 import { ProjectOverviewComponent } from './project-overview/project-overview.component'
 import { FormsModule } from '@angular/forms';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
-import { ContactUsComponent } from './contact-us/contact-us.component'
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component'
     ProjectDetailComponent,
     ProjectOverviewComponent,
     MessageDialogComponent,
-    ContactUsComponent
+    ContactUsComponent,
   ],
   imports: [
     FormsModule,

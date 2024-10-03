@@ -1,7 +1,5 @@
 import { Component } from '@angular/core'
-import { ToastrService } from 'ngx-toastr'
 import { AuthService } from 'src/app/services/auth.service'
-import { ProjectDataService } from 'src/app/services/project-data.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
@@ -19,10 +17,8 @@ export class AllProjectsComponent {
   imageurl = environment.imgUrl
 
   constructor (
-    private toastr: ToastrService,
     private service: SharedService,
     private authService: AuthService,
-    private projectData: ProjectDataService
   ) {}
 
   ngOnInit () {

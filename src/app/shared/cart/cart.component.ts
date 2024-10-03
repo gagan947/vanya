@@ -22,10 +22,8 @@ export class CartComponent {
   ref: DynamicDialogRef | undefined
 
   constructor (
-    private route: ActivatedRoute,
     private router: Router,
     private service: SharedService,
-    private projectService: ProjectDataService,
     private toastr: ToastrService,
     private dialogService: DialogService
   ) {}

@@ -60,9 +60,9 @@ export class ProjectsComponent {
       .subscribe({
         next: res => {
           if (res.status == 200) {
+            this.loading = false
             this.projectList = res.projectinfo
             this.totalCount = res.totalCount[0].total
-            this.loading = false
           } else {
             this.loading = false
             this.projectList = []

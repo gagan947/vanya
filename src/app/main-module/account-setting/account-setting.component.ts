@@ -1,6 +1,5 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
 import { City, Country, State } from 'country-state-city'
 import { ToastrService } from 'ngx-toastr'
 import { SharedService } from 'src/app/services/shared.service'
@@ -9,6 +8,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { ImagePreviewComponent } from 'src/app/shared/image-preview/image-preview.component'
+import { NoWhitespaceDirective } from 'src/app/auth/validator'
 
 @Component({
   selector: 'app-account-setting',
@@ -55,7 +55,7 @@ export class AccountSettingComponent {
   createForm () {
     this.updateInfoForm = this.fb.group({
       user_id: [''],
-      profile_name: ['', Validators.required],
+      profile_name: ['', [Validators.required, NoWhitespaceDirective.validate]],
       address: [''],
       city: [''],
       state: [''],

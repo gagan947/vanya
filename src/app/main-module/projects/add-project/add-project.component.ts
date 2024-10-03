@@ -9,7 +9,7 @@ import { ProjectDataService } from 'src/app/services/project-data.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
-import { dateRangeValidator, whiteSpaceValidator } from 'src/app/auth/validator'
+import { dateRangeValidator, NoWhitespaceDirective, whiteSpaceValidator } from 'src/app/auth/validator'
 
 @Component({
   selector: 'app-add-project',
@@ -205,7 +205,7 @@ export class AddProjectComponent {
 
   inItForm () {
     this.projectBasicInfoForm = this.fb.group({
-      project_name: ['', [Validators.required, Validators.minLength(3)]],
+      project_name: ['', [Validators.required, Validators.minLength(3), NoWhitespaceDirective.validate]],
       project_subtitle: ['', Validators.required],
       project_subtitle_2: [''],
       project_short_desc: [

@@ -56,3 +56,12 @@ export class whiteSpaceValidator {
       return null;
   }
 }
+
+export class NoWhitespaceDirective {
+  static validate(control: AbstractControl): ValidationErrors | null {
+    if (!control.value || control.value.trim() == '') {
+      return { required: true };
+    }
+    return null;
+  }
+}

@@ -20,6 +20,7 @@ export class SidebarDataService {
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
+      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
       { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
       { label: 'Sales Report', link: '/dgfh', icon: 'report-line' },
       { label: 'Certificates', link: '/tey', icon: 'certificate' },
@@ -43,6 +44,7 @@ export class SidebarDataService {
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
+      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
       { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
       { label: 'Sales Report', link: '/srr', icon: 'report-line' },
       { label: 'Certificates', link: '/utu', icon: 'certificate' },
@@ -70,7 +72,7 @@ export class SidebarDataService {
         link: '/my-orders',
         icon: 'clipboard-text-history-outline'
       },
-      { label: 'Credit History', link: '/res', icon: 'history' },
+      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
       { label: 'Certificates', link: '/fdfds', icon: 'certificate' },
       {
         label: 'Marketplace',
@@ -88,8 +90,8 @@ export class SidebarDataService {
     ]
   }
 
-  constructor (private authService: AuthService) {}
-  getSidebarItems (): Observable<{ label: string; link: string }[]> {
+  constructor(private authService: AuthService) { }
+  getSidebarItems(): Observable<{ label: string; link: string }[]> {
     return this.authService.authState$.pipe(
       map(res => {
         const roleName = this.getValidRoleName(res.role)
@@ -98,7 +100,7 @@ export class SidebarDataService {
     )
   }
 
-  getValidRoleName (role: string | null): RoleName {
+  getValidRoleName(role: string | null): RoleName {
     const validRoles: RoleName[] = ['Approver', 'Seller', 'Buyer']
     return validRoles.includes(role as RoleName) ? (role as RoleName) : 'Buyer'
   }

@@ -22,9 +22,7 @@ export class ProjectOverviewComponent {
 
   constructor (
     private route: ActivatedRoute,
-    private router: Router,
     private service: SharedService,
-    private projectService: ProjectDataService,
     private toastr: ToastrService
   ) {}
 

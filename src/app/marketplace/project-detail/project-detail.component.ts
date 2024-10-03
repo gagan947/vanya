@@ -34,7 +34,6 @@ export class ProjectDetailComponent {
 
   constructor (
     private route: ActivatedRoute,
-    private router: Router,
     private _location: Location,
     private service: SharedService,
     private projectService: ProjectDataService

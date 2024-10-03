@@ -5,8 +5,6 @@ import { LogInComponent } from './log-in/log-in.component'
 import { SignUpComponent } from './sign-up/sign-up.component'
 import { ForgetPasswordComponent } from './forget-password/forget-password.component'
 import { MessageComponent } from './message/message.component'
-import { AuthGuard } from '../guards/auth.guard'
-import { AccountSettingComponent } from '../main-module/account-setting/account-setting.component'
 
 const routes: Routes = [
   {
