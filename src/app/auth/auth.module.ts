@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-
 import { AuthRoutingModule } from './auth-routing.module'
 import { AuthComponent } from './auth/auth.component'
 import { LogInComponent } from './log-in/log-in.component'
@@ -28,4 +27,4 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     NgxIntlTelInputModule
   ]
 })
-export class AuthModule {}
+export class AuthModule { }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { Country, State, City } from 'country-state-city'
 import { SharedService } from 'src/app/services/shared.service'
-import { strongPasswordValidator } from 'src/app/auth/validator'
+import { strongPasswordValidator } from 'src/app/shared/validator'
 import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input'
 
 @Component({
@@ -24,7 +24,7 @@ export class AddUserComponent {
   CountryISO = CountryISO
   preferredCountries: CountryISO[] = [CountryISO.India]
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private service: SharedService,
@@ -58,11 +58,11 @@ export class AddUserComponent {
     })
   }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.countries = Country.getAllCountries()
   }
 
-  onSubmit (form: any) {
+  onSubmit(form: any) {
     form.markAllAsTouched()
     // if (form.invalid) {
     //   return
@@ -75,7 +75,7 @@ export class AddUserComponent {
     }
   }
 
-  createUser (form: any) {
+  createUser(form: any) {
     let apiUrl = `addUser`
     let formData = new URLSearchParams()
     formData.append('role_id', form.value.role_id)
@@ -102,7 +102,7 @@ export class AddUserComponent {
       })
   }
 
-  updateUser (form: any) {
+  updateUser(form: any) {
     let apiUrl = `updateUser`
     let formData = new URLSearchParams()
     // formData.append('role_id', form.value.role_id)
@@ -124,16 +124,15 @@ export class AddUserComponent {
       })
   }
 
-  getErrorMessage (field: string) {
+  getErrorMessage(field: string) {
     const control = this.userForm.controls[field]
     if (control.hasError('required')) {
       return 'This field cannot be empty'
     } else if (control.hasError('email')) {
       return 'Please enter a valid email address'
     } else if (control.hasError('minlength')) {
-      return `Password must be at least ${
-        control.getError('minlength').requiredLength
-      } characters long`
+      return `Password must be at least ${control.getError('minlength').requiredLength
+        } characters long`
     } else if (control.hasError('validatePhoneNumber')) {
       const errors = control.getError('validatePhoneNumber')
       if (!errors.valid) return 'Please enter a valid phone number'
@@ -152,7 +151,7 @@ export class AddUserComponent {
     return ''
   }
 
-  getUsersList () {
+  getUsersList() {
     let formData = new URLSearchParams()
     formData.set('page', '1')
     formData.set('page_size', '10')
@@ -182,11 +181,11 @@ export class AddUserComponent {
     })
   }
 
-  getStates (event: any) {
+  getStates(event: any) {
     this.countryCode = event.target.value
     this.states = State.getStatesOfCountry(event.target.value)
   }
-  getCities (event: any) {
+  getCities(event: any) {
     this.cities = City.getCitiesOfState(this.countryCode, event.target.value)
   }
 }

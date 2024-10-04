@@ -9,7 +9,11 @@ import { map, Observable } from 'rxjs'
 export class SidebarDataService {
   private sidebarItems = {
     Approver: [
-      { label: 'Dashboard', link: '/fgsg', icon: 'view-dashboard-outline' },
+      {
+        label: 'Dashboard',
+        link: '/fgsg',
+        icon: 'view-dashboard-outline'
+      },
       {
         label: 'User List',
         link: '/main/dashboard/users',
@@ -20,10 +24,26 @@ export class SidebarDataService {
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
-      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
-      { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
-      { label: 'Sales Report', link: '/dgfh', icon: 'report-line' },
-      { label: 'Certificates', link: '/tey', icon: 'certificate' },
+      {
+        label: 'Order History',
+        link: '/main/dashboard/credit-history',
+        icon: 'history'
+      },
+      {
+        label: 'Transaction History',
+        link: '/main/dashboard/transaction-history',
+        icon: 'bank-transfer'
+      },
+      {
+        label: 'Sales Report',
+        link: '/dgfh',
+        icon: 'report-line'
+      },
+      {
+        label: 'Certificates',
+        link: '/tey',
+        icon: 'certificate'
+      },
       {
         label: 'Marketplace',
         link: '/marketplace/projects',
@@ -34,20 +54,44 @@ export class SidebarDataService {
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      { label: 'Settings', link: '/ghjfghj', icon: 'settings-outline' }
+      {
+        label: 'Settings',
+        link: '/ghjfghj',
+        icon: 'settings-outline'
+      }
     ],
 
     Seller: [
-      { label: 'Dashboard', link: '/tfk', icon: 'view-dashboard-outline' },
+      {
+        label: 'Dashboard',
+        link: '/tfk',
+        icon: 'view-dashboard-outline'
+      },
       {
         label: 'Project List',
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
-      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
-      { label: 'Transaction History', link: '/main/dashboard/transaction-history', icon: 'bank-transfer' },
-      { label: 'Sales Report', link: '/srr', icon: 'report-line' },
-      { label: 'Certificates', link: '/utu', icon: 'certificate' },
+      {
+        label: 'Sale History',
+        link: '/main/dashboard/credit-history',
+        icon: 'history'
+      },
+      {
+        label: 'Transaction History',
+        link: '/main/dashboard/transaction-history',
+        icon: 'bank-transfer'
+      },
+      {
+        label: 'Sales Report',
+        link: '/srr',
+        icon: 'report-line'
+      },
+      {
+        label: 'Certificates',
+        link: '/utu',
+        icon: 'certificate'
+      },
       {
         label: 'Marketplace',
         link: '/marketplace/projects',
@@ -58,7 +102,11 @@ export class SidebarDataService {
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      { label: 'Settings', link: '/ryrtr', icon: 'settings-outline' }
+      {
+        label: 'Settings',
+        link: '/ryrtr',
+        icon: 'settings-outline'
+      }
     ],
 
     Buyer: [
@@ -72,21 +120,36 @@ export class SidebarDataService {
         link: '/my-orders',
         icon: 'clipboard-text-history-outline'
       },
-      { label: 'Order History', link: '/main/dashboard/credit-history', icon: 'history' },
-      { label: 'Certificates', link: '/fdfds', icon: 'certificate' },
+      {
+        label: 'Order History',
+        link: '/main/dashboard/credit-history',
+        icon: 'history'
+      },
+      {
+        label: 'Certificates',
+        link: '/fdfds',
+        icon: 'certificate'
+      },
       {
         label: 'Marketplace',
         link: '/marketplace/projects',
         icon: 'marketplace-outline'
       },
-      { label: 'Invoices', link: '/iuyh', icon: 'invoice-receive-outline' },
+      {
+        label: 'Invoices',
+        link: '/iuyh',
+        icon: 'invoice-receive-outline'
+      },
       {
         label: 'Profile',
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      { label: 'Settings', link: '/drs', icon: 'settings-outline' }
-      // { label: 'Logout', link: '/', icon: 'logout' }
+      {
+        label: 'Settings',
+        link: '/drs',
+        icon: 'settings-outline'
+      }
     ]
   }
 

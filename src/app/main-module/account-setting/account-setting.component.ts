@@ -8,7 +8,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { ImagePreviewComponent } from 'src/app/shared/image-preview/image-preview.component'
-import { NoWhitespaceDirective } from 'src/app/auth/validator'
+import { NoWhitespaceDirective } from 'src/app/shared/validator'
 
 @Component({
   selector: 'app-account-setting',
@@ -32,7 +32,7 @@ export class AccountSettingComponent {
   file: any
   ref: DynamicDialogRef | undefined
 
-  constructor (
+  constructor(
     private _location: Location,
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -43,16 +43,16 @@ export class AccountSettingComponent {
     this.getUserInfo()
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this.countries = Country.getAllCountries()
     this.createForm()
   }
 
-  back () {
+  back() {
     this._location.back()
   }
 
-  createForm () {
+  createForm() {
     this.updateInfoForm = this.fb.group({
       user_id: [''],
       profile_name: ['', [Validators.required, NoWhitespaceDirective.validate]],
@@ -64,16 +64,16 @@ export class AccountSettingComponent {
     })
   }
 
-  fileChangeEvent (event: any): void {
+  fileChangeEvent(event: any): void {
     this.imageChangedEvent = event
     this.visible = !this.visible
   }
-  imageCropped (event: ImageCroppedEvent) {
+  imageCropped(event: ImageCroppedEvent) {
     this.croppedImageBlob = event.blob
     this.croppedImage = event.objectUrl
   }
 
-  onDone () {
+  onDone() {
     this.visible = !this.visible
     this.profile_img = this.croppedImage
 
@@ -82,7 +82,7 @@ export class AccountSettingComponent {
     })
   }
 
-  uploadProfile () {
+  uploadProfile() {
     this.loading = true
     let apiUrl = `updateUserProfileImageC`
     let formData = new FormData()
@@ -102,15 +102,15 @@ export class AccountSettingComponent {
     })
   }
 
-  getStates (event: any) {
+  getStates(event: any) {
     this.countryCode = event.target.value
     this.states = State.getStatesOfCountry(event.target.value)
   }
-  getCities (event: any) {
+  getCities(event: any) {
     this.cities = City.getCitiesOfState(this.countryCode, event.target.value)
   }
 
-  updateInfo () {
+  updateInfo() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set(
@@ -147,7 +147,7 @@ export class AccountSettingComponent {
     })
   }
 
-  getUserInfo () {
+  getUserInfo() {
     this.loading = true
     let apiUrl = `getUserRoleProfile`
     this.service.get(apiUrl).subscribe(res => {
@@ -169,7 +169,7 @@ export class AccountSettingComponent {
     })
   }
 
-  vievImage (imgName: any) {
+  vievImage(imgName: any) {
     this.ref = this.dialogService.open(ImagePreviewComponent, {
       data: imgName,
       width: '',

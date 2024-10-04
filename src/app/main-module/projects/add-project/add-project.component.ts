@@ -9,7 +9,7 @@ import { ProjectDataService } from 'src/app/services/project-data.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
-import { dateRangeValidator, NoWhitespaceDirective, whiteSpaceValidator } from 'src/app/auth/validator'
+import { dateRangeValidator, NoWhitespaceDirective, whiteSpaceValidator } from 'src/app/shared/validator'
 
 @Component({
   selector: 'app-add-project',
@@ -66,7 +66,7 @@ export class AddProjectComponent {
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ]
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private service: SharedService,
@@ -84,7 +84,7 @@ export class AddProjectComponent {
     ]
   }
 
-  nextPage () {
+  nextPage() {
     if (this.activeIndex === 2) {
       const formData = {
         ...this.projectBasicInfoForm.value,
@@ -98,11 +98,11 @@ export class AddProjectComponent {
     }
   }
 
-  prevPage () {
+  prevPage() {
     this.activeIndex--
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this.editor = new Editor()
     this.editor2 = new Editor()
     this.inItForm()
@@ -203,7 +203,7 @@ export class AddProjectComponent {
     ]
   }
 
-  inItForm () {
+  inItForm() {
     this.projectBasicInfoForm = this.fb.group({
       project_name: ['', [Validators.required, Validators.minLength(3), NoWhitespaceDirective.validate]],
       project_subtitle: ['', Validators.required],
@@ -219,7 +219,7 @@ export class AddProjectComponent {
       project_type: ['', Validators.required],
       sustainableDevelopmentGoals: ['', Validators.required],
       specificSDGTargets: [''],
-      country: ['', [Validators.required,whiteSpaceValidator.cannotContainSpace]],
+      country: ['', [Validators.required, whiteSpaceValidator.cannotContainSpace]],
       projectArea: ['', [Validators.required, Validators.min(0)]],
       location: ['', Validators.required],
       address: [''],
@@ -239,7 +239,7 @@ export class AddProjectComponent {
       npar: ['', Validators.required],
       par: ['', Validators.required],
       current_phase: ['', Validators.required]
-    },{ validator: dateRangeValidator() })
+    }, { validator: dateRangeValidator() })
 
     this.impactBenefitsForm = this.fb.group({
       impact_metrics: [''],
@@ -250,7 +250,7 @@ export class AddProjectComponent {
     })
   }
 
-  submitBasicForm (data: any) {
+  submitBasicForm(data: any) {
     let apiUrl = ''
     let formData = new URLSearchParams()
 
@@ -308,7 +308,7 @@ export class AddProjectComponent {
     })
   }
 
-  finalize () {
+  finalize() {
     this.loading = true
     let apiUrl = ''
     let formData = new FormData()
@@ -352,7 +352,7 @@ export class AddProjectComponent {
     })
   }
 
-  uploadProjectDocument () {
+  uploadProjectDocument() {
     this.loading = true
     let apiUrl = 'projects/addProjectDocumentation'
     let formData = new FormData()
@@ -377,7 +377,7 @@ export class AddProjectComponent {
     })
   }
 
-  getProjectsByID () {
+  getProjectsByID() {
     this.loading = true
     this.service
       .get(`projects/getProjectsByIdSuperAdmin?id=${this.project_id}`)
@@ -431,7 +431,7 @@ export class AddProjectComponent {
             this.allSelectedSdg =
               this.sdgsByProjectType =
               this.selectedSdg =
-                this.selectedProType[0].sdgs
+              this.selectedProType[0].sdgs
 
             this.impactBenefitsForm.patchValue({
               impact_metrics: this.projectInfo.impact_metrics,
@@ -452,7 +452,7 @@ export class AddProjectComponent {
       })
   }
 
-  getProjectMedia () {
+  getProjectMedia() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.project_id)
@@ -535,13 +535,13 @@ export class AddProjectComponent {
     })
   }
 
-  async urlToFile (url: string, filename: string): Promise<File> {
+  async urlToFile(url: string, filename: string): Promise<File> {
     const response = await fetch(url)
     const blob = await response.blob()
     return new File([blob], filename, { type: blob.type })
   }
 
-  selectProjectType (type: string) {
+  selectProjectType(type: string) {
     this.selectedType = type
   }
 
@@ -551,7 +551,7 @@ export class AddProjectComponent {
   maxPdfs = 4
   selectedImageIndex: number | null = null
 
-  onFileSelected (event: any, index: number | null = null): void {
+  onFileSelected(event: any, index: number | null = null): void {
     const file = event.target.files[0]
 
     if (file && this.sliderImages.length < this.maxImages) {
@@ -583,7 +583,7 @@ export class AddProjectComponent {
     this.imageActiveIndex = this.images.length
   }
 
-  removeImage (index: number): void {
+  removeImage(index: number): void {
     this.sliderImages.splice(index, 1)
     this.ImageForUpload.splice(index, 1)
     this.images = this.sliderImages
@@ -591,11 +591,11 @@ export class AddProjectComponent {
     this.selectedImageIndex = null
   }
 
-  onTitleChange (index: number, event: any) {
+  onTitleChange(index: number, event: any) {
     this.images[index].title = event.target.value
   }
 
-  onVideoFileSelected (event: Event) {
+  onVideoFileSelected(event: Event) {
     const input = event.target as HTMLInputElement
     if (input.files && input.files[0]) {
       const file = input.files[0]
@@ -611,7 +611,7 @@ export class AddProjectComponent {
     }
   }
 
-  onPdfFileSelected (event: any): void {
+  onPdfFileSelected(event: any): void {
     const file = event.target.files[0]
     this.pdfForUpload.push(file)
     this.allSelectedPdf.push(file.name)
@@ -625,12 +625,12 @@ export class AddProjectComponent {
     }
   }
 
-  getFlag (event: any) {
+  getFlag(event: any) {
     this.flagUrl = findFlagUrlByCountryName(event.target.value)
     this.country = event.target.value
   }
 
-  onAreaUnitChecked (event: any) {
+  onAreaUnitChecked(event: any) {
     if (event.target.checked) {
       if (this.originalProjectArea === undefined) {
         this.originalProjectArea = this.project_area
@@ -646,25 +646,25 @@ export class AddProjectComponent {
     }
   }
 
-  geoJsonOrKmlChange (event: any) {
+  geoJsonOrKmlChange(event: any) {
     this.geoJson_or_kml = event.target.value
   }
-  onGeoJsonFileSelected (event: any) {
+  onGeoJsonFileSelected(event: any) {
     const file = event.target.files[0]
     this.geoJsonFile = file
   }
 
-  onProjectTypeSelect (event: any) {
+  onProjectTypeSelect(event: any) {
     this.allSelectedSdg =
       this.sdgsByProjectType =
       this.selectedSdg =
-        event.itemValue.sdgs
+      event.itemValue.sdgs
   }
-  onSdgSelect (_event: any) {
+  onSdgSelect(_event: any) {
     this.allSelectedSdg = [...this.selectedSdg, ...this.selectedSpecificSdg]
   }
 
-  getErrorMessage (field: string): string {
+  getErrorMessage(field: string): string {
     let control = this.projectBasicInfoForm.get(field)
     if (!control) {
       control = this.projectDetailForm.get(field)
@@ -673,13 +673,11 @@ export class AddProjectComponent {
     if (control?.hasError('required')) {
       return 'This field cannot be empty'
     } else if (control?.hasError('minlength')) {
-      return `It must be at least ${
-        control.getError('minlength').requiredLength
-      } characters long`
+      return `It must be at least ${control.getError('minlength').requiredLength
+        } characters long`
     } else if (control?.hasError('maxlength')) {
-      return `It must be only ${
-        control.getError('maxlength').requiredLength
-      } characters long`
+      return `It must be only ${control.getError('maxlength').requiredLength
+        } characters long`
     } else if (control?.hasError('min')) {
       return `It must be a positive number`
     } else if (control?.hasError('max')) {
@@ -690,7 +688,7 @@ export class AddProjectComponent {
     return ''
   }
 
-  decryptId (encryptedId: string): number {
+  decryptId(encryptedId: string): number {
     const secretKey = 'Vanya@321'
     const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey)
     const decryptedId = bytes.toString(CryptoJS.enc.Utf8)

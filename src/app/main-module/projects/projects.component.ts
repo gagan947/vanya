@@ -23,7 +23,7 @@ export class ProjectsComponent {
   ref: DynamicDialogRef | undefined
   loading: boolean = false
 
-  constructor (
+  constructor(
     private toastr: ToastrService,
     private service: SharedService,
     private confirmationService: ConfirmationService,
@@ -32,16 +32,16 @@ export class ProjectsComponent {
     private ethereumService: EthereumService,
     private router: Router,
     private projectData: ProjectDataService
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
     this.getAllProjects()
   }
 
-  getAllProjects () {
+  getAllProjects() {
     let ApiUrl = ''
 
     if (this.role === 'Approver') {
@@ -72,11 +72,11 @@ export class ProjectsComponent {
           this.loading = false
         }
       })
-      console.log(this.projectList);
-      
+    console.log(this.projectList);
+
   }
 
-  showDialog (project_id: number) {
+  showDialog(project_id: number) {
     this.ref = this.dialogService.open(ViewProjectComponent, {
       data: project_id,
       header: 'Project Information',
@@ -90,7 +90,7 @@ export class ProjectsComponent {
     })
   }
 
-  Delete (pro_id: number, event: Event) {
+  Delete(pro_id: number, event: Event) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this ?',
       header: 'Delete Confirmation',
@@ -120,7 +120,7 @@ export class ProjectsComponent {
     })
   }
 
-  getStatusClass (status: any): string {
+  getStatusClass(status: any): string {
     switch (status) {
       case 'Rejected':
         return 'bg-red-500'
@@ -131,7 +131,7 @@ export class ProjectsComponent {
     }
   }
 
-  getStatusLabel (status: any): string {
+  getStatusLabel(status: any): string {
     switch (status) {
       case 'Rejected':
         return 'Rejected'
@@ -142,7 +142,7 @@ export class ProjectsComponent {
     }
   }
 
-  createProject () {
+  createProject() {
     // const address = localStorage.getItem('address')
     this.loading = true
     // if (!address) {
@@ -193,33 +193,33 @@ export class ProjectsComponent {
       })
   }
 
-  getProjectType (TypeId: number) {
+  getProjectType(TypeId: number) {
     const projectType = this.projectData
       .projectTypes()
       .find((item: { id: number; type: string }) => item.id == TypeId)
     return projectType ? projectType.type : null
   }
 
-  getProjectPhase (phase: number) {
+  getProjectPhase(phase: number) {
     const projectPhase = this.projectData
       .projectPhase()
       .find((item: { id: number; name: string }) => item.id == phase)
     return projectPhase ? projectPhase.name : null
   }
 
-  encryptId (id: number): string {
+  encryptId(id: number): string {
     const secretKey = 'Vanya@321'
     return CryptoJS.AES.encrypt(id.toString(), secretKey).toString()
   }
 
   first: number = 0
   rows: number = 10
-  page:number = 0
+  page: number = 0
 
-  onPageChange (event: { first: number; rows: number;page:number }) {
+  onPageChange(event: { first: number; rows: number; page: number }) {
     this.first = event.first
     this.rows = event.rows
-    this.page = event.page    
+    this.page = event.page
 
     this.getAllProjects()
   }

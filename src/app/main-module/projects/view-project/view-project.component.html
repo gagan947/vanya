@@ -77,14 +77,14 @@
       </ng-container>
 </div> -->
 
-<div class="container mx-auto py-8">
+<div class="container mx-auto pb-8">
 
       <!-- Project Header -->
       <div class="bg-white shadow-md rounded-lg p-6 mb-6 sticky top-0">
 
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between items-center flex-wrap">
                   <h1 class="text-3xl font-bold text-green-600 mb-2">{{ projectData.project_name }}</h1>
-                  <div class="flex justify-end mt-5">
+                  <div class="flex justify-center">
                         <div class="flex gap-4 align-center">
                               <button (click)="changeProjectStatus('Rejected')" *ngIf="role == 'Approver'"
                                     class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 text-sm">

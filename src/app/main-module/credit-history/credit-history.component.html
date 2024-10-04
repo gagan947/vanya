@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="container mx-auto mt-5">
-      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Credit History</h1>
+      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">{{headingText}} History</h1>
       <div class="relative shadow-md sm:rounded-lg p-3 bg-[#F9F9F9]">
             <div
                   class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4">
@@ -23,80 +23,41 @@
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                               <thead class="text-xs text-white uppercase bg-primary-gradient sticky top-0">
                                     <tr>
-                                          <th scope="col" class="px-6 py-3">
-                                                S No.
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Order Id
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Total Credits
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Price/Credits
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Amount
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Status
-                                          </th>
-                                          <th scope="col" class="px-6 py-3">
-                                                Date
-                                          </th>
+                                          <th scope="col" class="px-6 py-3">S No.</th>
+                                          <th *ngFor="let column of columns" scope="col" class="px-6 py-3">{{
+                                                column.label }}</th>
                                     </tr>
                               </thead>
                               <tbody>
-                                    <tr *ngFor="let history of creditData; let i = index"
+                                    <tr *ngFor="let row of HistoryData; let i = index"
                                           class="bg-white border-b hover:bg-gray-50">
-                                          <td class="px-6 py-4">
-                                                {{i+1}}
-                                          </td>
+                                          <td class="px-6 py-4">{{ i + 1 }}</td>
 
-                                          <td class="px-6 py-4">
-                                                {{history.order_id}}
+                                          <td *ngFor="let column of columns" class="px-6 py-4 whitespace-nowrap">
+                                                <ng-container *ngIf="column.type === 'status'; else dateCheck">
+                                                      <div class="flex items-center">
+                                                            <div class="h-2.5 w-2.5 rounded-full me-2"
+                                                                  [ngClass]="getStatusClass(row[column.key])"></div>
+                                                            {{ row[column.key] }}
+                                                      </div>
+                                                </ng-container>
+
+                                                <ng-template #dateCheck>
+                                                      <ng-container *ngIf="column.type === 'date'; else price">
+                                                            {{ row[column.key] | date: 'mediumDate' }}
+                                                      </ng-container>
+                                                </ng-template>
+
+                                                <ng-template #price>
+                                                      <ng-container *ngIf="column.type === 'price'; else defaultCell">
+                                                            {{ row[column.key] | currency: 'USD' }}
+                                                      </ng-container>
+                                                </ng-template>
+
+                                                <ng-template #defaultCell>
+                                                      {{ row[column.key] }}
+                                                </ng-template>
                                           </td>
-                                          <td class="px-6 py-4">
-                                                {{history.carbon_credits}}
-                                          </td>
-                                          <td class="px-6 py-4">
-                                                {{history.price_per_carbon_credit | currency:'USD'}}
-                                          </td>
-                                          <td class="px-6 py-4">
-                                                {{history.amount | currency:'USD'}}
-                                          </td>
-                                          <td class="px-6 py-4">
-                                                <div class="flex items-center">
-                                                      <div class="h-2.5 w-2.5 rounded-full me-2"
-                                                            [ngClass]="getStatusClass(history.status)"></div>
-                                                      {{history.status}}
-                                                </div>
-                                          </td>
-                                          <td class="px-6 py-4">
-                                                {{history.created_at | date:'mediumDate'}}
-                                          </td>
-                                          <!--  <td class="px-6 flex gap-1 cursor-pointer">
-                                                <svg (click)="showDialog(history)" xmlns="http://www.w3.org/2000/svg"
-                                                      width="1.5em" height="1.5em" viewBox="0 0 256 256">
-                                                      <path fill="#f87c16"
-                                                            d="M251 123.13c-.37-.81-9.13-20.26-28.48-39.61C196.63 57.67 164 44 128 44S59.37 57.67 33.51 83.52C14.16 102.87 5.4 122.32 5 123.13a12.08 12.08 0 0 0 0 9.75c.37.82 9.13 20.26 28.49 39.61C59.37 198.34 92 212 128 212s68.63-13.66 94.48-39.51c19.36-19.35 28.12-38.79 28.49-39.61a12.08 12.08 0 0 0 .03-9.75m-46.06 33C183.47 177.27 157.59 188 128 188s-55.47-10.73-76.91-31.88A130.4 130.4 0 0 1 29.52 128a130.5 130.5 0 0 1 21.57-28.11C72.54 78.73 98.41 68 128 68s55.46 10.73 76.91 31.89A130.4 130.4 0 0 1 226.48 128a130.5 130.5 0 0 1-21.57 28.12ZM128 84a44 44 0 1 0 44 44a44.05 44.05 0 0 0-44-44m0 64a20 20 0 1 1 20-20a20 20 0 0 1-20 20" />
-                                                </svg>
-                                               <svg *ngIf="role == 'Approver'"
-                                                      routerLink="/main/dashboard/users/add-user"
-                                                      [queryParams]="{id:user.id}" xmlns="http://www.w3.org/2000/svg"
-                                                      width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                                                      <path fill="#00becc"
-                                                            d="m18.988 2.012l3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287l-3-3L8 13z" />
-                                                      <path fill="#00becc"
-                                                            d="M19 19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2z" />
-                                                </svg>
-                                                <svg *ngIf="role == 'Approver'" (click)="Delete(user.id,$event)"
-                                                      xmlns="http://www.w3.org/2000/svg" width="1.3em" height="1.3em"
-                                                      viewBox="0 0 16 16">
-                                                      <path fill="#c20000"
-                                                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1l-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
-                                                </svg> 
-                                          </td>-->
                                     </tr>
                               </tbody>
                         </table>

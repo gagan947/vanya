@@ -19,34 +19,36 @@ export class AllUsersComponent {
   loading: boolean = false
   totalCount: any
 
-  constructor (
+  constructor(
     private toastr: ToastrService,
     private service: SharedService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService,
     private authService: AuthService
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.getUsersList()
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
   }
 
-  showDialog (user: any) {
+  showDialog(user: any) {
     this.ref = this.dialogService.open(ViewUserComponent, {
       data: user,
       header: 'User Information',
       width: '50%',
-      styleClass: 'bg-white p-2 rounded-lg shadow-md'
+      maximizable: true,
+      dismissableMask: true,
+      styleClass: 'bg-white p-2 px-4 shadow-md'
     })
   }
 
-  getUsersList () {
+  getUsersList() {
     this.loading = true
     let formData = new URLSearchParams()
-    formData.set('page', (this.page + 1).toString() )
+    formData.set('page', (this.page + 1).toString())
     formData.set('page_size', this.rows.toString())
     let apiUrl = `getAllUserList`
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
@@ -61,7 +63,7 @@ export class AllUsersComponent {
     })
   }
 
-  Delete (user_id: number, event: Event) {
+  Delete(user_id: number, event: Event) {
     this.confirmationService.confirm({
       message: 'Do you want to delete this ?',
       header: 'Delete Confirmation',
@@ -94,7 +96,7 @@ export class AllUsersComponent {
     })
   }
 
-  getStatusClass (status: any): string {
+  getStatusClass(status: any): string {
     switch (status) {
       case '0':
         return 'bg-red-500'
@@ -105,7 +107,7 @@ export class AllUsersComponent {
     }
   }
 
-  getStatusLabel (status: any): string {
+  getStatusLabel(status: any): string {
     switch (status) {
       case '0':
         return 'Inactive'
@@ -118,12 +120,12 @@ export class AllUsersComponent {
 
   first: number = 0
   rows: number = 10
-  page:number = 0
+  page: number = 0
 
-  onPageChange (event: { first: number; rows: number; page:number }) {
+  onPageChange(event: { first: number; rows: number; page: number }) {
     this.first = event.first
     this.rows = event.rows
-    this.page = event.page    
+    this.page = event.page
 
     this.getUsersList()
   }

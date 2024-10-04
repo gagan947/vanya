@@ -4,7 +4,7 @@ import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { AuthService } from 'src/app/services/auth.service'
 import { Country, State, City } from 'country-state-city'
-import { strongPasswordValidator } from '../validator'
+import { strongPasswordValidator } from '../../shared/validator'
 import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input'
 
 @Component({
@@ -21,7 +21,7 @@ export class SignUpComponent {
   countryCode: any
   selectedRole: string
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private service: AuthService,
@@ -46,11 +46,11 @@ export class SignUpComponent {
     })
   }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.countries = Country.getAllCountries()
   }
 
-  onSubmit (form: any) {
+  onSubmit(form: any) {
     form.markAllAsTouched()
     if (form.invalid) {
       return
@@ -79,16 +79,15 @@ export class SignUpComponent {
     })
   }
 
-  getErrorMessage (field: string) {
+  getErrorMessage(field: string) {
     const control = this.signUpForm.controls[field]
     if (control.hasError('required')) {
       return 'This field cannot be empty'
     } else if (control.hasError('email')) {
       return 'Please enter a valid email address'
     } else if (control.hasError('minlength')) {
-      return `Password must be at least ${
-        control.getError('minlength').requiredLength
-      } characters long`
+      return `Password must be at least ${control.getError('minlength').requiredLength
+        } characters long`
     } else if (control.hasError('validatePhoneNumber')) {
       const errors = control.getError('validatePhoneNumber')
       if (!errors.valid) return 'Please enter a valid phone number'
@@ -107,21 +106,21 @@ export class SignUpComponent {
     return ''
   }
 
-  getStates (event: any) {
+  getStates(event: any) {
     this.countryCode = event.target.value
     this.states = State.getStatesOfCountry(event.target.value)
     if (this.states.length > 0) {
       this.signUpForm.get('state')?.enable()
     }
   }
-  getCities (event: any) {
+  getCities(event: any) {
     this.cities = City.getCitiesOfState(this.countryCode, event.target.value)
     if (this.cities.length > 0) {
       this.signUpForm.get('city')?.enable()
     }
   }
 
-  selectRole (role: string) {
+  selectRole(role: string) {
     this.selectedRole = role
   }
 
