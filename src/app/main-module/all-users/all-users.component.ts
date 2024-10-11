@@ -23,7 +23,7 @@ export class AllUsersComponent {
     private toastr: ToastrService,
     private service: SharedService,
     private confirmationService: ConfirmationService,
-    public dialogService: DialogService,
+    private dialogService: DialogService,
     private authService: AuthService
   ) { }
 
@@ -126,7 +126,6 @@ export class AllUsersComponent {
     this.first = event.first
     this.rows = event.rows
     this.page = event.page
-
     this.getUsersList()
   }
 }

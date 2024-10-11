@@ -17,7 +17,11 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { MainComponent } from './main/main.component'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
-import { CreditHistoryComponent } from './credit-history/credit-history.component'
+import { CreditHistoryComponent } from './credit-history/credit-history.component';
+import { CertificateComponent } from './certificate/certificate.component';
+import { CertificateViewComponent } from './certificate/certificate-view/certificate-view.component';
+import { HistoryInvoiceComponent } from './credit-history/history-invoice/history-invoice.component';
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { CreditHistoryComponent } from './credit-history/credit-history.componen
     AddProjectComponent,
     MainComponent,
     TransactionHistoryComponent,
-    CreditHistoryComponent
+    CreditHistoryComponent,
+    CertificateComponent,
+    CertificateViewComponent,
+    HistoryInvoiceComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

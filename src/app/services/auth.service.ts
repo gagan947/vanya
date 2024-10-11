@@ -20,17 +20,17 @@ export class AuthService {
   })
   authState$ = this.authState.asObservable()
 
-  constructor (private http: HttpClient, private route: Router) {}
-  setToken (token: string) {
+  constructor(private http: HttpClient, private route: Router) { }
+  setToken(token: string) {
     localStorage.setItem('token', token)
     this.updateAuthState(true, this.getRole())
   }
 
-  getToken () {
+  getToken() {
     return localStorage.getItem('token')
   }
 
-  setRole (role: string) {
+  setRole(role: string) {
     const secretKey = 'Vanya@321'
     const encryptedRole = CryptoJS.AES.encrypt(role, secretKey).toString()
 
@@ -38,7 +38,7 @@ export class AuthService {
     this.updateAuthState(this.isLogedIn(), role)
   }
 
-  getRole (): string | null {
+  getRole(): string | null {
     const secretKey = 'Vanya@321'
     const encryptedRole = localStorage.getItem('role')
 
@@ -50,22 +50,22 @@ export class AuthService {
     return null
   }
 
-  isLogedIn () {
+  isLogedIn() {
     return this.getToken() !== null
   }
 
-  updateAuthState (isLoggedIn: boolean, role: string | null) {
+  updateAuthState(isLoggedIn: boolean, role: string | null) {
     this.authState.next({ isLoggedIn, role })
   }
 
-  post (url: any, data: any): Observable<any> {
+  post(url: any, data: any): Observable<any> {
     const headers = new HttpHeaders()
       .set('content-type', 'application/x-www-form-urlencoded')
       .set('Access-Control-Allow-Origin', '*')
     return this.http.post<any>(this.baseUrl + url, data, { headers: headers })
   }
 
-  logout (): void {
+  logout(): void {
     localStorage.clear()
     this.updateAuthState(false, null)
     this.route.navigate(['/'])

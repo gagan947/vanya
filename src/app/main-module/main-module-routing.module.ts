@@ -8,6 +8,9 @@ import { AddProjectComponent } from './projects/add-project/add-project.componen
 import { MainComponent } from './main/main.component'
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
 import { CreditHistoryComponent } from './credit-history/credit-history.component'
+import { CertificateComponent } from './certificate/certificate.component'
+import { HistoryInvoiceComponent } from './credit-history/history-invoice/history-invoice.component'
+import { DashboardComponent } from './dashboard/dashboard.component'
 
 const routes: Routes = [
   {
@@ -19,6 +22,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: MainComponent,
     children: [
+      {
+        path: 'all',
+        component: DashboardComponent,
+      },
       {
         path: 'account-setting',
         component: AccountSettingComponent
@@ -47,6 +54,14 @@ const routes: Routes = [
         path: 'credit-history',
         component: CreditHistoryComponent
       },
+      {
+        path: 'invoice',
+        component: HistoryInvoiceComponent
+      },
+      {
+        path: 'certificate',
+        component: CertificateComponent
+      },
     ]
   }
 ]
@@ -55,4 +70,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MainModuleRoutingModule {}
+export class MainModuleRoutingModule { }

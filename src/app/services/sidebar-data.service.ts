@@ -11,7 +11,7 @@ export class SidebarDataService {
     Approver: [
       {
         label: 'Dashboard',
-        link: '/fgsg',
+        link: '/main/dashboard/all',
         icon: 'view-dashboard-outline'
       },
       {
@@ -41,7 +41,7 @@ export class SidebarDataService {
       },
       {
         label: 'Certificates',
-        link: '/tey',
+        link: '/main/dashboard/certificate',
         icon: 'certificate'
       },
       {
@@ -64,7 +64,7 @@ export class SidebarDataService {
     Seller: [
       {
         label: 'Dashboard',
-        link: '/tfk',
+        link: '/main/dashboard/all',
         icon: 'view-dashboard-outline'
       },
       {
@@ -89,7 +89,7 @@ export class SidebarDataService {
       },
       {
         label: 'Certificates',
-        link: '/utu',
+        link: '/main/dashboard/certificate',
         icon: 'certificate'
       },
       {
@@ -112,7 +112,7 @@ export class SidebarDataService {
     Buyer: [
       {
         label: 'Dashboard',
-        link: '/fffs',
+        link: '/main/dashboard/all',
         icon: 'view-dashboard-outline'
       },
       {
@@ -127,7 +127,7 @@ export class SidebarDataService {
       },
       {
         label: 'Certificates',
-        link: '/fdfds',
+        link: '/main/dashboard/certificate',
         icon: 'certificate'
       },
       {

@@ -4,12 +4,15 @@ import { ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
+import { HistoryInvoiceComponent } from './history-invoice/history-invoice.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit-history',
   templateUrl: './credit-history.component.html',
   styleUrls: ['./credit-history.component.css']
 })
+
 export class CreditHistoryComponent {
   HistoryData: any[] = []
   visible: boolean = false
@@ -26,14 +29,15 @@ export class CreditHistoryComponent {
     private service: SharedService,
     private confirmationService: ConfirmationService,
     public dialogService: DialogService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getHistory()
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
+    this.getHistory()
 
     if (this.role == 'Seller') {
       this.headingText = 'Sale'
@@ -46,22 +50,24 @@ export class CreditHistoryComponent {
         { key: 'amount', label: 'Amount', type: 'price' },
         { key: '', label: 'Order By' },
         { key: 'status', label: 'Status', type: 'status' },
-        { key: 'created_at', label: 'Date', type: 'date' }
+        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'action', label: 'Action', type: 'action' }
       ];
 
     } else if (this.role == 'Buyer') {
 
       this.columns = [
         { key: 'order_id', label: 'Order Id' },
-        { key: 'project_id', label: 'Project Name' },
+        { key: 'project_name', label: 'Project Name' },
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
         { key: 'status', label: 'Status', type: 'status' },
-        { key: 'created_at', label: 'Date', type: 'date' }
+        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'action', label: 'Action', type: 'action' }
       ];
-    } else {
 
+    } else {
       this.columns = [
         { key: 'order_id', label: 'Order Id' },
         { key: 'project_id', label: 'Project Name' },
@@ -71,18 +77,22 @@ export class CreditHistoryComponent {
         { key: '', label: 'Order By' },
         { key: '', label: 'Order To' },
         { key: 'status', label: 'Status', type: 'status' },
-        { key: 'created_at', label: 'Date', type: 'date' }
+        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'action', label: 'Action', type: 'action' }
       ];
     }
   }
 
   showDialog(data: any) {
-    // this.ref = this.dialogService.open(, {
-    //   data: user,
-    //   header: 'User Information',
-    //   width: '50%',
-    //   styleClass: 'bg-white p-2 rounded-lg shadow-md'
-    // })
+    // this.router.navigate(['/main/dashboard/invoice'])
+    this.ref = this.dialogService.open(HistoryInvoiceComponent, {
+      data: data,
+      header: '',
+      width: '70%',
+      styleClass: 'bg-white p-2 shadow-md',
+      dismissableMask: true,
+      maximizable: true
+    })
   }
 
   getHistory() {
@@ -91,14 +101,23 @@ export class CreditHistoryComponent {
     // formData.set('page', (this.page + 1).toString() )
     const user_id: any = localStorage.getItem('user')
     formData.set('user_id', user_id)
-    let apiUrl = `cart/orderHistory`
+
+    let apiUrl = ''
+    if (this.role == 'Buyer') {
+      apiUrl = `cart/orderHistory`
+    } else if (this.role == 'Seller') {
+      apiUrl = `cart/orderHistorySeller`
+    } else {
+      apiUrl = `cart/orderHistory`
+    }
+
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.loading = false
-        this.HistoryData = res.historyRes
-        this.totalCount = res.count[0].total
+        this.HistoryData = res.sellerDetails
+        // this.totalCount = res.count[0].total
       } else {
-        this.toastr.error(res.msg)
+        this.toastr.error(res.message)
         this.loading = false
       }
     })
@@ -147,7 +166,6 @@ export class CreditHistoryComponent {
         return 'bg-yellow-500'
     }
   }
-
 
   first: number = 0
   rows: number = 10

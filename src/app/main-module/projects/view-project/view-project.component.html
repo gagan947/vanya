@@ -106,7 +106,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                         <p><span class="font-semibold">Location:</span> {{ projectData.location }}</p>
-                        <p><span class="font-semibold">Start Date:</span> {{ projectData.start_date }}</p>
+                        <p><span class="font-semibold">Start Date:</span> {{ projectData.start_date |
+                              date:'mediumDate'}}</p>
                         <p><span class="font-semibold">End Date:</span> {{ projectData.end_date ? projectData.end_date :
                               'Ongoing' }}</p>
                         <p><span class="font-semibold">Registry Details:</span> {{ projectData.registry_details }}</p>

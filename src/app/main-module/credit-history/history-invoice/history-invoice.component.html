@@ -1,0 +1,67 @@
+<div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
+      <div class="col-span-2 flex justify-between items-start">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-6">Invoice</h1>
+            <button (click)="exportAsPDF()"
+                  class="bg-primary text-white py-1 px-4 rounded-md hover:bg-primary-gradient">Download
+                  Invoice</button>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 mb-6" id="invoice">
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Sale ID</label>
+                  <p class="text-gray-600">{{invoiceData.order_id}}</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Sale Date</label>
+                  <p class="text-gray-600">{{invoiceData.created_at | date:'mediumDate'}}</p>
+            </div>
+
+            <div class="col-span-2">
+                  <label class="block font-semibold text-[#2B2B2B] mb-2">Buyer Information</label>
+                  <div class="p-2 border rounded-md">
+                        <p class="text-[#2B2B2B]">John Doe</p>
+                        <p class="text-gray-500 text-sm">Doe Organization</p>
+                  </div>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Project Name</label>
+                  <p class="text-gray-600">{{invoiceData.project_name}}</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Project Type</label>
+                  <p class="text-gray-600">Reforestation</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Quantity Sold</label>
+                  <p class="text-gray-600">{{invoiceData.carbon_credits}}</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Price per Unit</label>
+                  <p class="text-gray-600">{{invoiceData.price_per_carbon_credit | currency:'USD'}}</p>
+            </div>
+
+            <div class="col-span-2">
+                  <label class="block font-semibold text-[#2B2B2B]">Total Sale Amount</label>
+                  <p class="text-gray-600">{{invoiceData.amount | currency:'USD'}}</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Transaction Status</label>
+                  <p class="text-gray-600">{{invoiceData.status}}</p>
+            </div>
+
+            <div>
+                  <label class="block font-semibold text-[#2B2B2B]">Payment Method</label>
+                  <p class="text-gray-600">Bank Transfer</p>
+            </div>
+
+            <div class="col-span-2">
+                  <label class="block font-semibold text-[#2B2B2B]">Net Revenue</label>
+                  <p class="text-gray-600">$950</p>
+            </div>
+      </div>
+</div>

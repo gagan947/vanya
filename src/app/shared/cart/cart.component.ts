@@ -1,10 +1,9 @@
 import { Component } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { MessageDialogComponent } from 'src/app/marketplace/message-dialog/message-dialog.component'
 import { ProjectOverviewComponent } from 'src/app/marketplace/project-overview/project-overview.component'
-import { ProjectDataService } from 'src/app/services/project-data.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
 
@@ -21,21 +20,21 @@ export class CartComponent {
   sidebarVisible2: boolean = false
   ref: DynamicDialogRef | undefined
 
-  constructor (
+  constructor(
     private router: Router,
     private service: SharedService,
     private toastr: ToastrService,
     private dialogService: DialogService
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.service.aClickedEvent.subscribe((data: boolean) => {
       this.sidebarVisible2 = data
     })
     this.getCartItems()
   }
 
-  getCartItems () {
+  getCartItems() {
     this.loading = true
 
     let formData = new URLSearchParams()
@@ -64,7 +63,7 @@ export class CartComponent {
     })
   }
 
-  increment (item: any) {
+  increment(item: any) {
     if (Number(item.carbon_credits) <= item.remaining_credit) {
       item.carbon_credits = Number(item.carbon_credits) + 1
 
@@ -91,7 +90,7 @@ export class CartComponent {
     }
   }
 
-  decrement (item: any) {
+  decrement(item: any) {
     if (Number(item.carbon_credits) > 0) {
       item.carbon_credits = Number(item.carbon_credits) - 1
 
@@ -118,7 +117,7 @@ export class CartComponent {
     }
   }
 
-  deleteFromCart (pro_data: any) {
+  deleteFromCart(pro_data: any) {
     let apiUrl = 'cart/deleteCartItemsByProject'
     let formData = new URLSearchParams()
     formData.set('project_id', pro_data.project_id)
@@ -143,7 +142,7 @@ export class CartComponent {
     })
   }
 
-  checkOut (item: any) {
+  checkOut(item: any) {
     this.loading = true
     let apiUrl = 'cart/checkOutOrderItems'
 
@@ -208,7 +207,7 @@ export class CartComponent {
     })
   }
 
-  getTotal (cartData: any) {
+  getTotal(cartData: any) {
     const totalAmount = cartData.reduce(
       (sum: any, currentItem: any) =>
         sum + currentItem.price_per_carbon_credit * currentItem.carbon_credits,
@@ -217,7 +216,7 @@ export class CartComponent {
     return totalAmount
   }
 
-  showDialog (Data: any) {
+  showDialog(Data: any) {
     this.ref = this.dialogService.open(MessageDialogComponent, {
       data: Data,
       header: '',
@@ -228,7 +227,7 @@ export class CartComponent {
     })
   }
 
-  close () {
+  close() {
     this.sidebarVisible2 = !this.sidebarVisible2
   }
 }
