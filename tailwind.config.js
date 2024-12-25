@@ -10,7 +10,8 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: '#1b9644'
+          DEFAULT: '#1B9644',
+          light: '#B1F1C6'
         }
       },
     },
@@ -18,4 +19,3 @@ module.exports = {
   plugins: [
   ],
 }
-

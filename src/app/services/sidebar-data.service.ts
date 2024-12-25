@@ -11,7 +11,7 @@ export class SidebarDataService {
     Approver: [
       {
         label: 'Dashboard',
-        link: '/main/dashboard/all',
+        link: '/main/dashboard/admin',
         icon: 'view-dashboard-outline'
       },
       {
@@ -36,7 +36,7 @@ export class SidebarDataService {
       },
       {
         label: 'Sales Report',
-        link: '/dgfh',
+        link: '/main/dashboard/sales-report',
         icon: 'report-line'
       },
       {
@@ -64,7 +64,7 @@ export class SidebarDataService {
     Seller: [
       {
         label: 'Dashboard',
-        link: '/main/dashboard/all',
+        link: '/main/dashboard/seller',
         icon: 'view-dashboard-outline'
       },
       {
@@ -84,7 +84,7 @@ export class SidebarDataService {
       },
       {
         label: 'Sales Report',
-        link: '/srr',
+        link: '/main/dashboard/sales-report',
         icon: 'report-line'
       },
       {
@@ -112,7 +112,7 @@ export class SidebarDataService {
     Buyer: [
       {
         label: 'Dashboard',
-        link: '/main/dashboard/all',
+        link: '/main/dashboard/buyer',
         icon: 'view-dashboard-outline'
       },
       {

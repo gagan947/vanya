@@ -1,51 +1,192 @@
-<div class="container mx-auto mt-5">
-      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Dashboard</h1>
+<div class="min-h-screen p-6 ">
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800">Welcome, Admin</h1>
+            <div class="flex items-center gap-4">
+                  <button routerLink="/main/dashboard/projects"
+                        class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                              <path fill="currentColor"
+                                    d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
+                        </svg>
+                        Project
+                  </button>
+            </div>
+      </div>
 
-      <!-- Overview Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-6">
-
-            <!-- Total Revenue -->
-            <div class="p-4 bg-primary-gradient rounded-lg shadow flex justify-between">
-                  <div>
-                        <h2 class="text-white font-medium">Total Revenue</h2>
-                        <p class="text-3xl font-semibold text-white">$58,700</p>
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
+                  <div class="absolute -right-14 -top-16">
+                        <div class="flex justify-center items-center p-6 rounded-full bg-[#1B964433] w-fit">
+                              <div class="flex justify-center items-center p-2 rounded-full bg-primary h-24 w-24">
+                              </div>
+                        </div>
                   </div>
-                  <div>
-                        <img src="assets/images/Icon (2).png" class="bg-white rounded-3xl">
+                  <div
+                        class="flex justify-center items-center p-1 rounded-full border-dashed border-2 border-primary w-fit">
+                        <div class="flex justify-center items-center p-2 rounded-full bg-primary w-fit">
+                              <img src="assets/images/users.png">
+                        </div>
+                  </div>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Users</h2>
+                  <p class="text-3xl font-bold text-[#252525]">85</p>
+            </div>
+            <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
+                  <div class="absolute -right-14 -top-16">
+                        <div class="flex justify-center items-center p-6 rounded-full bg-[#1B964433] w-fit">
+                              <div class="flex justify-center items-center p-2 rounded-full bg-primary h-24 w-24">
+                              </div>
+                        </div>
+                  </div>
+                  <div
+                        class="flex justify-center items-center p-1 rounded-full border-dashed border-2 border-primary w-fit">
+                        <div class="flex justify-center items-center p-2 rounded-full bg-primary w-fit">
+                              <img src="assets/images/Total_Sales.png">
+                        </div>
+                  </div>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Sales</h2>
+                  <div class="flex items-baseline gap-1">
+                        <p class="text-3xl font-bold text-[#252525] mt-1">8,000</p>
                   </div>
             </div>
-
-            <!-- Total Sales -->
-            <div class="p-4 bg-primary-gradient rounded-lg shadow flex justify-between">
-                  <div>
-                        <h2 class="text-white font-medium">Total Sales</h2>
-                        <p class="text-3xl font-semibold text-white">$10,430</p>
+            <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
+                  <div class="absolute -right-14 -top-16">
+                        <div class="flex justify-center items-center p-6 rounded-full bg-[#1B964433] w-fit">
+                              <div class="flex justify-center items-center p-2 rounded-full bg-primary h-24 w-24">
+                              </div>
+                        </div>
                   </div>
-                  <div>
-                        <img src="assets/images/Icon (3).png" class="bg-white rounded-3xl">
+                  <div
+                        class="flex justify-center items-center p-1 rounded-full border-dashed border-2 border-primary w-fit">
+                        <div class="flex justify-center items-center p-2 rounded-full bg-primary w-fit">
+                              <img src="assets/images/carbon_credit.png">
+                        </div>
+                  </div>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Carbon Credits</h2>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">12,000</p>
+            </div>
+      </div>
+
+      <!-- Impact Analysis -->
+      <div class="bg-white p-6 rounded shadow mb-8">
+            <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-lg font-bold text-gray-800">Impact Analysis</h3>
+                  <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1">
+                              <input type="radio" class="h-4 w-4 accent-primary" name="type" id="yearly">
+                              <label for="yearly" class="text-[#2B303466]">Yearly</label>
+                        </div>
+                        <div class="flex items-center gap-1">
+                              <input type="radio" class="h-4 w-4 accent-primary" name="type" id="monthly">
+                              <label for="monthly" class="text-[#2B303466]">Monthly</label>
+                        </div>
                   </div>
             </div>
+            <!-- Chart Placeholder -->
+            <div>
+                  <canvas id="impactChart" class="h-40"></canvas>
+            </div>
+      </div>
 
-            <!-- Total Orders -->
-            <div class="p-4 bg-primary-gradient rounded-lg shadow flex justify-between">
-                  <div>
-                        <h2 class="text-white font-medium">Total Orders</h2>
-                        <p class="text-3xl font-semibold text-white">1,245</p>
-                  </div>
-                  <div>
-                        <img src="assets/images/Icon (1).png" class="bg-white rounded-3xl">
+      <div class="gap-6 grid md:grid-cols-6">
+            <div class="w-full col-span-4">
+                  <div class="p-6 bg-white shadow rounded-lg w-full">
+                        <h2 class="text-xl font-semibold mb-4">Transaction History</h2>
+                        <table class="w-full border-collapse">
+                              <thead>
+                                    <tr class="bg-gray-100 text-left text-sm">
+                                          <th class="py-2 px-4">Seller</th>
+                                          <th class="py-2 px-4">Buyer</th>
+                                          <th class="py-2 px-4">Date</th>
+                                          <th class="py-2 px-4">Credits</th>
+                                          <th class="py-2 px-4">Revenue</th>
+                                          <!-- <th class="py-2 px-4">Action</th> -->
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="border-b" *ngFor="let transaction of transactions">
+                                          <td class="py-2 px-4">{{ transaction.seller }}</td>
+                                          <td class="py-2 px-4">{{ transaction.buyer }}</td>
+                                          <td class="py-2 px-4">{{ transaction.date }}</td>
+                                          <td class="py-2 px-4">{{ transaction.credits }}</td>
+                                          <td class="py-2 px-4">{{ transaction.revenue }}</td>
+                                          <!-- <td class="py-2 px-4">
+                                                <button
+                                                      class="border border-primary text-primary text-sm px-3 py-1 rounded hover:bg-primary hover:text-white">
+                                                      View All
+                                                </button>
+                                          </td> -->
+                                    </tr>
+                              </tbody>
+                        </table>
                   </div>
             </div>
-
-            <!-- Active Users -->
-            <div class="p-4 bg-primary-gradient rounded-lg shadow flex justify-between">
-                  <div>
-                        <h2 class="text-white font-medium">Active Users</h2>
-                        <p class="text-3xl font-semibold text-white">765</p>
-                  </div>
-                  <div>
-                        <img src="assets/images/Icon.png" class="bg-white rounded-3xl">
-                  </div>
+            <div class="p-6 bg-white shadow rounded-lg w-full col-span-2">
+                  <h2 class="text-xl font-semibold mb-4">Sales Report</h2>
+                  <canvas id="salesChart" height="200"></canvas>
             </div>
+      </div>
+
+      <!-- Summary and Purchase History -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-white shadow rounded-lg p-6">
+                  <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">Project Management</h2>
+                        <button class="text-gray-400 hover:text-gray-600">
+                              <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                  </div>
+                  <table class="w-full border-collapse">
+                        <thead>
+                              <tr class="bg-gray-100 text-left text-sm">
+                                    <th class="py-2 px-4">Project Name</th>
+                                    <th class="py-2 px-4">Status</th>
+                                    <th class="py-2 px-4">Credits Earned</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr class="border-b" *ngFor="let project of projects">
+                                    <td class="py-2 px-4">{{ project.name }}</td>
+                                    <td class="py-2 px-4">
+                                          <span class="px-3 py-1 rounded text-sm" [ngClass]="{
+                              'bg-green-100 text-green-600': project.status === 'Active',
+                              'bg-gray-100 text-gray-600': project.status === 'Under Review'
+                            }">
+                                                {{ project.status }}
+                                          </span>
+                                    </td>
+                                    <td class="py-2 px-4">{{ project.credits }}</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+
+
+            <div class="bg-white shadow rounded-lg p-6">
+                  <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold">User Management</h2>
+                        <button class="text-gray-400 hover:text-gray-600">
+                              <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                  </div>
+                  <table class="w-full border-collapse">
+                        <thead>
+                              <tr class="bg-gray-100 text-left text-sm">
+                                    <th class="py-2 px-4">New Registrations</th>
+                                    <th class="py-2 px-4">Active Sellers</th>
+                                    <th class="py-2 px-4">Active Buyers</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr class="border-b" *ngFor="let user of users">
+                                    <td class="py-2 px-4">{{ user.registration }}</td>
+                                    <td class="py-2 px-4">{{ user.seller }}</td>
+                                    <td class="py-2 px-4">{{ user.buyer }}</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+
       </div>
 </div>

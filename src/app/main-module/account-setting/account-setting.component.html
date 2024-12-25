@@ -26,7 +26,7 @@
                                     <input type="file" #file class="hidden" id="edit_profile"
                                           formControlName="profile_img" (change)="fileChangeEvent($event)">
                                     <div *ngIf="isEditable"
-                                          class="absolute bottom-0 right-0 bg-primary-gradient text-white rounded-full p-1 cursor-pointer"
+                                          class="absolute bottom-0 right-0 bg-primary text-white rounded-full p-1 cursor-pointer"
                                           (click)="file.click()">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                                                 viewBox="0 0 24 24">
@@ -42,13 +42,13 @@
                               <p class="font-medium text-base text-[#1C1C1C]">Personal Data</p>
                               <ng-container *ngIf="!isEditable">
                                     <button (click)="isEditable = true"
-                                          class="bg-primary-gradient border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">{{userInfo
+                                          class="bg-primary border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">{{userInfo
                                           ? 'Edit' : 'Register'}}</button>
                               </ng-container>
                               <ng-container *ngIf="isEditable">
                                     <button [disabled]="updateInfoForm.invalid" (click)="updateInfo()"
                                           [ngClass]="updateInfoForm.invalid ? 'cursor-not-allowed':'cursor-pointer'"
-                                          class="bg-primary-gradient border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Save</button>
+                                          class="bg-primary border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Save</button>
                               </ng-container>
                         </div>
                         <div class="mt-5">
@@ -101,7 +101,7 @@
                                     </div>
                                     <div class="flex justify-end items-center">
                                           <a
-                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary-gradient hover:text-white flex items-center space-x-2 cursor-pointer">
+                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary hover:text-white flex items-center space-x-2 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
                                                       viewBox="0 0 24 24">
                                                       <path fill="currentColor"
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="md:col-span-2 flex justify-end items-center">
                                           <a
-                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary-gradient hover:text-white flex items-center space-x-2 cursor-pointer">
+                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary hover:text-white flex items-center space-x-2 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                                                       viewBox="0 0 24 24">
                                                       <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
@@ -130,7 +130,7 @@
                                     [roundCropper]="true" (imageCropped)="imageCropped($event)"></image-cropper>
                               <div class="flex justify-end m-2">
                                     <button
-                                          class="bg-primary-gradient text-white hover:bg-transparent hover:text-primary border border-primary text-sm rounded-md py-1 px-4"
+                                          class="bg-primary text-white hover:bg-transparent hover:text-primary border border-primary text-sm rounded-md py-1 px-4"
                                           (click)="onDone()">Done</button>
                               </div>
                         </p-dialog>

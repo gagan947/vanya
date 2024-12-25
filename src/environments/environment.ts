@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://3.106.24.220:4000/',
-  imgUrl: 'http://3.106.24.220:4000/images/',
-  videoUrl: 'http://3.106.24.220:4000/videos/',
-  docUrl: 'http://3.106.24.220:4000/data/'
+  baseUrl: 'http://34.71.149.83:5000/',
+  imgUrl: 'http://34.71.149.83:5000/images/',
+  videoUrl: 'http://34.71.149.83:5000/videos/',
+  docUrl: 'http://34.71.149.83:5000/data/'
 
   // baseUrl: 'https://app.vanya.ai:8443/',
   // imgUrl: 'https://app.vanya.ai:8443/images/',

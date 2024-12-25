@@ -11,6 +11,10 @@ import { CreditHistoryComponent } from './credit-history/credit-history.componen
 import { CertificateComponent } from './certificate/certificate.component'
 import { HistoryInvoiceComponent } from './credit-history/history-invoice/history-invoice.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
+import { CertificateViewComponent } from './certificate/certificate-view/certificate-view.component'
+import { BuyerDashboardComponent } from './buyer-dashboard/buyer-dashboard.component'
+import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component'
+import { SalesReportComponent } from './sales-report/sales-report.component'
 
 const routes: Routes = [
   {
@@ -23,8 +27,16 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'all',
+        path: 'admin',
         component: DashboardComponent,
+      },
+      {
+        path: 'buyer',
+        component: BuyerDashboardComponent,
+      },
+      {
+        path: 'seller',
+        component: SellerDashboardComponent,
       },
       {
         path: 'account-setting',
@@ -41,6 +53,10 @@ const routes: Routes = [
       {
         path: 'projects',
         component: ProjectsComponent
+      },
+      {
+        path: 'sales-report',
+        component: SalesReportComponent
       },
       {
         path: 'projects/add-project',
@@ -61,6 +77,10 @@ const routes: Routes = [
       {
         path: 'certificate',
         component: CertificateComponent
+      },
+      {
+        path: 'certificate-view',
+        component: CertificateViewComponent
       },
     ]
   }

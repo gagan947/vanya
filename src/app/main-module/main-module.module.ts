@@ -21,7 +21,10 @@ import { CreditHistoryComponent } from './credit-history/credit-history.componen
 import { CertificateComponent } from './certificate/certificate.component';
 import { CertificateViewComponent } from './certificate/certificate-view/certificate-view.component';
 import { HistoryInvoiceComponent } from './credit-history/history-invoice/history-invoice.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BuyerDashboardComponent } from './buyer-dashboard/buyer-dashboard.component';
+import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
+import { SalesReportComponent } from './sales-report/sales-report.component'
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     CertificateComponent,
     CertificateViewComponent,
     HistoryInvoiceComponent,
-    DashboardComponent
+    DashboardComponent,
+    BuyerDashboardComponent,
+    SellerDashboardComponent,
+    SalesReportComponent
   ],
   imports: [
     CommonModule,

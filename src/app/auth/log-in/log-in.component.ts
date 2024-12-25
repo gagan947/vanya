@@ -15,7 +15,7 @@ export class LogInComponent {
   showPassword: boolean = false
   loading: boolean = false
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private service: AuthService,
@@ -27,7 +27,7 @@ export class LogInComponent {
       password: ['', [Validators.required]]
     })
   }
-  onSubmit (form: any) {
+  onSubmit(form: any) {
     this.loading = true
     form.markAllAsTouched()
     if (form.invalid) {
@@ -43,7 +43,15 @@ export class LogInComponent {
       if (res.success && res.token) {
         this.service.setToken(res.token)
         this.shared.get('getUserRoleDetails').subscribe(res2 => {
-          this.router.navigate(['/main'])
+
+          if (res2.userRoles.role_type == 'Approver') {
+            this.router.navigate(['/main/dashboard/admin']);
+          } else if (res2.userRoles.role_type == 'Seller') {
+            this.router.navigate(['/main/dashboard/seller']);
+          } else {
+            this.router.navigate(['/main/dashboard/buyer']);
+          }
+
           localStorage.setItem('user', res2.userRoles.id)
           this.service.setRole(res2.userRoles.role_type)
           this.toastr.success(res.message)
@@ -57,7 +65,7 @@ export class LogInComponent {
     })
   }
 
-  getErrorMessage (field: string) {
+  getErrorMessage(field: string) {
     const control = this.logInForm.controls[field]
     if (control.hasError('required')) {
       return 'This field cannot be empty'

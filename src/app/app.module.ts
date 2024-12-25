@@ -20,9 +20,13 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     FormsModule,
     ReactiveFormsModule,
     NgxIntlTelInputModule,
-    ToastrModule.forRoot({ tapToDismiss: true })
+    ToastrModule.forRoot({
+      tapToDismiss: true,
+      timeOut: 2000,
+      progressBar: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

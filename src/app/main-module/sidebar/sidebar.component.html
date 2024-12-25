@@ -2,7 +2,7 @@
       <div class="absolute z-10 transition-all duration-500"
             [ngClass]="isSidebarShow ? 'w-56' : 'w-20 -left-24 md:left-auto'">
             <div *ngIf="isSidebarShow" id="overlay" class="md:hidden" (click)="isSidebarShow = !isSidebarShow"></div>
-            <div class="p-1 rounded-full text-white bg-primary-gradient absolute left-[5.3rem] top-2 cursor-pointer md:hidden"
+            <div class="p-1 rounded-full text-white bg-primary absolute left-[5.3rem] top-2 cursor-pointer md:hidden"
                   (click)="isSidebarShow = !isSidebarShow">
                   <svg *ngIf="!isSidebarShow" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                         viewBox="0 0 24 24">
@@ -11,7 +11,7 @@
                   </svg>
             </div>
             <div class="bg-[#F9F9F9] shadow-lg py-5 px-2 h-[92vh] relative border-r-2">
-                  <div class="p-1 rounded-full text-white bg-primary-gradient absolute -right-3 top-2 cursor-pointer"
+                  <div class="p-1 rounded-full text-white bg-primary absolute -right-3 top-2 cursor-pointer"
                         (click)="isSidebarShow = !isSidebarShow">
                         <svg [ngClass]="isSidebarShow ? 'block':'hidden'" xmlns="http://www.w3.org/2000/svg"
                               width="1.2em" height="1.2em" viewBox="-4.5 -5 24 24">
@@ -26,8 +26,8 @@
                   </div>
                   <ul class="space-y-2">
                         <li *ngFor="let item of sidebarItems">
-                              <a [routerLink]="item.link" [routerLinkActive]="'bg-primary-gradient text-white'"
-                                    class="flex items-center px-4 py-1 duration-500 hover:bg-primary-gradient hover:text-white rounded-lg group focus:bg-primary-gradient focus:text-white">
+                              <a [routerLink]="item.link" [routerLinkActive]="'bg-primary text-white'"
+                                    class="flex items-center px-4 py-1 duration-500 hover:bg-primary hover:text-white rounded-lg group focus:bg-primary focus:text-white">
                                     <span class="iconify w-5 h-5" [attr.data-icon]="'mdi:' + item?.icon"
                                           data-inline="false"></span>
 
@@ -62,7 +62,7 @@
                         <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                               <li>
                                     <a routerLink="/main/dashboard/account-setting" (click)="op.hide()"
-                                          class="flex items-center gap-2 px-4 py-1 hover:bg-primary-gradient hover:text-white rounded-lg">
+                                          class="flex items-center gap-2 px-4 py-1 hover:bg-primary hover:text-white rounded-lg">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                                                 viewBox="0 0 24 24">
                                                 <path fill="currentColor"
@@ -73,7 +73,7 @@
                               </li>
                               <li>
                                     <a (click)="authService.logout()"
-                                          class="flex items-center gap-2 px-4 py-1 hover:bg-primary-gradient hover:text-white rounded-lg cursor-pointer">
+                                          class="flex items-center gap-2 px-4 py-1 hover:bg-primary hover:text-white rounded-lg cursor-pointer">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                                                 viewBox="0 0 1024 1024">
                                                 <path fill="currentColor"

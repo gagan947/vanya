@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Title } from 'chart.js/dist'
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
   title = 'vanya'
-  ngOnInit () {
+
+  ngOnInit() {
     window.onbeforeunload = () => {
       localStorage.removeItem('address')
     }

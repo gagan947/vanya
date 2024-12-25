@@ -110,11 +110,11 @@
 }
 
 .p-multiselect-item {
-      @apply py-1 px-5 hover:bg-primary-gradient hover:text-white
+      @apply py-1 px-5 hover:bg-primary hover:text-white
 }
 
 .p-multiselect-item.p-highlight {
-      @apply bg-primary-gradient text-white
+      @apply bg-primary text-white
 }
 
 .ql-toolbar.ql-snow {
@@ -220,5 +220,5 @@ input#country-search-box:focus {
 }
 
 .p-paginator-page.p-highlight {
-      @apply bg-primary-gradient text-white rounded-full h-6 w-6
+      @apply bg-primary text-white rounded-full h-6 w-6
 }

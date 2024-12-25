@@ -82,7 +82,7 @@ export class AddUserComponent {
     formData.append('first_name', form.value.firstName)
     formData.append('last_name', form.value.lastName)
     formData.append('email', form.value.email)
-    formData.append('phone_number', form.value.phone_number)
+    formData.append('phone_number', form.value.phone_number.e164Number)
     formData.append('company_name', form.value.company_name)
     formData.append('country', form.value.country)
     formData.append('state', form.value.state)

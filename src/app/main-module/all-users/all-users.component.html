@@ -1,7 +1,7 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="container mx-auto mt-5">
       <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">User List</h1>
-      <div class="relative shadow-md sm:rounded-lg p-3 bg-[#F9F9F9]">
+      <div class="relative bg-white p-6 rounded shadow">
             <div
                   class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4">
                   <div class="relative">
@@ -19,7 +19,7 @@
                   </div>
                   <div>
                         <button routerLink="/main/dashboard/users/add-user" *ngIf="role == 'Approver'"
-                              class="text-white bg-primary-gradient px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"><svg
+                              class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
                               </svg>
@@ -29,7 +29,7 @@
             <div class="table-div">
                   <div class="overflow-y-auto max-h-[60vh]">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                              <thead class="text-xs text-white uppercase bg-primary-gradient sticky top-0">
+                              <thead class="text-xs text-white uppercase bg-primary sticky top-0">
                                     <tr>
                                           <th scope="col" class="px-6 py-3">
                                                 S No.

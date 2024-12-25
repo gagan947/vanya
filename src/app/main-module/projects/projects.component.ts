@@ -95,7 +95,7 @@ export class ProjectsComponent {
       message: 'Do you want to delete this ?',
       header: 'Delete Confirmation',
       acceptButtonStyleClass:
-        'bg-primary-gradient rounded-md text-white border border-primary hover:bg-transparent hover:text-primary px-3 ms-2 outline-none',
+        'bg-primary rounded-md text-white border border-primary hover:bg-transparent hover:text-primary px-3 ms-2 outline-none',
       rejectButtonStyleClass:
         'bg-red-500 rounded-md text-white border border-red-500 hover:bg-transparent hover:text-red-500 px-3 ms-2 outline-none',
       acceptIcon: 'none',
@@ -125,7 +125,7 @@ export class ProjectsComponent {
       case 'Rejected':
         return 'bg-red-500'
       case 'Approved':
-        return 'bg-primary-gradient'
+        return 'bg-primary'
       default:
         return 'bg-yellow-500'
     }
@@ -178,19 +178,20 @@ export class ProjectsComponent {
     //     console.error('Error creating project:', error)
     //   })
 
-    this.service
-      .createProject('api/v1/storageContract/createProject', null)
-      .subscribe({
-        next: resp => {
-          this.loading = false
-          localStorage.setItem('contract address', resp.data.contract)
-          this.router.navigate(['/main/dashboard/projects/add-project'])
-        },
-        error: err => {
-          this.loading = false
-          console.error(err)
-        }
-      })
+    this.router.navigate(['/main/dashboard/projects/add-project'])
+    // this.service
+    //   .createProject('api/v1/storageContract/createProject', null)
+    //   .subscribe({
+    //     next: resp => {
+    //       this.loading = false
+    //       localStorage.setItem('contract address', resp.data.contract)
+    //       this.router.navigate(['/main/dashboard/projects/add-project'])
+    //     },
+    //     error: err => {
+    //       this.loading = false
+    //       console.error(err)
+    //     }
+    //   })
   }
 
   getProjectType(TypeId: number) {
