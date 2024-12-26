@@ -115,11 +115,11 @@ export class SidebarDataService {
         link: '/main/dashboard/buyer',
         icon: 'view-dashboard-outline'
       },
-      {
-        label: 'Project History',
-        link: '/my-orders',
-        icon: 'clipboard-text-history-outline'
-      },
+      // {
+      //   label: 'Project History',
+      //   link: '/my-orders',
+      //   icon: 'clipboard-text-history-outline'
+      // },
       {
         label: 'Order History',
         link: '/main/dashboard/credit-history',
@@ -135,11 +135,11 @@ export class SidebarDataService {
         link: '/marketplace/projects',
         icon: 'marketplace-outline'
       },
-      {
-        label: 'Invoices',
-        link: '/iuyh',
-        icon: 'invoice-receive-outline'
-      },
+      // {
+      //   label: 'Invoices',
+      //   link: '/iuyh',
+      //   icon: 'invoice-receive-outline'
+      // },
       {
         label: 'Profile',
         link: '/main/dashboard/account-setting',
