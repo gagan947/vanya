@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
 import { ethers } from 'ethers'
 import { projectContractABI, storageContractABI2 } from '../main-module/ABI/abi'
 import { ToastrService } from 'ngx-toastr'
-import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -29,16 +27,15 @@ export class EthereumService {
   //getProjectAddress
   private storageContractABI2: any = storageContractABI2
 
-  async initializeProvider (): Promise<void> {
+  async initializeProvider(): Promise<void> {
     if (typeof window.ethereum !== 'undefined') {
       this.provider = new ethers.providers.Web3Provider(window.ethereum)
     } else {
       console.error('MetaMask or similar provider not detected.')
-      // Handle error or notify user accordingly
     }
   }
 
-  async connectAccount (): Promise<void> {
+  async connectAccount(): Promise<void> {
     if (typeof window.ethereum !== 'undefined') {
       this.provider = new ethers.providers.Web3Provider(window.ethereum)
       if (!this.provider) {
@@ -54,7 +51,6 @@ export class EthereumService {
         localStorage.setItem('address', this.accountAddress[0])
       } catch (error) {
         this.toastr.error('User denied account access!')
-        console.error('User denied account access')
       }
       // } else {
       //   localStorage.removeItem('address');
@@ -63,7 +59,7 @@ export class EthereumService {
   }
 
   //get contract address
-  async createProject () {
+  async createProject() {
     const signer = await this.getSigner()
     const contract = new ethers.Contract(
       this.contractAddress2,
@@ -93,7 +89,7 @@ export class EthereumService {
     }
   }
 
-  async getSigner () {
+  async getSigner() {
     if (!this.provider) {
       this.toastr.error('Please re-initialized the provider!')
       // this.toastr.error('Provider is not initialized. Call connectAccount first.!');
@@ -161,13 +157,13 @@ export class EthereumService {
   // private contract: ethers.Contract;
   // private signer?: ethers.Signer;
 
-  constructor (private http: HttpClient, private toastr: ToastrService) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
     if (!this.provider) {
       this.initializeProvider()
     }
   }
 
-  async sendTransactionToContract (
+  async sendTransactionToContract(
     latitude: string,
     longitude: string,
     projectAddress: string,
@@ -230,7 +226,6 @@ export class EthereumService {
       return id // Return the ID or any relevant data
     } catch (error) {
       this.toastr.error('Error submitting transaction')
-      console.error('Error submitting transaction:', error)
       throw error // Rethrow or handle as needed
     }
   }

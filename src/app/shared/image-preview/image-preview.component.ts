@@ -12,14 +12,13 @@ import {
 })
 export class ImagePreviewComponent {
   imgName: any
-
-  constructor (
+  constructor(
     private dialogConfig: DynamicDialogConfig,
     public dialogService: DialogService,
     public ref: DynamicDialogRef
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.imgName = this.dialogConfig.data
   }
 }

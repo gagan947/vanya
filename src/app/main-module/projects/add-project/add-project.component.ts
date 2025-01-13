@@ -637,7 +637,6 @@ export class AddProjectComponent {
       }
       this.landUnit = 'hectares'
       this.project_area = this.originalProjectArea! * 0.404686
-      console.log(this.project_area)
     } else {
       if (this.originalProjectArea !== undefined) {
         this.project_area = this.originalProjectArea

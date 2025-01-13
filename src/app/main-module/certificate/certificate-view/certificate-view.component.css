@@ -1,0 +1,122 @@
+/* Certificate Container */
+
+.certificate-container {
+      background: #fff;
+      width: 900px;
+      padding: 30px;
+      border: 20px solid #d4af37;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Decorative Borders */
+.decorative-border-top,
+.decorative-border-bottom {
+      position: absolute;
+      width: 100%;
+      height: 15px;
+      background: repeating-linear-gradient(-45deg,
+                  #d4af37,
+                  #d4af37 10px,
+                  transparent 10px,
+                  transparent 20px);
+}
+
+.decorative-border-top {
+      top: -20px;
+      left: 0;
+}
+
+.decorative-border-bottom {
+      bottom: -20px;
+      left: 0;
+}
+
+/* Header */
+.header h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+}
+
+.header p {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #555;
+}
+
+.header h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #28a745;
+}
+
+/* Content */
+.content p {
+      font-size: 16px;
+      color: #333;
+      margin: 10px 0;
+}
+
+.content h3 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1d3557;
+      margin: 10px 0;
+}
+
+.content hr {
+      border: 1px solid #d4af37;
+      margin: 20px auto;
+      width: 60%;
+}
+
+.content h4 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+}
+
+.content #purchase-date {
+      font-size: 16px;
+      font-style: italic;
+      color: #555;
+}
+
+/* Footer */
+.footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+}
+
+.footer .sold-by,
+.footer .purchased-on {
+      text-align: center;
+      width: 45%;
+}
+
+.footer img.footer-logo {
+      width: 80px;
+      height: auto;
+      margin-top: 10px;
+}
+
+/* Serial Numbers */
+.serial-numbers {
+      font-size: 14px;
+      color: #555;
+      margin-top: 20px;
+}
+
+.container {
+      font-family: 'Playfair Display', serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+}

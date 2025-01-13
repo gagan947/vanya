@@ -72,8 +72,6 @@ export class ProjectsComponent {
           this.loading = false
         }
       })
-    console.log(this.projectList);
-
   }
 
   showDialog(project_id: number) {

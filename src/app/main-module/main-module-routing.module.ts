@@ -15,6 +15,7 @@ import { CertificateViewComponent } from './certificate/certificate-view/certifi
 import { BuyerDashboardComponent } from './buyer-dashboard/buyer-dashboard.component'
 import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component'
 import { SalesReportComponent } from './sales-report/sales-report.component'
+import { AddCertificateComponent } from './certificate/add-certificate/add-certificate.component'
 
 const routes: Routes = [
   {
@@ -79,8 +80,12 @@ const routes: Routes = [
         component: CertificateComponent
       },
       {
-        path: 'certificate-view',
+        path: 'certificate/certificate-view',
         component: CertificateViewComponent
+      },
+      {
+        path: 'certificate/add-certificate',
+        component: AddCertificateComponent
       },
     ]
   }

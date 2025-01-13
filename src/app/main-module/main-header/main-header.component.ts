@@ -15,7 +15,7 @@ export class MainHeaderComponent {
   maskedAddress: any
   address: any
 
-  constructor (
+  constructor(
     private router: Router,
     private ethereumService: EthereumService,
     private toastr: ToastrService
@@ -28,7 +28,7 @@ export class MainHeaderComponent {
     this.showAdd()
   }
 
-  showAdd () {
+  showAdd() {
     // this.address = localStorage.getItem('address')
     // const fullAddress: any = this.address
     // if (fullAddress) {
@@ -40,7 +40,7 @@ export class MainHeaderComponent {
     // }
   }
 
-  connectToMetaMask (): void {
+  connectToMetaMask(): void {
     this.loading = true
     this.ethereumService
       .connectAccount()
@@ -62,7 +62,6 @@ export class MainHeaderComponent {
         this.loading = false
         this.isMetamaskConnected = false
         this.toastr.error('Something went wrong.')
-        console.error('Error connecting to MetaMask', error)
       })
   }
 }

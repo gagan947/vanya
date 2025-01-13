@@ -25,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BuyerDashboardComponent } from './buyer-dashboard/buyer-dashboard.component';
 import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
 import { SalesReportComponent } from './sales-report/sales-report.component'
+import { AddCertificateComponent } from './certificate/add-certificate/add-certificate.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SalesReportComponent } from './sales-report/sales-report.component'
     DashboardComponent,
     BuyerDashboardComponent,
     SellerDashboardComponent,
-    SalesReportComponent
+    SalesReportComponent,
+    AddCertificateComponent
   ],
   imports: [
     CommonModule,
@@ -59,4 +61,4 @@ import { SalesReportComponent } from './sales-report/sales-report.component'
   exports: [SidebarComponent],
   providers: [ConfirmationService, DialogService]
 })
-export class MainModuleModule {}
+export class MainModuleModule { }
