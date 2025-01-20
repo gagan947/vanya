@@ -1,7 +1,7 @@
 <div class="min-h-screen p-6 ">
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Welcome, Admin</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
                   <button routerLink="/main/dashboard/projects"
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
@@ -30,7 +30,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Users</h2>
-                  <p class="text-3xl font-bold text-[#252525]">85</p>
+                  <p class="text-3xl font-bold text-[#252525]">{{data.total_users}}</p>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
                   <div class="absolute -right-14 -top-16">
@@ -47,7 +47,7 @@
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Sales</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">8,000</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data.sales_per_month | currency:'INR'}}</p>
                   </div>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
@@ -64,7 +64,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Carbon Credits</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">12,000</p>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data.carbon_per_month}}</p>
             </div>
       </div>
 
@@ -96,21 +96,22 @@
                         <table class="w-full border-collapse">
                               <thead>
                                     <tr class="bg-gray-100 text-left text-sm">
+                                          <th class="py-2 px-4">Transaction ID</th>
                                           <th class="py-2 px-4">Seller</th>
                                           <th class="py-2 px-4">Buyer</th>
                                           <th class="py-2 px-4">Date</th>
                                           <th class="py-2 px-4">Credits</th>
-                                          <th class="py-2 px-4">Revenue</th>
+                                          <!-- <th class="py-2 px-4">Revenue</th> -->
                                           <!-- <th class="py-2 px-4">Action</th> -->
                                     </tr>
                               </thead>
                               <tbody>
-                                    <tr class="border-b" *ngFor="let transaction of transactions">
-                                          <td class="py-2 px-4">{{ transaction.seller }}</td>
-                                          <td class="py-2 px-4">{{ transaction.buyer }}</td>
-                                          <td class="py-2 px-4">{{ transaction.date }}</td>
-                                          <td class="py-2 px-4">{{ transaction.credits }}</td>
-                                          <td class="py-2 px-4">{{ transaction.revenue }}</td>
+                                    <tr class="border-b" *ngFor="let transaction of data.last5">
+                                          <td class="py-2 px-4">{{ transaction.transaction_id }}</td>
+                                          <td class="py-2 px-4">{{ transaction.seller_name }}</td>
+                                          <td class="py-2 px-4">{{ transaction.buyer_name }}</td>
+                                          <td class="py-2 px-4">{{ transaction.created_at | date }}</td>
+                                          <td class="py-2 px-4">{{ transaction.carbon_credits }}</td>
                                           <!-- <td class="py-2 px-4">
                                                 <button
                                                       class="border border-primary text-primary text-sm px-3 py-1 rounded hover:bg-primary hover:text-white">

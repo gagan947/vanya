@@ -1,7 +1,7 @@
 <div class="min-h-screen p-6 ">
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Welcome, Farmer John!</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
                   <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
@@ -56,8 +56,8 @@
                               <img src="assets/images/carbon_credit.png">
                         </div>
                   </div>
-                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Carbon Credits</h2>
-                  <p class="text-3xl font-bold text-[#252525]">85</p>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Active Projects</h2>
+                  <p class="text-3xl font-bold text-[#252525]">{{data?.active_projects}}</p>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
                   <div class="absolute -right-14 -top-16">
@@ -69,13 +69,13 @@
                   <div
                         class="flex justify-center items-center p-1 rounded-full border-dashed border-2 border-primary w-fit">
                         <div class="flex justify-center items-center p-2 rounded-full bg-primary w-fit">
-                              <img src="assets/images/Environmental_Impact.png">
+                              <img src="assets/images/co2.png">
                         </div>
                   </div>
-                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Environmental Impact</h2>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">CO₂ Credits</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">8,000 T</p>
-                        <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.carbon_credits_sold}} T</p>
+                        <!-- <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p> -->
                   </div>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
@@ -91,8 +91,8 @@
                               <img src="assets/images/Available_Balance.png">
                         </div>
                   </div>
-                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Available Balance</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">12,000</p>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Revenue</h2>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.revenue | currency:'INR'}}</p>
             </div>
       </div>
 
@@ -132,19 +132,13 @@
                               </tr>
                         </thead>
                         <tbody>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Project Meadow</td>
-                                    <td><span class="px-3 py-1 rounded text-sm bg-green-100 text-green-600"> Active
+                              <tr class="text-gray-800" *ngFor="let item of projectsdata">
+                                    <td class="py-1">{{item.project_name}}</td>
+                                    <td><span class="px-3 py-1 rounded text-sm bg-green-100 text-green-600">
+                                                {{item.status}}
                                           </span></td>
-                                    <td>12,000</td>
-                                    <td>₹30,000</td>
-                              </tr>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">GreenTree Initiative</td>
-                                    <td><span class="px-3 py-1 rounded text-sm bg-green-100 text-green-600"> Active
-                                          </span></td>
-                                    <td>15,000</td>
-                                    <td>₹40,000</td>
+                                    <td>{{item.carbon_credits}}</td>
+                                    <td>{{item.revenue | currency:'INR'}}</td>
                               </tr>
                         </tbody>
                   </table>
@@ -155,24 +149,18 @@
                   <table class="w-full text-sm text-left">
                         <thead>
                               <tr class="text-gray-600">
-                                    <th class="pb-2">Product Name</th>
+                                    <th class="pb-2">Project Name</th>
                                     <th class="pb-2">Credits Sold</th>
                                     <th class="pb-2">Revenue Earned</th>
-                                    <th class="pb-2">Date</th>
+                                    <th class="pb-2">Buyer</th>
                               </tr>
                         </thead>
                         <tbody>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Project Greenfield</td>
-                                    <td>50</td>
-                                    <td>₹50,000</td>
-                                    <td>24 Jan 2024</td>
-                              </tr>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Oxygen Oasis</td>
-                                    <td>30</td>
-                                    <td>₹30,000</td>
-                                    <td>12 Feb 2024</td>
+                              <tr class="text-gray-800" *ngFor="let item of salesdata">
+                                    <td class="py-1">{{item.project_name}}</td>
+                                    <td>{{item.carbon_credits}}</td>
+                                    <td>{{item.revenue | currency:'INR'}}</td>
+                                    <td>{{item.buyer}}</td>
                               </tr>
                         </tbody>
                   </table>

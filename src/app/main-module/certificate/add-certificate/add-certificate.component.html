@@ -1,1 +1,125 @@
-<p>add-certificate works!</p>
+<div id="right-panel" class="container mx-auto">
+      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Request For Certificate</h1>
+      <div class="p-5 px-10 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
+            <form [formGroup]="Form" (ngSubmit)="onSubmit(Form)" class="">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
+                        <div class="grid gap-1 col-span-1">
+                              <label for="" class="text-sm text-gray-700">*Project</label>
+                              <select
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    [ngClass]="Form.controls['project_id'].errors &&
+                                Form.controls['project_id'].touched ? 'outline-red-600' : ''"
+                                    formControlName="project_id" (change)="onProjectChange($event)">
+                                    <option disabled value="">Select</option>
+                                    @for (item of projectList; track $index) {
+                                    <option [value]="item.id">{{item.project_name}}</option>
+                                    }
+                              </select>
+                              <!-- error text S -->
+                              <p *ngIf="Form.controls['project_id'].errors && Form.controls['project_id'].touched"
+                                    class="flex text-sm text-red-600 justify-between items-center mt-2">
+                                    {{ getErrorMessage('project_id') }} <svg width="17" height="17" viewBox="0 0 17 17"
+                                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                fill="#F80000" />
+                                    </svg>
+                              </p>
+                        </div>
+                        <div class="grid gap-1 col-span-1">
+                              <label for="" class="text-sm text-gray-700">*Carbon Credits</label>
+                              <input type="number" min="0" [max]="remaining_credits"
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    [ngClass]="Form.controls['carbon_credits'].errors &&
+                                Form.controls['carbon_credits'].touched ? 'outline-red-600' : ''"
+                                    formControlName="carbon_credits">
+                              <!-- error text S -->
+                              <p *ngIf="Form.controls['carbon_credits'].errors && Form.controls['carbon_credits'].touched"
+                                    class="flex text-sm text-red-600 justify-between items-center mt-2">
+                                    {{ getErrorMessage('carbon_credits') }} <svg width="17" height="17"
+                                          viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                fill="#F80000" />
+                                    </svg>
+                              </p>
+                        </div>
+                        <div class="grid gap-1 col-span-1">
+                              <label for="" class="text-sm text-gray-700">*Standard</label>
+                              <select
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    [ngClass]="Form.controls['standard'].errors &&
+                                  Form.controls['standard'].touched ? 'outline-red-600' : ''"
+                                    formControlName="standard">
+                                    <option value="" disabled>Select</option>
+                                    <option value="Verra or Verified Carbon Standard (VCS)">Verra or Verified
+                                          Carbon Standard (VCS)</option>
+                                    <option value="Gold Standard (GS)">Gold Standard (GS)</option>
+                                    <option value="American Carbon Registry (ACR)">American Carbon Registry (ACR)
+                                    </option>
+                                    <option value="Climate Action Reserve (CAR)">Climate Action Reserve (CAR)</option>
+                              </select>
+                              <!-- error text S -->
+                              <p *ngIf="Form.controls['standard'].errors && Form.controls['standard'].touched"
+                                    class="flex text-sm text-red-600 justify-between items-center mt-2">
+                                    {{ getErrorMessage('standard') }} <svg width="17" height="17" viewBox="0 0 17 17"
+                                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                fill="#F80000" />
+                                    </svg>
+                              </p>
+                        </div>
+                        <div class="grid gap-1 col-span-1">
+                              <label for="" class="text-sm text-gray-700">*Name</label>
+                              <input type="text"
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    [ngClass]="Form.controls['issued_on_name'].errors &&
+                                  Form.controls['issued_on_name'].touched ? 'outline-red-600' : ''"
+                                    formControlName="issued_on_name">
+                              <!-- error text S -->
+                              <p *ngIf="Form.controls['issued_on_name'].errors && Form.controls['issued_on_name'].touched"
+                                    class="flex text-sm text-red-600 justify-between items-center mt-2">
+                                    {{ getErrorMessage('issued_on_name') }} <svg width="17" height="17"
+                                          viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                fill="#F80000" />
+                                    </svg>
+                              </p>
+                        </div>
+                        <div class="grid gap-1 col-span-1">
+                              <label for="" class="text-sm text-gray-700">*Company Logo</label>
+                              <input type="file"
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    [ngClass]="Form.controls['certificate'].errors &&
+                                  Form.controls['certificate'].touched ? 'outline-red-600' : ''"
+                                    formControlName="certificate" (change)="fileChangeEvent($event)">
+                              <!-- error text S -->
+                              <p *ngIf="Form.controls['certificate'].errors && Form.controls['certificate'].touched"
+                                    class="flex text-sm text-red-600 justify-between items-center mt-2">
+                                    {{ getErrorMessage('certificate') }} <svg width="17" height="17" viewBox="0 0 17 17"
+                                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path d="M7.65 11.05H9.35V12.75H7.65V11.05ZM7.65 4.25H9.35V9.35H7.65V4.25ZM8.4915 4.25039e-06C6.81072 0.00168503 5.16817 0.501629 3.77147 1.43664C2.37478 2.37166 1.28663 3.69976 0.644591 5.25308C0.00254921 6.8064 -0.164567 8.5152 0.164367 10.1635C0.4933 11.8118 1.30352 13.3255 2.4926 14.5134C3.68168 15.7013 5.19625 16.51 6.84486 16.8373C8.49346 17.1646 10.2021 16.9958 11.7548 16.3522C13.3074 15.7086 14.6345 14.6191 15.5681 13.2215C16.5017 11.8238 17 10.1808 17 8.5C17 7.38305 16.7799 6.27705 16.3522 5.24523C15.9245 4.21341 15.2976 3.276 14.5074 2.48659C13.7172 1.69718 12.7792 1.07125 11.7469 0.644587C10.7147 0.217922 9.60845 -0.0011127 8.4915 4.25039e-06ZM8.5 15.3C7.15509 15.3 5.84038 14.9012 4.72213 14.154C3.60387 13.4068 2.7323 12.3448 2.21762 11.1022C1.70295 9.85971 1.56828 8.49246 1.83066 7.17339C2.09304 5.85432 2.74068 4.64267 3.69168 3.69168C4.64267 2.74068 5.85432 2.09304 7.17339 1.83066C8.49246 1.56828 9.85971 1.70295 11.1022 2.21762C12.3448 2.7323 13.4068 3.60387 14.154 4.72213C14.9012 5.84038 15.3 7.15509 15.3 8.5C15.3 10.3035 14.5836 12.0331 13.3083 13.3083C12.0331 14.5836 10.3035 15.3 8.5 15.3Z"
+                                                fill="#F80000" />
+                                    </svg>
+                              </p>
+                        </div>
+                        <div class="mt-4">
+                              <div class="pt-2 flex gap-1 align-center">
+                                    <button type="reset"
+                                          class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 font-medium"
+                                          routerLink="/main/dashboard/users">Cancel</button>
+                                    <button type="submit"
+                                          class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium">Save</button>
+                              </div>
+                        </div>
+                  </div>
+            </form>
+      </div>
+      <p-dialog styleClass="bg-white p-2 rounded-lg shadow-md" [modal]="true" [(visible)]="visible"
+            [style]="{ width: '25rem' }">
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [aspectRatio]="3 / 1" format="png"
+                  (imageCropped)="imageCropped($event)"></image-cropper>
+            <div class="flex justify-end m-2">
+                  <button
+                        class="bg-primary text-white hover:bg-transparent hover:text-primary border border-primary text-sm rounded-md py-1 px-4"
+                        (click)="onDone()">Done</button>
+            </div>
+      </p-dialog>

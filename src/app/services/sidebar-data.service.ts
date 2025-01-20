@@ -141,6 +141,11 @@ export class SidebarDataService {
       //   icon: 'invoice-receive-outline'
       // },
       {
+        label: 'Transaction History',
+        link: '/main/dashboard/transaction-history',
+        icon: 'bank-transfer'
+      },
+      {
         label: 'Profile',
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { AuthService } from 'src/app/services/auth.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +10,44 @@ import { Chart } from 'chart.js/auto';
 })
 export class DashboardComponent {
 
+  userInfo: any
+  role: string | null | undefined
+  data: any;
+
+  constructor(
+    private service: SharedService,
+    public authService: AuthService,
+  ) { }
+
+  ngOnInit() {
+    this.authService.authState$.subscribe(res => {
+      this.role = res.role
+    })
+    this.getUserInfo()
+    this.getDashboardData()
+  }
+
+  public getUserInfo() {
+    let apiUrl = `getUserRoleProfile`
+    this.service.get(apiUrl).subscribe(res => {
+      if (res.success) {
+        this.userInfo = res.userDetails[0]
+      } else {
+        // this.toastr.error(res.message)
+      }
+    })
+  }
+
+  getDashboardData() {
+    let apiUrl = `admin/getadminDashboardDetails`
+    this.service.get(apiUrl).subscribe(res => {
+      if (res.success) {
+        this.data = res.finalDashboard
+      } else {
+        // this.toastr.error(res.message)
+      }
+    })
+  }
 
   projects = [
     { name: 'Farmer Greenfield', status: 'Active', credits: 120 },
@@ -34,44 +74,6 @@ export class DashboardComponent {
     }
   ];
 
-  transactions = [
-    {
-      seller: 'Farmer Greenfield',
-      buyer: 'BuyerCorp Ltd.',
-      date: '12.08.2019',
-      credits: 50,
-      revenue: '5,000'
-    },
-    {
-      seller: 'Project Meadow',
-      buyer: 'ClientFuture Inc.',
-      date: '12.08.2019',
-      credits: 30,
-      revenue: '3,000'
-    },
-    {
-      seller: 'Project Meadow',
-      buyer: 'ClientFuture Inc.',
-      date: '12.08.2019',
-      credits: 30,
-      revenue: '3,000'
-    },
-    {
-      seller: 'Project Meadow',
-      buyer: 'ClientFuture Inc.',
-      date: '12.08.2019',
-      credits: 30,
-      revenue: '3,000'
-    },
-    {
-      seller: 'Project Meadow',
-      buyer: 'ClientFuture Inc.',
-      date: '12.08.2019',
-      credits: 30,
-      revenue: '3,000'
-    },
-  ];
-
   ngAfterViewInit() {
     const ctx = document.getElementById('impactChart') as HTMLCanvasElement;
     new Chart(ctx, {
@@ -85,7 +87,7 @@ export class DashboardComponent {
             data: [20, 40, 50, 60, 80, 90, 70, 60, 100],
             borderColor: '#22c55e',
             backgroundColor: 'rgba(34, 197, 94, 0.2)',
-            tension: 0.4,
+            tension: 0.1,
           },
         ],
       },

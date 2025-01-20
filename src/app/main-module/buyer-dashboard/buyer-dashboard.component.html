@@ -1,7 +1,7 @@
 <div class="min-h-screen p-6 ">
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Welcome, BuyerCorp Ltd.!</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
                   <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
@@ -56,8 +56,8 @@
                               <img src="assets/images/carbon_credit.png">
                         </div>
                   </div>
-                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Carbon Credits</h2>
-                  <p class="text-3xl font-bold text-[#252525]">85</p>
+                  <h2 class="text-sm font-semibold text-[#252525] mt-3">Active Projects</h2>
+                  <p class="text-3xl font-bold text-[#252525]">{{data.active_projects}}</p>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
                   <div class="absolute -right-14 -top-16">
@@ -74,8 +74,8 @@
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Environmental Impact</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">8,000 T</p>
-                        <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data.carbon_credits_sold}} T</p>
+                        <!-- <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p> -->
                   </div>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
@@ -92,7 +92,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Available Balance</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">12,000</p>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data.revenue | currency:'INR'}}</p>
             </div>
       </div>
 
@@ -126,23 +126,17 @@
                         <thead>
                               <tr class="text-gray-600">
                                     <th class="pb-2">Project Name</th>
-                                    <th class="pb-2">Ratings</th>
+                                    <th class="pb-2">Status</th>
                                     <th class="pb-2">Credits Approved</th>
                                     <th class="pb-2">Revenue</th>
                               </tr>
                         </thead>
                         <tbody>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Project Meadow</td>
-                                    <td>4.2</td>
-                                    <td>12,000</td>
-                                    <td>₹30,000</td>
-                              </tr>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">GreenTree Initiative</td>
-                                    <td>4.7</td>
-                                    <td>15,000</td>
-                                    <td>₹40,000</td>
+                              <tr class="text-gray-800" *ngFor="let item of projectsdata">
+                                    <td class="py-1">{{item.project_name}}</td>
+                                    <td>{{item.status}}</td>
+                                    <td>{{item.carbon_credits}}</td>
+                                    <td>{{item.revenue | currency:'INR'}}</td>
                               </tr>
                         </tbody>
                   </table>
@@ -157,21 +151,15 @@
                                     <th class="pb-2">Product Name</th>
                                     <th class="pb-2">Credits Purchased</th>
                                     <th class="pb-2">Total Cost</th>
-                                    <th class="pb-2">Date</th>
+                                    <th class="pb-2">Seller</th>
                               </tr>
                         </thead>
                         <tbody>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Project Greenfield</td>
-                                    <td>50</td>
-                                    <td>₹50,000</td>
-                                    <td>24 Jan 2024</td>
-                              </tr>
-                              <tr class="text-gray-800">
-                                    <td class="py-1">Oxygen Oasis</td>
-                                    <td>30</td>
-                                    <td>₹30,000</td>
-                                    <td>12 Feb 2024</td>
+                              <tr class="text-gray-800" *ngFor="let item of salesdata">
+                                    <td class="py-1">{{item.project_name}}</td>
+                                    <td>{{item.carbon_credits}}</td>
+                                    <td>{{item.revenue | currency:'INR'}}</td>
+                                    <td>{{item.seller}}</td>
                               </tr>
                         </tbody>
                   </table>

@@ -104,8 +104,25 @@
                         class="text-primary hover:underline font-semibold">Global Registry CSI</a>.</p>
       </div>
 </div> -->
+<div class="absolute right-16 top-6 cursor-pointer text-primary" title="Download" (click)="exportAsPDF()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path fill="currentColor" fill-opacity="0" stroke-dasharray="20" stroke-dashoffset="20"
+                        d="M12 4h2v6h2.5l-4.5 4.5M12 4h-2v6h-2.5l4.5 4.5">
+                        <animate attributeName="d" begin="0.25s" dur="0.75s" repeatCount="indefinite"
+                              values="M12 4h2v6h2.5l-4.5 4.5M12 4h-2v6h-2.5l4.5 4.5;M12 4h2v3h2.5l-4.5 4.5M12 4h-2v3h-2.5l4.5 4.5;M12 4h2v6h2.5l-4.5 4.5M12 4h-2v6h-2.5l4.5 4.5" />
+                        <animate fill="freeze" attributeName="fill-opacity" begin="0.35s" dur="0.25s" values="0;1" />
+                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="20;0" />
+                  </path>
+                  <path stroke-dasharray="14" stroke-dashoffset="14" d="M6 19h12">
+                        <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.25s" dur="0.1s"
+                              values="14;0" />
+                  </path>
+            </g>
+      </svg>
+</div>
+<div class="container mx-auto flex justify-center py-5" id="certificate">
 
-<div class="container mx-auto flex justify-center py-5">
       <div class="certificate-container">
             <!-- Decorative Top Border -->
             <div class="decorative-border-top"></div>
@@ -114,19 +131,19 @@
             <div class="header">
                   <h1>Carbon Credit Certificate</h1>
                   <p>This certificate confirms that</p>
-                  <h2 id="credits">10 carbon credits</h2>
+                  <h2 id="credits">{{data.carbon_credits}} carbon credits</h2>
                   <p>equivalent to one metric tonne of CO<sub>2</sub>e</p>
             </div>
 
             <!-- Main Content -->
             <div class="content">
                   <p>have been purchased and are being retired to support the</p>
-                  <h3 id="project-name">Mhow Biodiversity Reserve, Indore Project</h3>
-                  <p>Verra - Verified Carbon Standard (VCS) project ID <span id="project-id">#674</span></p>
+                  <h3 id="project-name">{{data.project_name}} {{data.location}}</h3>
+                  <p>{{data.standard}} ID <span id="project-id">#{{data.project_id}}</span></p>
                   <hr>
                   <p>On behalf of</p>
-                  <h4 id="buyer-name">Hans Bjordahl</h4>
-                  <p id="purchase-date">January 01, 2025</p>
+                  <h4 id="buyer-name">{{data.user_name}}</h4>
+                  <p id="purchase-date">{{data.created_at | date }}</p>
             </div>
 
             <!-- Footer -->
@@ -138,10 +155,9 @@
                         </div>
                   </div>
                   <div class="purchased-on">
-                        <p>Purchased on</p>
+                        <p>Purchased by</p>
                         <div class="flex justify-center">
-                              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2OXnhI28p5NfdjWHtewDwTdqIP8tIZ0QCw&s"
-                                    alt="Vanya Environmental Services" class="footer-logo">
+                              <img [src]="imgUrl + data.logo" alt="Vanya Environmental Services" class="footer-logo">
                         </div>
                   </div>
             </div>
