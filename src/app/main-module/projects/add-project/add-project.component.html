@@ -585,7 +585,7 @@
                               </form>
                         </div>
                         <div class="p-fluid" *ngIf="activeIndex === 3">
-                              <form class="flex justify-center">
+                              <form class="">
                                     <div class="col-span-1 grid grid-cols-1 gap-x-4 gap-y-5">
                                           <div class="flex flex-wrap gap-6">
                                                 <div *ngFor="let image of sliderImages; let i = index" class="relative">
@@ -761,11 +761,13 @@
                                                                   <img [src]=" flagUrl ? flagUrl : 'assets/images/US.svg'"
                                                                         class="w-8 h-6">
                                                                   <p class="text-white text-base font-medium">
-                                                                        {{country}}</p>
+                                                                        {{country}}
+                                                                  </p>
                                                                   <div class="border-r border-white"></div>
                                                                   <p class="text-white text-base font-medium">
                                                                         {{project_area ? project_area : 514 }}
-                                                                        {{landUnit}}</p>
+                                                                        {{landUnit}}
+                                                                  </p>
                                                             </div>
                                                             <p
                                                                   class="text-white text-3xl font-semibold uppercase text-center">
@@ -782,9 +784,8 @@
                                                             <div class="mt-24">
                                                                   <p class="text-white text-xl text-center">
                                                                         {{project_subtitle_2 ? project_subtitle_2 :
-                                                                        'From
-                                                                        planned residential developments to public parks
-                                                                        on the outskirts of Seattle'}}</p>
+                                                                  "From planned residential developments to public parks on the outskirts of Seattle"}}
+                                                                  </p>
                                                             </div>
                                                       </div>
                                                 </div>
@@ -955,11 +956,14 @@
                                                       <ng-template let-product pTemplate="item">
                                                             <div class="p-5">
                                                                   <p class="text-white text-sm font-semibold">
-                                                                        {{product.id}}</p>
+                                                                        {{product.id}}
+                                                                  </p>
                                                                   <p class="text-white text-lg font-medium">
-                                                                        {{product.heading}}</p>
+                                                                        {{product.heading}}
+                                                                  </p>
                                                                   <p class="text-white font-normal">
-                                                                        {{product.description}}</p>
+                                                                        {{product.description}}
+                                                                  </p>
                                                                   <video autoplay muted loop id="myVideo"
                                                                         class="w-full h-full object-cover">
                                                                         <source [src]="product.src" type="video/mp4">
@@ -1091,11 +1095,14 @@
                                                             <div class="p-5 bg-white rounded-lg mx-2 h-full">
                                                                   <img [src]="sdg.logo" class="w-20 rounded-md mb-2">
                                                                   <p class="text-[#2B2B2B] text-sm font-semibold">
-                                                                        {{sdg.id}}</p>
+                                                                        {{sdg.id}}
+                                                                  </p>
                                                                   <p class="text-[#2B2B2B] text-lg font-medium">
-                                                                        {{sdg.name}}</p>
+                                                                        {{sdg.name}}
+                                                                  </p>
                                                                   <p class="text-[#2B2B2B] text-sm font-normal">
-                                                                        {{sdg.description}}</p>
+                                                                        {{sdg.description}}
+                                                                  </p>
                                                             </div>
                                                       </ng-template>
                                                 </p-carousel>

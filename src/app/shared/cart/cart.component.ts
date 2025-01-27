@@ -42,16 +42,20 @@ export class CartComponent {
 
     this.service.postWithToken(`cart/getCartItems`, formData).subscribe({
       next: async res => {
-        if (res.success == true) {
-          this.cartItems = res.projectData.map((project: { id: any }) => {
-            const matchingResult = res.result.find(
-              (r: { project_id: any }) => r.project_id === project.id
-            )
-            return {
-              ...project,
-              ...matchingResult
+        if (res.success === true) {
+          this.cartItems = res.projectData.reduce((acc: any[], project: { id: any }) => {
+            if (project.id) {
+              const matchingResult = res.result.find(
+                (r: { project_id: any }) => r.project_id === project.id
+              )
+              if (matchingResult) {
+                acc.push({ ...project, ...matchingResult })
+              }
             }
-          })
+            return acc
+          }, [])
+          console.log(this.cartItems)
+
           this.loading = false
         } else {
           this.loading = false

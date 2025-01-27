@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from 'primeng/dynamicdialog';
+import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class AddCertificateComponent {
   croppedImageBlob: any;
   croppedImage: string | null | undefined;
   imageChangedEvent: any = ''
+  role: string | null | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -30,7 +32,8 @@ export class AddCertificateComponent {
     private service: SharedService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private authService: AuthService
   ) {
     this.route.queryParams.subscribe(params => {
       if (params['id']) {
@@ -49,18 +52,26 @@ export class AddCertificateComponent {
   }
 
   ngOnInit() {
+    this.authService.authState$.subscribe(res => {
+      this.role = res.role
+    })
     this.getAllProjects()
   }
 
   getAllProjects() {
-    let ApiUrl = 'getProjectsByLimitSeller'
+    let ApiUrl = ''
+
+    if (this.role == 'Buyer') {
+      ApiUrl = 'buyer/getBuyerProjects'
+    } else {
+      ApiUrl = `projects/getProjectsByLimitSeller?pageNo=${1}&pageSize=${20}&userid=${localStorage.getItem(
+        'user'
+      )}`
+    }
+
     this.loading = true
     this.service
-      .get(
-        `projects/${ApiUrl}?pageNo=${1}&pageSize=${20}&userid=${localStorage.getItem(
-          'user'
-        )}`
-      )
+      .get(ApiUrl)
       .subscribe({
         next: res => {
           if (res.status == 200) {
@@ -87,7 +98,9 @@ export class AddCertificateComponent {
 
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event
-    this.visible = !this.visible
+    if (event.target.files.length > 0) {
+      this.visible = !this.visible
+    }
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImageBlob = event.blob
@@ -102,24 +115,40 @@ export class AddCertificateComponent {
   }
 
   onSubmit(form: any) {
-    let formData = new FormData()
 
+    let ApiUrl = ''
+
+    if (this.role == 'Buyer') {
+      ApiUrl = 'buyer/createCertificate'
+    } else {
+      ApiUrl = 'seller/createCertificate'
+    }
+
+    this.loading = true
+
+    let formData = new FormData()
     formData.append('project_id', form.value.project_id)
     formData.append('carbon_credits', form.value.carbon_credits)
     formData.append('standard', form.value.standard)
     formData.append('issued_on_name', form.value.issued_on_name)
     formData.append('certificate', this.file)
 
-    this.service
-      .upload('seller/createCertificate', formData)
-      .subscribe((res: any) => {
-        if (res.success) {
+    this.service.upload(ApiUrl, formData).subscribe({
+      next: res => {
+        if (res.success == true) {
+          this.loading = false
           this.toastr.success(res.message)
           this.router.navigate(['/main/dashboard/certificate'])
         } else {
+          this.loading = false
           this.toastr.error(res.message)
         }
-      })
+      },
+      error: err => {
+        this.loading = false
+      }
+    })
+
   }
 
   getErrorMessage(field: string) {

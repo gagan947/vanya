@@ -15,10 +15,10 @@
             </div>
       </div>
 
-
       <ng-container *ngIf="activeTab === 'Approved'">
             <div class="relative bg-white p-6 rounded shadow mt-3">
                   <div class="grid grid-cols-1 sm:grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        @if(ApprovedCertificates){
                         <ng-container *ngFor="let list of ApprovedCertificates">
                               <div class="projects-card shadow-md rounded-lg cursor-pointer" (click)="showDialog(list)">
                                     <div class="relative">
@@ -45,6 +45,10 @@
                                     </div>
                               </div>
                         </ng-container>
+                        }@else{
+                        <p class=" text-red-600 mb-2"><strong>Notice: </strong> No
+                              certificates Found.</p>
+                        }
                   </div>
             </div>
       </ng-container>
@@ -66,7 +70,7 @@
                                     class="border border-gray-300 rounded-lg px-4 pl-8 py-2 focus:outline outline-primary text-sm bg-transparent"
                                     placeholder="Search">
                         </div>
-                        <div>
+                        <div *ngIf="role !== 'Approver'">
                               <button routerLink="/main/dashboard/certificate/add-certificate"
                                     class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium">
                                     <!-- <svg
@@ -108,6 +112,9 @@
                                           </tr>
                                     </thead>
                                     <tbody>
+                                          <tr *ngIf="certificates.length == 0">
+                                                <td colspan="8" class="text-center mt-3">No Request Found.</td>
+                                          </tr>
                                           <tr *ngFor="let item of certificates; let i = index"
                                                 class="bg-white border-b hover:bg-gray-50">
                                                 <td class="px-6 py-4">

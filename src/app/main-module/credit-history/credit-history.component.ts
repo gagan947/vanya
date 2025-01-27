@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { HistoryInvoiceComponent } from './history-invoice/history-invoice.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-credit-history',
@@ -27,10 +25,8 @@ export class CreditHistoryComponent {
   constructor(
     private toastr: ToastrService,
     private service: SharedService,
-    private confirmationService: ConfirmationService,
     public dialogService: DialogService,
     private authService: AuthService,
-    private router: Router
   ) { }
 
   ngOnInit() {

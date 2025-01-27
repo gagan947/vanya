@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
-import { ProjectDataService } from 'src/app/services/project-data.service';
-import { SharedService } from 'src/app/services/shared.service';
 import { environment } from 'src/environments/environment';
 import * as html2pdf from 'html2pdf.js';
 
@@ -19,11 +16,7 @@ export class CertificateViewComponent {
 
   constructor(
     private dialogConfig: DynamicDialogConfig,
-    private service: SharedService,
-    private toastr: ToastrService,
     public dialogService: DialogService,
-    public ref: DynamicDialogRef,
-    private projectDataService: ProjectDataService,
     private authService: AuthService
   ) { }
 

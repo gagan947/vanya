@@ -29,11 +29,11 @@ export class SidebarDataService {
         link: '/main/dashboard/credit-history',
         icon: 'history'
       },
-      {
-        label: 'Transaction History',
-        link: '/main/dashboard/transaction-history',
-        icon: 'bank-transfer'
-      },
+      // {
+      //   label: 'Transaction History',
+      //   link: '/main/dashboard/transaction-history',
+      //   icon: 'bank-transfer'
+      // },
       {
         label: 'Sales Report',
         link: '/main/dashboard/sales-report',
@@ -77,11 +77,11 @@ export class SidebarDataService {
         link: '/main/dashboard/credit-history',
         icon: 'history'
       },
-      {
-        label: 'Transaction History',
-        link: '/main/dashboard/transaction-history',
-        icon: 'bank-transfer'
-      },
+      // {
+      //   label: 'Transaction History',
+      //   link: '/main/dashboard/transaction-history',
+      //   icon: 'bank-transfer'
+      // },
       {
         label: 'Sales Report',
         link: '/main/dashboard/sales-report',
@@ -140,11 +140,11 @@ export class SidebarDataService {
       //   link: '/iuyh',
       //   icon: 'invoice-receive-outline'
       // },
-      {
-        label: 'Transaction History',
-        link: '/main/dashboard/transaction-history',
-        icon: 'bank-transfer'
-      },
+      // {
+      //   label: 'Transaction History',
+      //   link: '/main/dashboard/transaction-history',
+      //   icon: 'bank-transfer'
+      // },
       {
         label: 'Profile',
         link: '/main/dashboard/account-setting',

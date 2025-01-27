@@ -222,3 +222,7 @@ input#country-search-box:focus {
 .p-paginator-page.p-highlight {
       @apply bg-primary text-white rounded-full h-6 w-6
 }
+
+.p-confirm-dialog.p-component .p-dialog-header .p-dialog-title, .p-dynamic-dialog .p-dialog-header .p-dialog-title {
+      margin-bottom: 0 !important;
+}

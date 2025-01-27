@@ -31,10 +31,10 @@ export class HistoryInvoiceComponent {
     const invoiceElement = document.getElementById('invoice');
 
     const options = {
-      margin: 1,
+      useCORS: true,
       filename: 'invoice.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
+      image: { type: 'jpeg', quality: 0.5 },
+      html2canvas: { scale: 2, useCORS: true, logging: true },
       jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 

@@ -27,26 +27,27 @@ export class DashboardComponent {
     this.getDashboardData()
   }
 
-  public getUserInfo() {
-    let apiUrl = `getUserRoleProfile`
-    this.service.get(apiUrl).subscribe(res => {
-      if (res.success) {
-        this.userInfo = res.userDetails[0]
-      } else {
-        // this.toastr.error(res.message)
-      }
-    })
+  public getUserInfo(): void {
+    const apiUrl = `getUserRoleProfile`;
+    this.service.get(apiUrl).subscribe(
+      (res: any) => res.success && (this.userInfo = res.userDetails[0])
+    );
   }
 
   getDashboardData() {
-    let apiUrl = `admin/getadminDashboardDetails`
-    this.service.get(apiUrl).subscribe(res => {
-      if (res.success) {
-        this.data = res.finalDashboard
-      } else {
-        // this.toastr.error(res.message)
+    const apiUrl = 'admin/getadminDashboardDetails';
+    this.service.get(apiUrl).subscribe({
+      next: res => {
+        if (res.success) {
+          this.data = res.finalDashboard;
+        } else {
+          // this.toastr.error(res.message);
+        }
+      },
+      error: err => {
+        console.error('Error fetching dashboard data:', err);
       }
-    })
+    });
   }
 
   projects = [

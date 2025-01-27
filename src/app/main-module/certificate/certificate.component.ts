@@ -52,6 +52,8 @@ export class CertificateComponent {
     let ApiUrl = ''
     if (this.role === 'Approver') {
       ApiUrl = 'seller/getCertificates'
+    } else if (this.role === 'Buyer') {
+      ApiUrl = 'buyer/getCertificatesBuyer'
     } else {
       ApiUrl = 'seller/getCertificatesSeller'
     }
@@ -66,14 +68,22 @@ export class CertificateComponent {
         // this.totalCount = res.count[0].total
         this.loading = false
       } else {
-        this.toastr.error(res.msg)
+        this.certificates = []
+        // this.toastr.error(res.msg)
         this.loading = false
       }
     })
   }
 
   getApprovedList() {
-    let ApiUrl = 'seller/getCertificatesSellerApprove'
+    let ApiUrl = ''
+
+    if (this.role === 'Buyer') {
+      ApiUrl = 'buyer/getCertificatesBuyerApprove'
+    } else {
+      ApiUrl = 'seller/getCertificatesSellerApprove'
+    }
+
     this.loading = true
     let formData = new URLSearchParams()
     // formData.set('page', (this.page + 1).toString())
@@ -84,7 +94,7 @@ export class CertificateComponent {
         // this.totalCount = res.count[0].total
         this.loading = false
       } else {
-        this.toastr.error(res.msg)
+        // this.toastr.error(res.message)
         this.loading = false
       }
     })
@@ -119,7 +129,7 @@ export class CertificateComponent {
     switch (status) {
       case 'C':
         return 'Canceled'
-      case '1':
+      case 'A':
         return 'Approved'
       default:
         return 'Requested'
@@ -131,7 +141,7 @@ export class CertificateComponent {
     this.activeTab = tabId;
   }
 
-  Approve(user_id: number) {
+  Approve(certificate_id: number) {
     this.confirmationService.confirm({
       message: 'Do you want to Approve this ?',
       header: 'Approve Confirmation',
@@ -146,7 +156,7 @@ export class CertificateComponent {
         this.loading = true
         let apiUrl = `seller/updateCertificate`
         let formData = new URLSearchParams()
-        formData.set('certificate_id', user_id.toString())
+        formData.set('certificate_id', certificate_id.toString())
 
         this.service
           .postWithToken(apiUrl, formData.toString())
