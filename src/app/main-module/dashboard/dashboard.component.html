@@ -30,7 +30,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Users</h2>
-                  <p class="text-3xl font-bold text-[#252525]">{{data.total_users}}</p>
+                  <p class="text-3xl font-bold text-[#252525]">{{data?.total_users}}</p>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
                   <div class="absolute -right-14 -top-16">
@@ -47,7 +47,7 @@
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Total Sales</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data.sales_per_month | currency:'INR'}}</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.sales_per_month | currency:'INR'}}</p>
                   </div>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
@@ -64,7 +64,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Carbon Credits</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data.carbon_per_month}}</p>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.carbon_per_month}}</p>
             </div>
       </div>
 
@@ -106,7 +106,7 @@
                                     </tr>
                               </thead>
                               <tbody>
-                                    <tr class="border-b" *ngFor="let transaction of data.last5">
+                                    <tr class="border-b" *ngFor="let transaction of data?.last5">
                                           <td class="py-2 px-4">{{ transaction.transaction_id }}</td>
                                           <td class="py-2 px-4">{{ transaction.seller_name }}</td>
                                           <td class="py-2 px-4">{{ transaction.buyer_name }}</td>

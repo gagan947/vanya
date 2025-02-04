@@ -79,8 +79,8 @@ export class AddUserComponent {
     let apiUrl = `addUser`
     let formData = new URLSearchParams()
     formData.append('role_id', form.value.role_id)
-    formData.append('first_name', form.value.firstName)
-    formData.append('last_name', form.value.lastName)
+    formData.append('first_name', this.toTitleCase(form.value.firstName))
+    formData.append('last_name', this.toTitleCase(form.value.lastName))
     formData.append('email', form.value.email)
     formData.append('phone_number', form.value.phone_number.e164Number)
     formData.append('company_name', form.value.company_name)
@@ -100,6 +100,12 @@ export class AddUserComponent {
           this.toastr.error(res.message)
         }
       })
+  }
+
+  toTitleCase(str: string) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   }
 
   updateUser(form: any) {

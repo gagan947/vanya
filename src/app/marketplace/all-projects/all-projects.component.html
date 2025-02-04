@@ -3,8 +3,7 @@
       <p class="font-semibold text-2xl border-b-2 border-primary w-fit mb-5">Selected Contracted Projects</p>
       <div class="grid grid-cols-1 sm:grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <ng-container *ngFor="let project of projectList">
-                  <div class="projects-card shadow-md rounded-lg cursor-pointer"
-                        routerLink="/marketplace/projects/project-detail" [queryParams]="{id:encryptId(project.id)}">
+                  <div class="projects-card shadow-md rounded-lg cursor-pointer" (click)="redirect(project)">
                         <div class="relative">
                               <img [src]=" project.thumbnail ? imageurl + project.thumbnail : '/assets/images/about_inner_bg.jpg'"
                                     class="rounded-lg md:h-64 w-full" alt="">
@@ -13,7 +12,8 @@
                               <div class="flex justify-between items-center">
                                     <p
                                           class="font-bold text-lg whitespace-nowrap max-w-40 text-ellipsis overflow-hidden">
-                                          {{project.project_name}}</p>
+                                          {{project.project_name}}
+                                    </p>
                                     <p class="flex items-center gap-1 font-medium text-base text-gray-400"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
                                                 viewBox="0 0 24 24">

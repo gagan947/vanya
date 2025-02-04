@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-all-projects',
@@ -16,19 +17,20 @@ export class AllProjectsComponent {
   totalCount: any
   imageurl = environment.imgUrl
 
-  constructor (
+  constructor(
     private service: SharedService,
     private authService: AuthService,
-  ) {}
+    private router: Router
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
     this.getAllProjects()
   }
 
-  getAllProjects () {
+  getAllProjects() {
     let ApiUrl = 'projects/getProjectsByPaginationBuyer?pageNo=1&pageSize=10'
     this.loading = true
     this.service.get(ApiUrl).subscribe({
@@ -47,7 +49,12 @@ export class AllProjectsComponent {
     })
   }
 
-  encryptId (id: number): string {
+  redirect(project: any) {
+    const encryptedId = this.encryptId(project.id);
+    this.router.navigate(['/marketplace/projects/project-detail'], { queryParams: { id: encryptedId } });
+  }
+
+  encryptId(id: number): string {
     const secretKey = 'Vanya@321'
     return CryptoJS.AES.encrypt(id?.toString(), secretKey).toString()
   }

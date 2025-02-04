@@ -133,9 +133,11 @@
                                                       <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes
                                                             calculated at
                                                             checkout.</p>
-                                                      <div class="mt-6">
-                                                            <button (click)="checkOut(cartItems)"
+                                                      <div class="mt-6" *ngIf="role == 'Buyer'">
+                                                            <button id="renderBtn" (click)="checkOut(cartItems)"
                                                                   class="flex items-center w-full justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button>
+                                                            <!-- <button id="renderBtn" (click)="checkOut(cartItems)"
+                                                                  class="flex items-center w-full justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</button> -->
                                                       </div>
                                                 </div>
                                           </ng-container>

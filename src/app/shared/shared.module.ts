@@ -53,7 +53,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog'
     SidebarModule,
     NgxEditorModule,
     PaginatorModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    CartComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

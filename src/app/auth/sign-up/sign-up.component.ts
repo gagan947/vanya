@@ -59,8 +59,8 @@ export class SignUpComponent {
     let apiUrl = `signup`
     let formData = new URLSearchParams()
     formData.set('role_id', this.selectedRole)
-    formData.set('first_name', form.value.firstName)
-    formData.set('last_name', form.value.lastName)
+    formData.set('first_name', this.toTitleCase(form.value.firstName))
+    formData.set('last_name', this.toTitleCase(form.value.lastName))
     formData.set('email', form.value.email)
     formData.set('password', form.value.password)
     formData.set('company_name', form.value.companyName)
@@ -78,6 +78,13 @@ export class SignUpComponent {
       }
     })
   }
+
+  toTitleCase(str: string) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
 
   getErrorMessage(field: string) {
     const control = this.signUpForm.controls[field]

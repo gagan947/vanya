@@ -39,34 +39,34 @@ export class CreditHistoryComponent {
       this.headingText = 'Sale'
 
       this.columns = [
-        { key: 'order_id', label: 'Order Id' },
-        { key: 'project_id', label: 'Project Name' },
+        // { key: 'order_id', label: 'Order Id' },
+        { key: 'project_name', label: 'Project Name' },
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
-        { key: '', label: 'Order By' },
-        { key: 'status', label: 'Status', type: 'status' },
-        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'buyer_name', label: 'Order By' },
+        // { key: 'status', label: 'Status', type: 'status' },
+        // { key: 'created_at', label: 'Date', type: 'date' },
         { key: 'action', label: 'Action', type: 'action' }
       ];
 
     } else if (this.role == 'Buyer') {
 
       this.columns = [
-        { key: 'order_id', label: 'Order Id' },
+        // { key: 'order_id', label: 'Order Id' },
         { key: 'project_name', label: 'Project Name' },
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
-        { key: 'status', label: 'Status', type: 'status' },
-        { key: 'created_at', label: 'Date', type: 'date' },
-        { key: 'action', label: 'Action', type: 'action' }
+        // { key: 'status', label: 'Status', type: 'status' },
+        // { key: 'created_at', label: 'Date', type: 'date' },
+        // { key: 'action', label: 'Action', type: 'action' }
       ];
 
     } else {
       this.columns = [
         { key: 'order_id', label: 'Order Id' },
-        { key: 'project_id', label: 'Project Name' },
+        { key: 'project_name', label: 'Project Name' },
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
@@ -110,7 +110,7 @@ export class CreditHistoryComponent {
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.loading = false
-        this.HistoryData = res.sellerDetails
+        this.HistoryData = res.sellerDetails ? res.sellerDetails : res.historyRes
         // this.totalCount = res.count[0].total
       } else {
         this.toastr.error(res.message)

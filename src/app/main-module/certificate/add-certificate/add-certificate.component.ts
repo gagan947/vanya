@@ -76,7 +76,7 @@ export class AddCertificateComponent {
         next: res => {
           if (res.status == 200) {
             this.loading = false
-            this.projectList = res.projectinfo
+            this.projectList = res.projectinfo ? res.projectinfo : res.projectResult
           } else {
             this.loading = false
             this.projectList = []
@@ -90,9 +90,9 @@ export class AddCertificateComponent {
 
   onProjectChange(event: any) {
     let project = this.projectList.find((item: { id: any; }) => item.id == event.target.value)
-    this.remaining_credits = project.remaining_credit
+    this.remaining_credits = project.remaining_credit ? project.remaining_credit : project.carbon_credits
     this.Form.patchValue({
-      carbon_credits: project.remaining_credit
+      carbon_credits: this.remaining_credits
     })
   }
 
@@ -115,7 +115,7 @@ export class AddCertificateComponent {
   }
 
   onSubmit(form: any) {
-
+    this.loading = true
     let ApiUrl = ''
 
     if (this.role == 'Buyer') {
@@ -123,8 +123,6 @@ export class AddCertificateComponent {
     } else {
       ApiUrl = 'seller/createCertificate'
     }
-
-    this.loading = true
 
     let formData = new FormData()
     formData.append('project_id', form.value.project_id)

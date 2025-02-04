@@ -50,7 +50,7 @@
 
                                                 <ng-template #price>
                                                       <ng-container *ngIf="column.type === 'price'; else action">
-                                                            {{ row[column.key] | currency: 'USD' }}
+                                                            {{ row[column.key] | currency: 'INR' }}
                                                       </ng-container>
                                                 </ng-template>
 

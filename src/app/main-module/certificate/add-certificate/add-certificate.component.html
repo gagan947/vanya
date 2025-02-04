@@ -12,7 +12,10 @@
                                     formControlName="project_id" (change)="onProjectChange($event)">
                                     <option disabled value="">Select</option>
                                     @for (item of projectList; track $index) {
-                                    <option [value]="item.id">{{item.project_name}}</option>
+                                    <option [value]="item.id">
+                                          {{ item.project_name }}
+                                          <span *ngIf="item.transaction_id">({{ item.transaction_id }})</span>
+                                    </option>
                                     }
                               </select>
                               <!-- error text S -->

@@ -32,14 +32,15 @@ export class ProjectDetailComponent {
   allSelectedPdf: any
   docsUrl = environment.docUrl
 
-  constructor (
+  constructor(
     private route: ActivatedRoute,
     private _location: Location,
     private service: SharedService,
-    private projectService: ProjectDataService
-  ) {}
+    private projectService: ProjectDataService,
+    private router: Router
+  ) { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.projectTypes = this.projectService.projectTypes()
     this.allSelectedSdg = this.SDG = this.projectService.sdg()
     this.projectPhases = this.projectService.projectPhase()
@@ -142,7 +143,7 @@ export class ProjectDetailComponent {
     ]
   }
 
-  getProjectsByID () {
+  getProjectsByID() {
     this.loading = true
     this.service
       .get(`projects/getProjectsByIdSuperAdmin?id=${this.project_id}`)
@@ -163,7 +164,7 @@ export class ProjectDetailComponent {
             this.allSelectedSdg =
               this.sdgsByProjectType =
               this.allSelectedSdg =
-                this.selectedProType[0].sdgs
+              this.selectedProType[0].sdgs
             this.loading = false
           } else {
             this.loading = false
@@ -175,7 +176,7 @@ export class ProjectDetailComponent {
       })
   }
 
-  getProjectMedia () {
+  getProjectMedia() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.project_id)
@@ -246,7 +247,7 @@ export class ProjectDetailComponent {
     })
   }
 
-  getProjectDocs () {
+  getProjectDocs() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.project_id)
@@ -277,19 +278,24 @@ export class ProjectDetailComponent {
       })
   }
 
-  encryptId (id: number): string {
+  encryptId(id: number): string {
     const secretKey = 'Vanya@321'
     return CryptoJS.AES.encrypt(id?.toString(), secretKey).toString()
   }
 
-  decryptId (encryptedId: string): number {
+  decryptId(encryptedId: string): number {
     const secretKey = 'Vanya@321'
     const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey)
     const decryptedId = bytes.toString(CryptoJS.enc.Utf8)
     return +decryptedId
   }
 
-  back () {
+  back() {
     this._location.back()
+  }
+
+  redirect(project: any) {
+    const encryptedId = this.encryptId(project.id);
+    this.router.navigate(['/marketplace/projects/project-overview'], { queryParams: { id: encryptedId } });
   }
 }

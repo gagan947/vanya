@@ -222,4 +222,9 @@ export class ProjectsComponent {
 
     this.getAllProjects()
   }
+
+  redirect(project: any) {
+    const encryptedId = this.encryptId(project.id);
+    this.router.navigate(['/main/dashboard/projects/add-project'], { queryParams: { id: encryptedId } });
+  }
 }

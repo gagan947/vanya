@@ -104,4 +104,8 @@ export class BuyerDashboardComponent {
       },
     });
   }
+
+  onCartClick() {
+    this.service.AClicked(true)
+  }
 }

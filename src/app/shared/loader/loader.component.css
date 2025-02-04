@@ -4,6 +4,6 @@
       top: 0;
       left: 0;
       height: 100%;
-      backdrop-filter: brightness(0.5);
+      backdrop-filter: brightness(0.9);
       z-index: 999;
 }

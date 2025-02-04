@@ -3,15 +3,15 @@
       <div class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
-                  <button
+                  <!-- <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                               <path fill="currentColor"
                                     d="M12 15.575q-.2 0-.375-.062T11.3 15.3l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4t.713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15t.713.288T6 16v2h12v-2q0-.425.288-.712T19 15t.713.288T20 16v2q0 .825-.587 1.413T18 20z" />
                         </svg>
                         Download
-                  </button>
-                  <button
+                  </button> -->
+                  <button routerLink="/marketplace/projects"
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 256 256">
                               <g fill="none" stroke-width="16">
@@ -30,7 +30,7 @@
                         </svg>
                         View Market
                   </button>
-                  <button
+                  <button (click)="onCartClick()"
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                               <path fill="currentColor"
@@ -57,7 +57,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Active Projects</h2>
-                  <p class="text-3xl font-bold text-[#252525]">{{data.active_projects}}</p>
+                  <p class="text-3xl font-bold text-[#252525]">{{data?.active_projects}}</p>
             </div>
             <div class="bg-green-100 p-4 rounded shadow relative overflow-hidden">
                   <div class="absolute -right-14 -top-16">
@@ -74,7 +74,7 @@
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Environmental Impact</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data.carbon_credits_sold}} T</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.carbon_credits_sold}} T</p>
                         <!-- <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p> -->
                   </div>
             </div>
@@ -92,7 +92,7 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Available Balance</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data.revenue | currency:'INR'}}</p>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.revenue | currency:'INR'}}</p>
             </div>
       </div>
 
@@ -166,3 +166,5 @@
             </div>
       </div>
 </div>
+
+<app-cart></app-cart>
