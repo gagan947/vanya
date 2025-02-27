@@ -1,17 +1,17 @@
 <div class="flex gap-3">
-      <div class="absolute z-10 transition-all duration-500"
+      <div class="absolute z-10 transition-all duration-400"
             [ngClass]="isSidebarShow ? 'w-56' : 'w-20 -left-24 md:left-auto'">
             <div *ngIf="isSidebarShow" id="overlay" class="md:hidden" (click)="isSidebarShow = !isSidebarShow"></div>
-            <div class="p-1 rounded-full text-white bg-primary absolute left-[5.3rem] top-2 cursor-pointer md:hidden"
+            <!-- <div class="p-1 rounded-full text-white bg-primary absolute left-[5.3rem] top-2 cursor-pointer md:hidden"
                   (click)="isSidebarShow = !isSidebarShow">
                   <svg *ngIf="!isSidebarShow" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
                         viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                               stroke-width="2" d="m7 7l5 5l-5 5m6-10l5 5l-5 5" />
                   </svg>
-            </div>
+            </div> -->
             <div class="bg-[#F9F9F9] shadow-lg py-5 px-2 h-[92vh] relative border-r-2">
-                  <div class="p-1 rounded-full text-white bg-primary absolute -right-3 top-2 cursor-pointer"
+                  <!-- <div class="p-1 rounded-full text-white bg-primary absolute -right-3 top-2 cursor-pointer"
                         (click)="isSidebarShow = !isSidebarShow">
                         <svg [ngClass]="isSidebarShow ? 'block':'hidden'" xmlns="http://www.w3.org/2000/svg"
                               width="1.2em" height="1.2em" viewBox="-4.5 -5 24 24">
@@ -23,11 +23,11 @@
                               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m7 7l5 5l-5 5m6-10l5 5l-5 5" />
                         </svg>
-                  </div>
+                  </div> -->
                   <ul class="space-y-2">
                         <li *ngFor="let item of sidebarItems">
                               <a [routerLink]="item.link" [routerLinkActive]="'bg-primary text-white'"
-                                    class="flex items-center px-4 py-1 duration-500 hover:bg-primary hover:text-white rounded-lg group focus:bg-primary focus:text-white">
+                                    class="flex items-center px-4 py-1 duration-500  rounded-lg group focus:bg-primary focus:text-white">
                                     <span class="iconify w-5 h-5" [attr.data-icon]="'mdi:' + item?.icon"
                                           data-inline="false"></span>
 
@@ -87,7 +87,7 @@
             </div>
       </div>
       <div [ngClass]="isSidebarShow ? 'md:ml-56' : 'md:ml-20'"
-            class="overflow-y-auto h-[92vh] px-5 transition-all w-full duration-500">
+            class="overflow-y-auto h-[92vh] transition-all w-full duration-500">
             <router-outlet></router-outlet>
       </div>
 </div>

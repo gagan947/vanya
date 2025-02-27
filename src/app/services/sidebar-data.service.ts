@@ -54,11 +54,11 @@ export class SidebarDataService {
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      {
-        label: 'Settings',
-        link: '/ghjfghj',
-        icon: 'settings-outline'
-      }
+      // {
+      //   label: 'Settings',
+      //   link: '/ghjfghj',
+      //   icon: 'settings-outline'
+      // }
     ],
 
     Seller: [
@@ -102,11 +102,11 @@ export class SidebarDataService {
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      {
-        label: 'Settings',
-        link: '/ryrtr',
-        icon: 'settings-outline'
-      }
+      // {
+      //   label: 'Settings',
+      //   link: '/ryrtr',
+      //   icon: 'settings-outline'
+      // }
     ],
 
     Buyer: [
@@ -150,11 +150,11 @@ export class SidebarDataService {
         link: '/main/dashboard/account-setting',
         icon: 'user-circle-outline'
       },
-      {
-        label: 'Settings',
-        link: '/drs',
-        icon: 'settings-outline'
-      }
+      // {
+      //   label: 'Settings',
+      //   link: '/drs',
+      //   icon: 'settings-outline'
+      // }
     ]
   }
 

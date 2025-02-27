@@ -14,7 +14,7 @@ export class LogInComponent {
   logInForm: FormGroup
   showPassword: boolean = false
   loading: boolean = false
-
+  role: string | null | undefined
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -23,47 +23,82 @@ export class LogInComponent {
     private shared: SharedService
   ) {
     this.logInForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: [localStorage.getItem('savedEmail') || '', [Validators.required, Validators.email]],
+      password: [localStorage.getItem('savedPassword') || '', [Validators.required]],
+      rememberMe: [localStorage.getItem('rememberMe') === 'true', false]
     })
+    this.service.authState$.subscribe(res => {
+      this.role = res.role
+    })
+    // if (this.service.isLogedIn() && this.role == 'Approver') {
+    //   this.router.navigate(['/main/dashboard/admin']);
+    // } else if (this.service.isLogedIn() && this.role == 'Seller') {
+    //   this.router.navigate(['/main/dashboard/seller']);
+    // } else if (this.service.isLogedIn() && this.role == 'Buyer') {
+    //   this.router.navigate(['/main/dashboard/buyer']);
+    // } else {
+    //   this.router.navigate(['/']);
+    // }
   }
   onSubmit(form: any) {
-    this.loading = true
-    form.markAllAsTouched()
+    this.loading = true;
+    form.markAllAsTouched();
+
     if (form.invalid) {
-      this.loading = false
-      return
+      this.loading = false;
+      return;
     }
 
-    let apiUrl = `login`
-    let formData = new URLSearchParams()
-    formData.set('email', form.value.email)
-    formData.set('password', form.value.password)
+    let apiUrl = `login`;
+    let formData = new URLSearchParams();
+    formData.set('email', form.value.email);
+    formData.set('password', form.value.password);
+
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success && res.token) {
-        this.service.setToken(res.token)
-        this.shared.get('getUserRoleDetails').subscribe(res2 => {
+        this.service.setToken(res.token);
 
-          if (res2.userRoles.role_type == 'Approver') {
-            this.router.navigate(['/main/dashboard/admin']);
-          } else if (res2.userRoles.role_type == 'Seller') {
-            this.router.navigate(['/main/dashboard/seller']);
-          } else {
-            this.router.navigate(['/main/dashboard/buyer']);
+        this.shared.get('getUserRoleDetails').subscribe(res2 => {
+          const roleType = res2.userRoles.role_type;
+          const userId = res2.userRoles.id;
+
+          // Store user ID and role
+          localStorage.setItem('user', userId);
+          this.service.setRole(roleType);
+
+          // Navigate based on user role
+          switch (roleType) {
+            case 'Approver':
+              this.router.navigate(['/main/dashboard/admin']);
+              break;
+            case 'Seller':
+              this.router.navigate(['/main/dashboard/seller']);
+              break;
+            default:
+              this.router.navigate(['/main/dashboard/buyer']);
           }
 
-          localStorage.setItem('user', res2.userRoles.id)
-          this.service.setRole(res2.userRoles.role_type)
-          this.toastr.success(res.message)
+          // **Remember Me Functionality**
+          if (form.value.rememberMe) {
+            localStorage.setItem('savedEmail', form.value.email);
+            localStorage.setItem('savedPassword', form.value.password);
+            localStorage.setItem('rememberMe', 'true');
+          } else {
+            localStorage.removeItem('savedEmail');
+            localStorage.removeItem('savedPassword');
+            localStorage.removeItem('rememberMe');
+          }
 
-          this.loading = false
-        })
+          this.toastr.success(res.message);
+          this.loading = false;
+        });
       } else {
-        this.toastr.error(res.message)
-        this.loading = false
+        this.toastr.error(res.message);
+        this.loading = false;
       }
-    })
+    });
   }
+
 
   getErrorMessage(field: string) {
     const control = this.logInForm.controls[field]

@@ -2,6 +2,8 @@ import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { EthereumService } from 'src/app/services/ethereum.service'
+import { SidebarComponent } from '../sidebar/sidebar.component'
+import { SharedService } from 'src/app/services/shared.service'
 
 @Component({
   selector: 'app-main-header',
@@ -18,7 +20,8 @@ export class MainHeaderComponent {
   constructor(
     private router: Router,
     private ethereumService: EthereumService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private service: SharedService
   ) {
     this.address = localStorage.getItem('address')
     if (this.address) {
@@ -64,4 +67,9 @@ export class MainHeaderComponent {
         this.toastr.error('Something went wrong.')
       })
   }
+
+  toggle() {
+    this.service.toggleSidebar();
+  }
 }
+

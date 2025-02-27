@@ -1,6 +1,6 @@
-<div id="right-panel" class="container mx-auto">
+<div id="right-panel" class="container mx-auto px-5">
       <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Request For Certificate</h1>
-      <div class="p-5 px-10 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
+      <div class="p-5 px-5 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
             <form [formGroup]="Form" (ngSubmit)="onSubmit(Form)" class="">
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
                         <div class="grid gap-1 col-span-1">
@@ -116,9 +116,9 @@
                   </div>
             </form>
       </div>
-      <p-dialog styleClass="bg-white p-2 rounded-lg shadow-md" [modal]="true" [(visible)]="visible"
-            [style]="{ width: '25rem' }">
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [aspectRatio]="3 / 1" format="png"
+      <p-dialog styleClass="bg-white p-2 rounded-lg shadow-md md:w-[25rem] w-[22rem]" [modal]="true"
+            [(visible)]="visible">
+            <image-cropper [imageChangedEvent]="imageChangedEvent" format="png"
                   (imageCropped)="imageCropped($event)"></image-cropper>
             <div class="flex justify-end m-2">
                   <button

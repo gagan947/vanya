@@ -3,15 +3,15 @@
       <div class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
-                  <button
+                  <!-- <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                               <path fill="currentColor"
                                     d="M12 15.575q-.2 0-.375-.062T11.3 15.3l-3.6-3.6q-.3-.3-.288-.7t.288-.7q.3-.3.713-.312t.712.287L11 12.15V5q0-.425.288-.712T12 4t.713.288T13 5v7.15l1.875-1.875q.3-.3.713-.288t.712.313q.275.3.288.7t-.288.7l-3.6 3.6q-.15.15-.325.213t-.375.062M6 20q-.825 0-1.412-.587T4 18v-2q0-.425.288-.712T5 15t.713.288T6 16v2h12v-2q0-.425.288-.712T19 15t.713.288T20 16v2q0 .825-.587 1.413T18 20z" />
                         </svg>
                         Download
-                  </button>
-                  <button
+                  </button> -->
+                  <!-- <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 256 256">
                               <g fill="none" stroke-width="16">
@@ -29,15 +29,15 @@
                               </g>
                         </svg>
                         View Market
-                  </button>
-                  <button
+                  </button> -->
+                  <!-- <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                               <path fill="currentColor"
                                     d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
                         </svg>
                         Buy Credits
-                  </button>
+                  </button> -->
             </div>
       </div>
 
@@ -122,48 +122,53 @@
             <!-- Marketplace Summary -->
             <div class="bg-white p-6 rounded shadow">
                   <h3 class="text-lg font-bold text-gray-800 mb-4">Projects Overview</h3>
-                  <table class="w-full text-sm text-left">
-                        <thead>
-                              <tr class="text-gray-600">
-                                    <th class="pb-2">Project Name</th>
-                                    <th class="pb-2">Status</th>
-                                    <th class="pb-2">Credits Earned</th>
-                                    <th class="pb-2">Revenue</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="text-gray-800" *ngFor="let item of projectsdata">
-                                    <td class="py-1">{{item.project_name}}</td>
-                                    <td><span class="px-3 py-1 rounded text-sm bg-green-100 text-green-600">
-                                                {{item.status}}
-                                          </span></td>
-                                    <td>{{item.carbon_credits}}</td>
-                                    <td>{{item.revenue | currency:'INR'}}</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="overflow-auto">
+                        <table class="w-full text-sm text-left">
+                              <thead>
+                                    <tr class="text-gray-600">
+                                          <th class="py-2 px-4 whitespace-nowrap">Project Name</th>
+                                          <th class="py-2 px-4">Status</th>
+                                          <th class="py-2 px-4">Credits Earned</th>
+                                          <th class="py-2 px-4">Revenue</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="text-gray-800" *ngFor="let item of projectsdata">
+                                          <td class="py-2 px-4 whitespace-nowrap">{{item.project_name}}</td>
+                                          <td class="py-2 px-4"><span
+                                                      class="px-3 py-1 rounded text-sm bg-green-100 text-green-600">
+                                                      {{item.status}}
+                                                </span></td>
+                                          <td class="py-2 px-4">{{item.carbon_credits}}</td>
+                                          <td class="py-2 px-4">{{item.revenue | currency:'INR'}}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
             </div>
 
             <div class="bg-white p-6 rounded shadow">
                   <h3 class="text-lg font-bold text-gray-800 mb-4">Sales History</h3>
-                  <table class="w-full text-sm text-left">
-                        <thead>
-                              <tr class="text-gray-600">
-                                    <th class="pb-2">Project Name</th>
-                                    <th class="pb-2">Credits Sold</th>
-                                    <th class="pb-2">Revenue Earned</th>
-                                    <th class="pb-2">Buyer</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="text-gray-800" *ngFor="let item of salesdata">
-                                    <td class="py-1">{{item.project_name}}</td>
-                                    <td>{{item.carbon_credits}}</td>
-                                    <td>{{item.revenue | currency:'INR'}}</td>
-                                    <td>{{item.buyer}}</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="overflow-auto">
+                        <table class="w-full text-sm text-left">
+                              <thead>
+                                    <tr class="text-gray-600">
+                                          <th class="py-2 px-4 whitespace-nowrap">Project Name</th>
+                                          <th class="py-2 px-4">Credits Sold</th>
+                                          <th class="py-2 px-4">Revenue Earned</th>
+                                          <th class="py-2 px-4">Buyer</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="text-gray-800" *ngFor="let item of salesdata">
+                                          <td class="py-2 px-4 whitespace-nowrap">{{item.project_name}}</td>
+                                          <td class="py-2 px-4">{{item.carbon_credits}}</td>
+                                          <td class="py-2 px-4">{{item.revenue | currency:'INR'}}</td>
+                                          <td class="py-2 px-4">{{item.buyer}}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
             </div>
       </div>
 </div>

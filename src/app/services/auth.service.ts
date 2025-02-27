@@ -66,7 +66,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.clear()
+    localStorage.removeItem('token'),
+      localStorage.removeItem('role')
     this.updateAuthState(false, null)
     this.route.navigate(['/'])
   }

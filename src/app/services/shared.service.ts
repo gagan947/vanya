@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { EventEmitter, Injectable, Output } from '@angular/core'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { AuthService } from './auth.service'
 import { environment } from 'src/environments/environment'
 
@@ -50,5 +50,16 @@ export class SharedService {
 
   AClicked(value: any) {
     this.aClickedEvent.emit(value)
+  }
+
+  private sidebarState = new BehaviorSubject<boolean>(false);
+  sidebarState$ = this.sidebarState.asObservable();
+
+  toggleSidebar() {
+    this.sidebarState.next(!this.sidebarState.value);
+  }
+
+  close(value: boolean) {
+    this.sidebarState.next(value);
   }
 }

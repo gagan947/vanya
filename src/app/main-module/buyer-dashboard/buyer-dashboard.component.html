@@ -1,6 +1,6 @@
-<div class="min-h-screen p-6 ">
+<div class="min-h-screen md:p-6 p-4">
       <!-- Header -->
-      <div class="flex justify-between items-center mb-8">
+      <div class="flex justify-between items-center mb-8 gap-3 flex-wrap">
             <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
                   <!-- <button
@@ -122,47 +122,51 @@
             <!-- Marketplace Summary -->
             <div class="bg-white p-6 rounded shadow">
                   <h3 class="text-lg font-bold text-gray-800 mb-4">Marketplace Summary</h3>
-                  <table class="w-full text-sm text-left">
-                        <thead>
-                              <tr class="text-gray-600">
-                                    <th class="pb-2">Project Name</th>
-                                    <th class="pb-2">Status</th>
-                                    <th class="pb-2">Credits Approved</th>
-                                    <th class="pb-2">Revenue</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="text-gray-800" *ngFor="let item of projectsdata">
-                                    <td class="py-1">{{item.project_name}}</td>
-                                    <td>{{item.status}}</td>
-                                    <td>{{item.carbon_credits}}</td>
-                                    <td>{{item.revenue | currency:'INR'}}</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="overflow-auto">
+                        <table class="w-full text-sm text-left">
+                              <thead>
+                                    <tr class="text-gray-600">
+                                          <th class="py-2 px-4 whitespace-nowrap">Project Name</th>
+                                          <th class="py-2 px-4">Status</th>
+                                          <th class="py-2 px-4">Credits Approved</th>
+                                          <th class="py-2 px-4">Revenue</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="text-gray-800" *ngFor="let item of projectsdata">
+                                          <td class="py-2 px-4 whitespace-nowrap">{{item.project_name}}</td>
+                                          <td class="py-2 px-4">{{item.status}}</td>
+                                          <td class="py-2 px-4">{{item.carbon_credits}}</td>
+                                          <td class="py-2 px-4">{{item.revenue | currency:'INR'}}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
             </div>
 
             <!-- Purchase History -->
             <div class="bg-white p-6 rounded shadow">
                   <h3 class="text-lg font-bold text-gray-800 mb-4">Purchase History</h3>
-                  <table class="w-full text-sm text-left">
-                        <thead>
-                              <tr class="text-gray-600">
-                                    <th class="pb-2">Product Name</th>
-                                    <th class="pb-2">Credits Purchased</th>
-                                    <th class="pb-2">Total Cost</th>
-                                    <th class="pb-2">Seller</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="text-gray-800" *ngFor="let item of salesdata">
-                                    <td class="py-1">{{item.project_name}}</td>
-                                    <td>{{item.carbon_credits}}</td>
-                                    <td>{{item.revenue | currency:'INR'}}</td>
-                                    <td>{{item.seller}}</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="overflow-auto">
+                        <table class="w-full text-sm text-left">
+                              <thead>
+                                    <tr class="text-gray-600">
+                                          <th class="py-2 px-4 whitespace-nowrap">Product Name</th>
+                                          <th class="py-2 px-4">Credits Purchased</th>
+                                          <th class="py-2 px-4">Total Cost</th>
+                                          <th class="py-2 px-4">Seller</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="text-gray-800" *ngFor="let item of salesdata">
+                                          <td class="py-2 px-4 whitespace-nowrap">{{item.project_name}}</td>
+                                          <td class="py-2 px-4">{{item.carbon_credits}}</td>
+                                          <td class="py-2 px-4">{{item.revenue | currency:'INR'}}</td>
+                                          <td class="py-2 px-4">{{item.seller}}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
             </div>
       </div>
 </div>

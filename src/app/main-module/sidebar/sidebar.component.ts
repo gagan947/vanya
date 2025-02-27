@@ -15,23 +15,28 @@ export class SidebarComponent {
   sidebarItems: any
   role: string | null | undefined
 
-  constructor (
+  constructor(
     private service: SharedService,
     public authService: AuthService,
     private sidebarDataService: SidebarDataService
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
+
+    this.service.sidebarState$.subscribe(state => {
+      this.isSidebarShow = state;
+    });
+
     this.sidebarDataService.getSidebarItems().subscribe(items => {
       this.sidebarItems = items
     })
     this.getUserInfo()
   }
 
-  public getUserInfo () {
+  public getUserInfo() {
     let apiUrl = `getUserRoleProfile`
     this.service.get(apiUrl).subscribe(res => {
       if (res.success) {

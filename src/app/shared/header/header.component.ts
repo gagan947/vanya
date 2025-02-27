@@ -7,11 +7,15 @@ import { SharedService } from 'src/app/services/shared.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor (private service: SharedService) {}
+  constructor(private service: SharedService) { }
 
-  ngOnInit () {}
+  ngOnInit() { }
 
-  onCartClick () {
+  onCartClick() {
     this.service.AClicked(true)
+  }
+
+  toggle() {
+    this.service.toggleSidebar();
   }
 }

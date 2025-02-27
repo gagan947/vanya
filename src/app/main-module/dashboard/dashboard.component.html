@@ -1,10 +1,10 @@
-<div class="min-h-screen p-6 ">
+<div class="min-h-screen md:p-6 p-4">
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
             <div class="flex items-center gap-4">
                   <button routerLink="/main/dashboard/projects"
-                        class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
+                        class="px-3 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
                               <path fill="currentColor"
                                     d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
@@ -89,41 +89,43 @@
             </div>
       </div>
 
-      <div class="gap-6 grid md:grid-cols-6">
-            <div class="w-full col-span-4">
+      <div class="gap-6 grid grid-cols-1 md:grid-cols-6">
+            <div class="w-full md:col-span-4">
                   <div class="p-6 bg-white shadow rounded-lg w-full">
                         <h2 class="text-xl font-semibold mb-4">Transaction History</h2>
-                        <table class="w-full border-collapse">
-                              <thead>
-                                    <tr class="bg-gray-100 text-left text-sm">
-                                          <th class="py-2 px-4">Transaction ID</th>
-                                          <th class="py-2 px-4">Seller</th>
-                                          <th class="py-2 px-4">Buyer</th>
-                                          <th class="py-2 px-4">Date</th>
-                                          <th class="py-2 px-4">Credits</th>
-                                          <!-- <th class="py-2 px-4">Revenue</th> -->
-                                          <!-- <th class="py-2 px-4">Action</th> -->
-                                    </tr>
-                              </thead>
-                              <tbody>
-                                    <tr class="border-b" *ngFor="let transaction of data?.last5">
-                                          <td class="py-2 px-4">{{ transaction.transaction_id }}</td>
-                                          <td class="py-2 px-4">{{ transaction.seller_name }}</td>
-                                          <td class="py-2 px-4">{{ transaction.buyer_name }}</td>
-                                          <td class="py-2 px-4">{{ transaction.created_at | date }}</td>
-                                          <td class="py-2 px-4">{{ transaction.carbon_credits }}</td>
-                                          <!-- <td class="py-2 px-4">
+                        <div class="overflow-y-auto max-h-[60vh]">
+                              <table class="w-full border-collapse">
+                                    <thead>
+                                          <tr class="bg-gray-100 text-left text-sm">
+                                                <th class="py-2 px-4">Transaction ID</th>
+                                                <th class="py-2 px-4">Seller</th>
+                                                <th class="py-2 px-4">Buyer</th>
+                                                <th class="py-2 px-4">Date</th>
+                                                <th class="py-2 px-4">Credits</th>
+                                                <!-- <th class="py-2 px-4">Revenue</th> -->
+                                                <!-- <th class="py-2 px-4">Action</th> -->
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          <tr class="border-b" *ngFor="let transaction of data?.last5">
+                                                <td class="py-2 px-4">{{ transaction.transaction_id }}</td>
+                                                <td class="py-2 px-4">{{ transaction.seller_name }}</td>
+                                                <td class="py-2 px-4">{{ transaction.buyer_name }}</td>
+                                                <td class="py-2 px-4">{{ transaction.created_at | date }}</td>
+                                                <td class="py-2 px-4">{{ transaction.carbon_credits }}</td>
+                                                <!-- <td class="py-2 px-4">
                                                 <button
                                                       class="border border-primary text-primary text-sm px-3 py-1 rounded hover:bg-primary hover:text-white">
                                                       View All
                                                 </button>
                                           </td> -->
-                                    </tr>
-                              </tbody>
-                        </table>
+                                          </tr>
+                                    </tbody>
+                              </table>
+                        </div>
                   </div>
             </div>
-            <div class="p-6 bg-white shadow rounded-lg w-full col-span-2">
+            <div class="p-6 bg-white shadow rounded-lg w-full md:col-span-2">
                   <h2 class="text-xl font-semibold mb-4">Sales Report</h2>
                   <canvas id="salesChart" height="200"></canvas>
             </div>
@@ -171,23 +173,24 @@
                               <i class="fas fa-ellipsis-h"></i>
                         </button>
                   </div>
-                  <table class="w-full border-collapse">
-                        <thead>
-                              <tr class="bg-gray-100 text-left text-sm">
-                                    <th class="py-2 px-4">New Registrations</th>
-                                    <th class="py-2 px-4">Active Sellers</th>
-                                    <th class="py-2 px-4">Active Buyers</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                              <tr class="border-b" *ngFor="let user of users">
-                                    <td class="py-2 px-4">{{ user.registration }}</td>
-                                    <td class="py-2 px-4">{{ user.seller }}</td>
-                                    <td class="py-2 px-4">{{ user.buyer }}</td>
-                              </tr>
-                        </tbody>
-                  </table>
+                  <div class="overflow-y-auto max-h-[60vh]">
+                        <table class="w-full border-collapse">
+                              <thead>
+                                    <tr class="bg-gray-100 text-left text-sm">
+                                          <th class="py-2 px-4">New Registrations</th>
+                                          <th class="py-2 px-4">Active Sellers</th>
+                                          <th class="py-2 px-4">Active Buyers</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr class="border-b" *ngFor="let user of users">
+                                          <td class="py-2 px-4">{{ user.registration }}</td>
+                                          <td class="py-2 px-4">{{ user.seller }}</td>
+                                          <td class="py-2 px-4">{{ user.buyer }}</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
             </div>
-
       </div>
 </div>

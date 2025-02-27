@@ -26,7 +26,6 @@ import { BuyerDashboardComponent } from './buyer-dashboard/buyer-dashboard.compo
 import { SellerDashboardComponent } from './seller-dashboard/seller-dashboard.component';
 import { SalesReportComponent } from './sales-report/sales-report.component'
 import { AddCertificateComponent } from './certificate/add-certificate/add-certificate.component'
-import { CartComponent } from '../shared/cart/cart.component'
 
 @NgModule({
   declarations: [
@@ -58,7 +57,6 @@ import { CartComponent } from '../shared/cart/cart.component'
     ReactiveFormsModule,
     SharedModule,
     NgxIntlTelInputModule,
-
   ],
   exports: [SidebarComponent],
   providers: [ConfirmationService, DialogService]

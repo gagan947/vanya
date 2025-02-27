@@ -107,6 +107,11 @@ export class ProjectDetailComponent {
         breakpoint: '767px',
         numVisible: 1,
         numScroll: 1
+      },
+      {
+        breakpoint: '375px',
+        numVisible: 1,
+        numScroll: 1
       }
     ]
 

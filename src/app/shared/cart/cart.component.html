@@ -47,11 +47,11 @@
                                                                         <div class="ml-4 flex flex-1 flex-col">
                                                                               <div>
                                                                                     <div
-                                                                                          class="flex justify-between text-base font-medium text-gray-900">
+                                                                                          class="flex justify-between text-base font-medium text-gray-900 flex-wrap">
                                                                                           <h3>
                                                                                                 <a>{{item.project_name}}</a>
                                                                                           </h3>
-                                                                                          <p class="ml-4">
+                                                                                          <p class="md:ml-4">
                                                                                                 {{item.price_per_carbon_credit
                                                                                                 *
                                                                                                 item?.carbon_credits?.toString().split('.')[0]
@@ -64,12 +64,12 @@
                                                                                     </p>
                                                                               </div>
                                                                               <div
-                                                                                    class="flex flex-1 items-end justify-between text-sm">
+                                                                                    class="flex flex-1 items-end justify-between text-sm flex-wrap">
                                                                                     <div
                                                                                           class="text-gray-500 flex gap-3 items-center">
                                                                                           Qty
                                                                                           <div
-                                                                                                class="border px-4 pr-6 py-1 rounded-md text-[#2B2B2B] relative">
+                                                                                                class="border px-4 pr-6 py-1 rounded-md text-[#2B2B2B] relative whitespace-nowrap">
                                                                                                 {{
                                                                                                 item?.carbon_credits?.toString().split('.')[0]
                                                                                                 }} &nbsp;

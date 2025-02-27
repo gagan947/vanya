@@ -39,7 +39,7 @@
                         <input type="text" [ngClass]="signUpForm.controls['firstName'].errors &&
                               signUpForm.controls['firstName'].touched ? 'outline-red-600' : ''"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
-                              placeholder="" formControlName="firstName">
+                              placeholder="Enter First Name" formControlName="firstName">
                         <p *ngIf="
                               signUpForm.controls['firstName'].errors &&
                               signUpForm.controls['firstName'].touched
@@ -57,8 +57,8 @@
                         <input type="text"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               [ngClass]="signUpForm.controls['lastName'].errors &&
-                              signUpForm.controls['lastName'].touched ? 'outline-red-600' : ''" placeholder=""
-                              formControlName="lastName">
+                              signUpForm.controls['lastName'].touched ? 'outline-red-600' : ''"
+                              placeholder="Enter Last Name" formControlName="lastName">
                         <p *ngIf="
                               signUpForm.controls['lastName'].errors &&
                               signUpForm.controls['lastName'].touched
@@ -76,8 +76,8 @@
                         <input type="text"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               [ngClass]="signUpForm.controls['email'].errors &&
-                              signUpForm.controls['email'].touched ? 'outline-red-600' : ''" placeholder=""
-                              formControlName="email">
+                              signUpForm.controls['email'].touched ? 'outline-red-600' : ''"
+                              placeholder="Enter Your Email" formControlName="email">
                         <p *ngIf="
                               signUpForm.controls['email'].errors &&
                               signUpForm.controls['email'].touched
@@ -134,8 +134,8 @@
                         <input type="text"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               [ngClass]="signUpForm.controls['companyName'].errors &&
-                              signUpForm.controls['companyName'].touched ? 'outline-red-600' : ''" placeholder=""
-                              formControlName="companyName">
+                              signUpForm.controls['companyName'].touched ? 'outline-red-600' : ''"
+                              placeholder="Enter Your Company Name" formControlName="companyName">
                         <p *ngIf="
                               signUpForm.controls['companyName'].errors &&
                               signUpForm.controls['companyName'].touched
@@ -153,8 +153,8 @@
                         <input [type]="showPassword ? 'text': 'password'"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               [ngClass]="signUpForm.controls['password'].errors &&
-                              signUpForm.controls['password'].touched ? 'outline-red-600' : ''" placeholder=""
-                              formControlName="password">
+                              signUpForm.controls['password'].touched ? 'outline-red-600' : ''"
+                              placeholder="Enter Password" formControlName="password">
                         <button type="button" class="absolute right-3 top-[2.2rem]"
                               (click)="showPassword = !showPassword">
                               <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -191,6 +191,7 @@
                         signUpForm.controls['country'].touched ? 'outline-red-600' : ''"
                               class="border border-gray-300 rounded-lg px-3 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               (change)="getStates($event)">
+                              <option value='' disabled>Select Country</option>
                               <option *ngFor="let country of countries" [value]="country.isoCode">{{country.name}}
                               </option>
                         </select>
@@ -212,6 +213,7 @@
                         signUpForm.controls['state'].touched ? 'outline-red-600' : ''"
                               class="border border-gray-300 rounded-lg px-3 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                               (change)="getCities($event)">
+                              <option [value]="''" disabled>Select State</option>
                               <option *ngFor="let state of states" [value]="state.isoCode">{{state.name}}</option>
                         </select>
                         <p *ngIf="
@@ -231,6 +233,7 @@
                         <select type="password" formControlName="city" [ngClass]="signUpForm.controls['city'].errors &&
                         signUpForm.controls['city'].touched ? 'outline-red-600' : ''"
                               class="border border-gray-300 rounded-lg px-3 py-2 focus:outline outline-primary text-sm bg-transparent w-full">
+                              <option [value]="''" disabled>Select City</option>
                               <option *ngFor="let city of cities" [value]="city.name">{{city.name}}</option>
                         </select>
                         <p *ngIf="
@@ -250,7 +253,7 @@
                         <textarea type="text" formControlName="address" [ngClass]="signUpForm.controls['address'].errors &&
                         signUpForm.controls['address'].touched ? 'outline-red-600' : ''"
                               class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
-                              placeholder=""></textarea>
+                              placeholder="Enter Your Address Here.."></textarea>
                         <p *ngIf="
                               signUpForm.controls['address'].errors &&
                               signUpForm.controls['address'].touched
@@ -263,18 +266,18 @@
                               </svg>
                         </p>
                   </div>
-                  <div class="flex justify-between items-center text-gray-500 cursor-pointer">
+                  <!-- <div class="flex justify-between items-center text-gray-500 cursor-pointer">
                         <div class="flex gap-1 items-center">
                               <input type="checkbox" class="h-4 w-4 accent-primary" id="remember" name="remember">
                               <label for="remember" class="text-sm text-gray-700">Subscribe me to Vanya's
                                     newsletter.</label>
                         </div>
-                  </div>
-                  <a class="text-sm font-medium text-gray-500">Please find our terms and condition
-                        <span class="text-primary cursor-pointer">here</span></a>
+                  </div> -->
+                  <!-- <a class="text-sm font-medium text-gray-500">Please find our terms and condition
+                        <span class="text-primary cursor-pointer">here</span></a> -->
 
                   <button type="submit"
-                        class="text-white border-2 border-primary font-medium py-1.5 rounded-lg w-full bg-primary hover:text-primary hover:bg-transparent mt-10">Sign
+                        class="text-white border-2 border-primary font-medium py-1.5 rounded-lg w-full bg-primary hover:text-primary hover:bg-transparent mt-4">Sign
                         Up</button>
 
                   <div class="grid gap-1">

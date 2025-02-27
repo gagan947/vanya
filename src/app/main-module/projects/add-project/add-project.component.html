@@ -1,5 +1,5 @@
 <app-loader *ngIf="loading"></app-loader>
-<div id="right-panel" class="container mx-auto">
+<div id="right-panel" class="container mx-auto px-5">
       <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">{{project_id ? 'Update' : 'Add'}} Project</h1>
       <div class="p-5 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
             <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex"
