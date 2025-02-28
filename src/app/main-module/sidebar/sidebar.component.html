@@ -10,7 +10,7 @@
                               stroke-width="2" d="m7 7l5 5l-5 5m6-10l5 5l-5 5" />
                   </svg>
             </div> -->
-            <div class="bg-[#F9F9F9] shadow-lg py-5 px-2 h-[92vh] relative border-r-2">
+            <div class="bg-[#F9F9F9] shadow-lg py-5 px-2 h-[94vh] relative border-r-2">
                   <!-- <div class="p-1 rounded-full text-white bg-primary absolute -right-3 top-2 cursor-pointer"
                         (click)="isSidebarShow = !isSidebarShow">
                         <svg [ngClass]="isSidebarShow ? 'block':'hidden'" xmlns="http://www.w3.org/2000/svg"
@@ -26,8 +26,9 @@
                   </div> -->
                   <ul class="space-y-2">
                         <li *ngFor="let item of sidebarItems">
-                              <a [routerLink]="item.link" [routerLinkActive]="'bg-primary text-white'"
-                                    class="flex items-center px-4 py-1 duration-500  rounded-lg group focus:bg-primary focus:text-white">
+                              <a [ngClass]="isSidebarShow ? 'justify-start' : 'justify-center'" [routerLink]="item.link"
+                                    [routerLinkActive]="'bg-primary text-white'"
+                                    class="flex items-center px-4  py-3 duration-500  rounded-lg group focus:bg-primary focus:text-white">
                                     <span class="iconify w-5 h-5" [attr.data-icon]="'mdi:' + item?.icon"
                                           data-inline="false"></span>
 

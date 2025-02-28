@@ -1,6 +1,16 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="container mx-auto mt-5">
-      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold px-5">Project List</h1>
+      <div class="flex items-center justify-between gap-3 mb-6">
+            <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold px-5">Project List</h1>
+            <div>
+                  <button (click)="createProject()" *ngIf="role == 'Approver' || role == 'Seller'"
+                        class="text-white bg-primary px-4 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"><svg
+                              xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                        </svg>
+                        Add New</button>
+            </div>
+      </div>
       <div class="relative bg-white p-6 rounded shadow">
             <div class="flex items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4">
                   <!-- <div class="relative">
@@ -16,51 +26,44 @@
                               class="border border-gray-300 rounded-lg px-4 pl-8 py-2 focus:outline outline-primary text-sm bg-transparent"
                               placeholder="Search">
                   </div> -->
-                  <div>
-                        <button (click)="createProject()" *ngIf="role == 'Approver' || role == 'Seller'"
-                              class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
-                              </svg>
-                              Add New</button>
-                  </div>
+
             </div>
             <div class="table-div">
                   <div class="overflow-y-auto max-h-[60vh]">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                               <thead class="text-xs text-white uppercase bg-primary sticky top-0">
                                     <tr>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 S No.
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Project Name
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Type
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Location
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Total Credits
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Remaining Credits
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Current Phase
                                           </th>
-                                          <!-- <th scope="col" class="px-6 py-3">
+                                          <!-- <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                     Role
                               </th> -->
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Verification Status
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Created at
                                           </th>
-                                          <th scope="col" class="px-6 py-3">
+                                          <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                                 Action
                                           </th>
                                     </tr>
@@ -68,11 +71,11 @@
                               <tbody>
                                     <tr *ngFor="let project of projectList; let i = index"
                                           class="bg-white border-b hover:bg-gray-50">
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{i+1}}
                                           </td>
                                           <td scope="row"
-                                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
+                                                class="flex items-center px-6 py-4 whitespace-nowrap text-gray-900 whitespace-nowrap">
                                                 <div class="grid gap-1">
                                                       <div class="text-base font-semibold">{{project.project_name}}
                                                       </div>
@@ -82,22 +85,22 @@
                                                       </div>
                                                 </div>
                                           </td>
-                                          <td class="px-6 py-4 whitespace-nowrap">
+                                          <td class="px-6 py-4 whitespace-nowrap whitespace-nowrap">
                                                 {{getProjectType(project.project_type)}}
                                           </td>
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{project.location}}
                                           </td>
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{project.credits}}
                                           </td>
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{project.remaining_credit}}
                                           </td>
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{getProjectPhase(project.current_phase)}}
                                           </td>
-                                          <td class="px-6 py-4">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                       <div class="h-2.5 w-2.5 rounded-full me-1"
                                                             [ngClass]="getStatusClass(project.verification_status)">
@@ -105,11 +108,11 @@
                                                       {{getStatusLabel(project.verification_status)}}
                                                 </div>
                                           </td>
-                                          <td class="px-6 py-4 whitespace-nowrap">
+                                          <td class="px-6 py-4 whitespace-nowrap whitespace-nowrap">
                                                 {{project.created_at | date:'mediumDate'}}
                                           </td>
-                                          <td class="px-6 py-4">
-                                                <div class="flex gap-1 cursor-pointer items-center">
+                                          <td class="px-6 py-4 whitespace-nowrap">
+                                                <div class="flex gap-3 cursor-pointer items-center">
                                                       <svg (click)="showDialog(project.id)"
                                                             xmlns="http://www.w3.org/2000/svg" width="1.5em"
                                                             height="1.5em" viewBox="0 0 256 256">
