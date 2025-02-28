@@ -386,6 +386,7 @@ export class AddProjectComponent {
           if (res.success == true) {
             this.projectInfo = res.projectInfo
             this.getProjectMedia()
+            this.getProjectDocs()
             this.projectBasicInfoForm.patchValue({
               project_name: this.projectInfo.project_name,
               project_subtitle: this.projectInfo.project_subtitle,
@@ -495,18 +496,33 @@ export class AddProjectComponent {
             }
           ]
 
-          const filteredImageArray = imageArray
-            .filter(item => item.url !== null)
-            .map(item => item.url)
+          imageArray.forEach(async (item) => {
+            if (item.url) {
+              const response = await fetch(environment.imgUrl + item.url);
+              const blob = await response.blob();
+              const file = new File([blob], item.url, {
+                type: 'image/jpeg',
+              });
+              if (file) {
+                this.ImageForUpload.push(file)
+              }
+            }
+          });
 
-          this.ImageForUpload = filteredImageArray
+          // imageArray
+          //   .filter(item => item.url !== null && item.url !== undefined)
+          //   .map(item => item.url)
+
+          // this.ImageForUpload = filteredImageArray
 
           this.images = this.sliderImages = imageArray
-            .filter(item => item.title !== null)
+            .filter(item => item.title !== null && item.title !== 'undefined')
             .map(item => ({
               ...item,
               url: environment.imgUrl + item.url
             }))
+
+          console.log(this.sliderImages)
 
           if (this.projectMedia.geo_json) {
             this.geoJson_or_kml = 'G'
@@ -533,6 +549,51 @@ export class AddProjectComponent {
         this.loading = false
       }
     })
+  }
+
+  getProjectDocs() {
+    this.loading = true
+    let formData = new URLSearchParams()
+    formData.set('project_id', this.project_id)
+
+    this.service
+      .postWithToken(`projects/getProjectDocument`, formData)
+      .subscribe({
+        next: res => {
+          if (res.success == true) {
+            const docArray = [
+              res.projectDetails[0].doc_1,
+              res.projectDetails[0].doc_2,
+              res.projectDetails[0].doc_3,
+              res.projectDetails[0].doc_4
+            ]
+
+            docArray.forEach(doc => {
+              if (doc && this.selectedPdf.length < this.maxPdfs) {
+                const pdfUrl = environment.docUrl + doc;
+                fetch(pdfUrl)
+                  .then(response => response.blob())
+                  .then(blob => {
+                    this.pdfForUpload.push(blob);
+                    const reader = new FileReader();
+                    reader.onload = (e: any) => {
+                      this.selectedPdf.push(e.target.result);
+                    };
+                    reader.readAsDataURL(blob);
+                  })
+                  .catch(error => console.error('Error fetching PDF:', error));
+              }
+            })
+
+            this.loading = false
+          } else {
+            this.loading = false
+          }
+        },
+        error: err => {
+          this.loading = false
+        }
+      })
   }
 
   async urlToFile(url: string, filename: string): Promise<File> {
@@ -582,6 +643,7 @@ export class AddProjectComponent {
 
     this.imageActiveIndex = this.images.length
   }
+
 
   removeImage(index: number): void {
     this.sliderImages.splice(index, 1)

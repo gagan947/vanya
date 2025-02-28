@@ -4,8 +4,8 @@ import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { AuthService } from 'src/app/services/auth.service'
 import { Country, State, City } from 'country-state-city'
-import { strongPasswordValidator } from '../../shared/validator'
-import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input'
+import { NoWhitespaceDirective, strongPasswordValidator } from '../../shared/validator'
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg'
 
 @Component({
   selector: 'app-sign-up',
@@ -20,21 +20,34 @@ export class SignUpComponent {
   cities: any
   countryCode: any
   selectedRole: string
-
+  role: string | null | undefined
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private service: AuthService,
     private router: Router
   ) {
+    this.service.authState$.subscribe(res => {
+      this.role = res.role
+    })
+    if (this.service.isLogedIn() && this.role == 'Approver') {
+      this.router.navigate(['/main/dashboard/admin']);
+    } else if (this.service.isLogedIn() && this.role == 'Seller') {
+      this.router.navigate(['/main/dashboard/seller']);
+    } else if (this.service.isLogedIn() && this.role == 'Buyer') {
+      this.router.navigate(['/main/dashboard/buyer']);
+    } else {
+      this.router.navigate([this.router.url]);
+    }
+
     this.selectedRole = '2'
     this.signUpForm = this.fb.group({
       roll_id: [''],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, NoWhitespaceDirective.validate]],
+      lastName: ['', [Validators.required, NoWhitespaceDirective.validate]],
       email: ['', [Validators.required, Validators.email]],
       phone_number: ['', [Validators.required]],
-      companyName: ['', Validators.required],
+      companyName: ['', Validators.required, NoWhitespaceDirective.validate],
       country: ['', [Validators.required]],
       state: [{ value: '', disabled: true }, [Validators.required]],
       address: ['', [Validators.required]],

@@ -52,7 +52,7 @@ export class SharedService {
     this.aClickedEvent.emit(value)
   }
 
-  private sidebarState = new BehaviorSubject<boolean>(false);
+  private sidebarState = new BehaviorSubject<boolean>(true);
   sidebarState$ = this.sidebarState.asObservable();
 
   toggleSidebar() {

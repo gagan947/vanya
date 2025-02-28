@@ -26,7 +26,7 @@ export class ViewProjectComponent {
   flagUrl: string | undefined
   imgUrl = environment.imgUrl
 
-  constructor (
+  constructor(
     private dialogConfig: DynamicDialogConfig,
     private service: SharedService,
     private toastr: ToastrService,
@@ -34,9 +34,9 @@ export class ViewProjectComponent {
     public ref: DynamicDialogRef,
     private projectDataService: ProjectDataService,
     private authService: AuthService
-  ) {}
+  ) { }
 
-  ngOnInit () {
+  ngOnInit() {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
@@ -45,7 +45,7 @@ export class ViewProjectComponent {
     this.getProjectsByID()
   }
 
-  getProjectsByID () {
+  getProjectsByID() {
     this.loading = true
     this.service
       .get(`projects/getProjectsByIdSuperAdmin?id=${this.project_id}`)
@@ -66,7 +66,7 @@ export class ViewProjectComponent {
       })
   }
 
-  getProjectMedia () {
+  getProjectMedia() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.project_id)
@@ -86,7 +86,7 @@ export class ViewProjectComponent {
     })
   }
 
-  getStatusClass (status: any): string {
+  getStatusClass(status: any): string {
     switch (status) {
       case 'Rejected':
         return 'text-red-500'
@@ -97,7 +97,7 @@ export class ViewProjectComponent {
     }
   }
 
-  getStatusLabel (status: any): string {
+  getStatusLabel(status: any): string {
     switch (status) {
       case 'Rejected':
         return 'Rejected'
@@ -108,14 +108,14 @@ export class ViewProjectComponent {
     }
   }
 
-  getProjectPhase (phase: number) {
+  getProjectPhase(phase: number) {
     const projectPhase = this.projectDataService
       .projectPhase()
       .find((item: { id: number; name: string }) => item.id == phase)
     return projectPhase ? projectPhase.name : null
   }
 
-  changeProjectStatus (status: string) {
+  changeProjectStatus(status: string) {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.projectData.id),
@@ -126,7 +126,10 @@ export class ViewProjectComponent {
       .subscribe({
         next: res => {
           if (res.success == true && status == 'Approved') {
-            this.addProjectData()
+            // this.addProjectData()
+            this.toastr.success('Project Status Changed Successfully')
+            this.ref.close()
+            this.loading = false
           } else {
             this.toastr.success('Project Status Changed Successfully')
             this.ref.close()
@@ -139,7 +142,7 @@ export class ViewProjectComponent {
       })
   }
 
-  addProjectData () {
+  addProjectData() {
     this.loading = true
 
     let formData: any = {
@@ -202,7 +205,7 @@ export class ViewProjectComponent {
       })
   }
 
-  issueCertificate (Url: any) {
+  issueCertificate(Url: any) {
     this.loading = true
     let formData = {
       uri: Url
@@ -224,7 +227,7 @@ export class ViewProjectComponent {
     })
   }
 
-  getProjectType (TypeId: number) {
+  getProjectType(TypeId: number) {
     const projectType = this.projectDataService
       .projectTypes()
       .find((item: { id: number; type: string }) => item.id == TypeId)

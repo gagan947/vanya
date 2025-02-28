@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+      touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+}
+
 ::-webkit-scrollbar {
       width: 3px;
       height: 3px;
@@ -21,7 +28,6 @@
 ::-webkit-scrollbar-thumb:hover {
       background: #555;
 }
-
 
 .table-div ::-webkit-scrollbar {
       width: 2px;
@@ -225,4 +231,8 @@ input#country-search-box:focus {
 
 .p-confirm-dialog.p-component .p-dialog-header .p-dialog-title, .p-dynamic-dialog .p-dialog-header .p-dialog-title {
       margin-bottom: 0 !important;
+}
+
+video::-webkit-media-controls {
+      display: none !important;
 }

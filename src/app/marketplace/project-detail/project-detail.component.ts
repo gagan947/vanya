@@ -225,7 +225,7 @@ export class ProjectDetailComponent {
           ]
 
           this.images = imageArray
-            .filter(item => item.title !== null)
+            .filter(item => item.title !== null && item.title !== 'undefined')
             .map(item => ({
               ...item,
               itemImageSrc: environment.imgUrl + item.itemImageSrc

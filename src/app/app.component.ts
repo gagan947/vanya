@@ -14,9 +14,8 @@ export class AppComponent {
   constructor(private router: Router, private service: SharedService) { }
 
   ngOnInit() {
-
     this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
+      if (event instanceof NavigationEnd && window.innerWidth < 768) {
         this.service.close(false)
       }
     });

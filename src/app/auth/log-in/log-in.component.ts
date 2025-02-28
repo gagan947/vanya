@@ -30,15 +30,15 @@ export class LogInComponent {
     this.service.authState$.subscribe(res => {
       this.role = res.role
     })
-    // if (this.service.isLogedIn() && this.role == 'Approver') {
-    //   this.router.navigate(['/main/dashboard/admin']);
-    // } else if (this.service.isLogedIn() && this.role == 'Seller') {
-    //   this.router.navigate(['/main/dashboard/seller']);
-    // } else if (this.service.isLogedIn() && this.role == 'Buyer') {
-    //   this.router.navigate(['/main/dashboard/buyer']);
-    // } else {
-    //   this.router.navigate(['/']);
-    // }
+    if (this.service.isLogedIn() && this.role == 'Approver') {
+      this.router.navigate(['/main/dashboard/admin']);
+    } else if (this.service.isLogedIn() && this.role == 'Seller') {
+      this.router.navigate(['/main/dashboard/seller']);
+    } else if (this.service.isLogedIn() && this.role == 'Buyer') {
+      this.router.navigate(['/main/dashboard/buyer']);
+    } else {
+      this.router.navigate([this.router.url]);
+    }
   }
   onSubmit(form: any) {
     this.loading = true;

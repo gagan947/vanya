@@ -592,7 +592,7 @@
                                                       <img [src]="image.url" alt="Image {{i + 1}}"
                                                             class="w-24 h-24 object-cover rounded border border-primary" />
                                                       <button type="button" (click)="removeImage(i)"
-                                                            class="absolute -bottom-1 -right-1 text-red-700">
+                                                            class="absolute -bottom-1 -right-1 text-red-700 z-50">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="1.2em"
                                                                   height="1.2em" viewBox="0 0 48 48">
                                                                   <defs>
@@ -720,13 +720,13 @@
                                                 <input type="text"
                                                       class="border border-gray-300 rounded-lg px-5 py-2 focus:outline outline-primary text-sm bg-transparent" />
                                           </div> -->
-                                          <div class="grid gap-1 col-span-1" *ngIf="role == 'Approver'">
+                                          <!-- <div class="grid gap-1 col-span-1" *ngIf="role == 'Approver'">
                                                 <label class="text-xs text-[#454545] font-medium"
                                                       for="videoUpload">Project Registry (For linking with external or
                                                       internal registries)</label>
                                                 <input type="text"
                                                       class="border border-gray-300 rounded-lg px-5 py-2 focus:outline outline-primary text-sm bg-transparent" />
-                                          </div>
+                                          </div> -->
                                           <div class="flex justify-end space-x-4 mt-4">
                                                 <button
                                                       class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"
@@ -749,7 +749,8 @@
                         </div>
                         <div class="mt-5">
                               <div class="relative h-[80vh]">
-                                    <video autoplay muted loop id="videoPreview" class="w-full h-full object-cover">
+                                    <video autoplay muted playsinline webkit-playsinline loop id="videoPreview"
+                                          class="w-full h-full object-cover">
                                           <source src="assets/images/Untitled (1).mp4" type="video/mp4">
                                     </video>
                                     <div class="overlay"></div>
@@ -964,7 +965,8 @@
                                                                   <p class="text-white font-normal">
                                                                         {{product.description}}
                                                                   </p>
-                                                                  <video autoplay muted loop id="myVideo"
+                                                                  <video autoplay muted playsinline webkit-playsinline
+                                                                        loop id="myVideo"
                                                                         class="w-full h-full object-cover">
                                                                         <source [src]="product.src" type="video/mp4">
                                                                   </video>

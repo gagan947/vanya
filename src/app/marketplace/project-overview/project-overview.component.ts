@@ -1,10 +1,10 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
-import { ProjectDataService } from 'src/app/services/project-data.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
+import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
   selector: 'app-project-overview',
@@ -20,13 +20,15 @@ export class ProjectOverviewComponent {
   baseUrl = environment.imgUrl
   cartItems: any
 
-  constructor (
+  constructor(
     private route: ActivatedRoute,
     private service: SharedService,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
-  ngOnInit (): void {
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const encryptedId = params['id']
       if (encryptedId) {
@@ -38,18 +40,18 @@ export class ProjectOverviewComponent {
     this.getCartItems()
   }
 
-  decrement () {
+  decrement() {
     this.value = this.value !== 1 ? this.value - 1 : this.value
   }
 
-  increment () {
+  increment() {
     this.value =
       this.value < this.projectInfo.remaining_credit
         ? this.value + 1
         : this.projectInfo.remaining_credit
   }
 
-  checkValue () {
+  checkValue() {
     if (this.value < 0) {
       this.value = 1
     } else if (this.value > this.projectInfo.remaining_credit) {
@@ -59,7 +61,7 @@ export class ProjectOverviewComponent {
     }
   }
 
-  public getProjectsByID () {
+  public getProjectsByID() {
     this.loading = true
     this.service
       .get(`projects/getProjectsByIdSuperAdmin?id=${this.project_id}`)
@@ -79,7 +81,7 @@ export class ProjectOverviewComponent {
       })
   }
 
-  getProjectMedia () {
+  getProjectMedia() {
     this.loading = true
     let formData = new URLSearchParams()
     formData.set('project_id', this.project_id)
@@ -99,7 +101,7 @@ export class ProjectOverviewComponent {
     })
   }
 
-  getCartItems () {
+  getCartItems() {
     this.loading = true
     let formData = new URLSearchParams()
 
@@ -126,12 +128,17 @@ export class ProjectOverviewComponent {
     })
   }
 
-  addToCart (pro_data: any) {
+  addToCart(pro_data: any) {
     const isProjectIdAvailable = (pro_data: { id: number }): boolean => {
       const exists = this.cartItems?.some(
         (project: { project_id: number }) => project.project_id === pro_data.id
       )
       return !exists
+    }
+
+    if (!this.auth.isLogedIn()) {
+      this.router.navigate(['/auth'])
+      return
     }
 
     if (isProjectIdAvailable(pro_data)) {
@@ -161,7 +168,7 @@ export class ProjectOverviewComponent {
     }
   }
 
-  decryptId (encryptedId: string): number {
+  decryptId(encryptedId: string): number {
     const secretKey = 'Vanya@321'
     const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey)
     const decryptedId = bytes.toString(CryptoJS.enc.Utf8)

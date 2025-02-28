@@ -251,8 +251,8 @@ export class CartComponent {
       data: Data,
       header: '',
       showHeader: false,
-      width: '40%',
-      styleClass: 'bg-white p-2 rounded-lg shadow-md',
+      width: '90%',
+      styleClass: 'bg-transparent p-2 rounded-lg shadow-md',
       dismissableMask: true
     })
   }

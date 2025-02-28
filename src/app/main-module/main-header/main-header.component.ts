@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr'
 import { EthereumService } from 'src/app/services/ethereum.service'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { SharedService } from 'src/app/services/shared.service'
+import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
   selector: 'app-main-header',
@@ -21,7 +22,8 @@ export class MainHeaderComponent {
     private router: Router,
     private ethereumService: EthereumService,
     private toastr: ToastrService,
-    private service: SharedService
+    private service: SharedService,
+    public auth: AuthService
   ) {
     this.address = localStorage.getItem('address')
     if (this.address) {

@@ -2,6 +2,7 @@
 <div class="container p-4 mx-auto">
       <p class="font-semibold text-2xl border-b-2 border-primary w-fit mb-5">Selected Contracted Projects</p>
       <div class="grid grid-cols-1 sm:grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            @if(projectList){
             <ng-container *ngFor="let project of projectList">
                   <div class="projects-card shadow-md rounded-lg cursor-pointer" (click)="redirect(project)">
                         <div class="relative">
@@ -55,5 +56,14 @@
                         </div>
                   </div>
             </ng-container>
+            } @else {
+            <div class="col-span-2">
+                  <div class="flex justify-center items-center h-[50vh]">
+                        <div class="flex flex-col items-center space-y-2">
+                              <p class="text-2xl font-semibold">No Data Found</p>
+                        </div>
+                  </div>
+            </div>
+            }
       </div>
 </div>

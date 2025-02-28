@@ -1,7 +1,8 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="my-4">
       <div class="relative h-screen">
-            <video autoplay muted loop id="videoPreview" class="w-full h-full object-cover">
+            <video autoplay muted playsinline webkit-playsinline loop id="videoPreview"
+                  class="w-full h-full object-cover">
                   <source src="assets/images/Untitled (1).mp4" type="video/mp4">
             </video>
             <div class="overlay"></div>
@@ -156,7 +157,8 @@
                                           <p class="text-white text-lg font-semibold">{{product.id}}</p>
                                           <p class="text-white text-2xl font-medium">{{product.heading}}</p>
                                           <p class="text-white font-normal">{{product.description}}</p>
-                                          <video autoplay muted loop id="myVideo" class="w-full h-full object-cover">
+                                          <video autoplay muted playsinline webkit-playsinline loop id="myVideo"
+                                                class="w-full h-full object-cover">
                                                 <source [src]="product.src" type="video/mp4">
                                           </video>
                                           <div class="flex items-center gap-3 text-white"

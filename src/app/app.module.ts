@@ -7,7 +7,7 @@ import { SharedModule } from './shared/shared.module'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ToastrModule } from 'ngx-toastr'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input-gg'
 
 @NgModule({
   declarations: [AppComponent],

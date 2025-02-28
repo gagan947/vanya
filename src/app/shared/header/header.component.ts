@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core'
+import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service'
 
 @Component({
@@ -7,7 +8,9 @@ import { SharedService } from 'src/app/services/shared.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private service: SharedService) { }
+  constructor(private service: SharedService,
+    public auth: AuthService
+  ) { }
 
   ngOnInit() { }
 
