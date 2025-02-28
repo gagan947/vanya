@@ -11,7 +11,7 @@ import { SidebarDataService } from 'src/app/services/sidebar-data.service'
 export class SidebarComponent {
   userInfo: any
   imageUrl: string = 'assets/images/profile_logo.jpg'
-  isSidebarShow: boolean = false
+  isSidebarShow: boolean = true
   sidebarItems: any
   role: string | null | undefined
 
