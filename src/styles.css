@@ -242,7 +242,15 @@ body {
       height: 48px !important;
 }
 
-
 video::-webkit-media-controls {
       display: none !important;
+}
+
+.p-galleria-item {
+      height: 700px !important;
+}
+
+.p-galleria-item img {
+      height: 100% !important;
+      object-fit: cover !important;
 }

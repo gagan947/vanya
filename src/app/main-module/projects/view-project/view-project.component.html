@@ -170,32 +170,32 @@
       <div class="bg-white shadow-md rounded-lg p-6">
             <h2 class="text-2xl font-bold mb-4">Project Media</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div *ngIf="projectMedia.image_1URL">
+                  <div *ngIf="projectMedia.image_1URL && projectMedia.image1_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_1URL" alt="Image 1"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image1_text }}</p>
                   </div>
-                  <div *ngIf="projectMedia.image_2URL">
+                  <div *ngIf="projectMedia.image_2URL && projectMedia.image2_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_2URL" alt="Image 2"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image2_text }}</p>
                   </div>
-                  <div *ngIf="projectMedia.image_3URL">
+                  <div *ngIf="projectMedia.image_3URL && projectMedia.image3_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_3URL" alt="Image 3"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image3_text }}</p>
                   </div>
-                  <div *ngIf="projectMedia.image_4URL">
+                  <div *ngIf="projectMedia.image_4URL && projectMedia.image4_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_4URL" alt="Image 3"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image4_text }}</p>
                   </div>
-                  <div *ngIf="projectMedia.image_5URL">
+                  <div *ngIf="projectMedia.image_5URL && projectMedia.image5_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_5URL" alt="Image 3"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image5_text }}</p>
                   </div>
-                  <div *ngIf="projectMedia.image_6URL">
+                  <div *ngIf="projectMedia.image_6URL && projectMedia.image6_text != 'undefined'">
                         <img [src]="imgUrl + projectMedia.image_6URL" alt="Image 3"
                               class="rounded-md w-full h-48 object-cover mb-2">
                         <p>{{ projectMedia.image6_text }}</p>

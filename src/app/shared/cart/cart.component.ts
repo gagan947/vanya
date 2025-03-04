@@ -3,7 +3,6 @@ import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog'
 import { MessageDialogComponent } from 'src/app/marketplace/message-dialog/message-dialog.component'
-import { ProjectOverviewComponent } from 'src/app/marketplace/project-overview/project-overview.component'
 import { AuthService } from 'src/app/services/auth.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
@@ -12,7 +11,6 @@ import { environment } from 'src/environments/environment'
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  providers: [ProjectOverviewComponent]
 })
 export class CartComponent {
   loading: boolean = false
@@ -28,7 +26,7 @@ export class CartComponent {
     private service: SharedService,
     private toastr: ToastrService,
     private dialogService: DialogService,
-    private authService: AuthService
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -71,13 +69,16 @@ export class CartComponent {
             }
             return acc
           }, [])
+          this.service.setCartItems(this.cartItems)
           this.loading = false
         } else {
           this.loading = false
+          this.service.setCartItems([])
         }
       },
       error: err => {
         this.loading = false
+        this.service.setCartItems([])
       }
     })
   }
@@ -110,7 +111,7 @@ export class CartComponent {
   }
 
   decrement(item: any) {
-    if (Number(item.carbon_credits) > 0) {
+    if (Number(item.carbon_credits) > 1) {
       item.carbon_credits = Number(item.carbon_credits) - 1
 
       let apiUrl = 'cart/updateCart'
@@ -302,6 +303,7 @@ export class CartComponent {
         this.service.post('cart/checkOutOrderItemsPart2', formData).subscribe({
           next: async res2 => {
             if (res2.success) {
+              this.clearCart()
               this.router.navigate(['/main/dashboard/credit-history'])
               const msgData = {
                 icon: 'success-circle-outline',
@@ -318,5 +320,11 @@ export class CartComponent {
         })
       }
     });
+  }
+
+  clearCart() {
+    this.service.postWithToken('cart/deleteCartItemsByUser', '').subscribe({ next: async res => { } })
+    this.cartItems = []
+    this.service.setCartItems([])
   }
 }

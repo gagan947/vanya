@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { ChangeDetectorRef, Component, computed, effect } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
 import { SharedService } from 'src/app/services/shared.service'
@@ -18,15 +18,19 @@ export class ProjectOverviewComponent {
   loading: boolean = false
   projectMedia: any
   baseUrl = environment.imgUrl
-  cartItems: any
+  cartItems: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private service: SharedService,
     private toastr: ToastrService,
     private auth: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {
+    effect(() => {
+      this.cartItems = this.service._cartItems();
+    })
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -36,8 +40,6 @@ export class ProjectOverviewComponent {
         this.getProjectsByID()
       }
     })
-
-    this.getCartItems()
   }
 
   decrement() {
@@ -61,7 +63,7 @@ export class ProjectOverviewComponent {
     }
   }
 
-  public getProjectsByID() {
+  getProjectsByID() {
     this.loading = true
     this.service
       .get(`projects/getProjectsByIdSuperAdmin?id=${this.project_id}`)
@@ -69,7 +71,7 @@ export class ProjectOverviewComponent {
         next: async res => {
           if (res.success == true) {
             this.projectInfo = res.projectInfo
-            this, this.getProjectMedia()
+            this.getProjectMedia()
             this.loading = false
           } else {
             this.loading = false
@@ -101,32 +103,33 @@ export class ProjectOverviewComponent {
     })
   }
 
-  getCartItems() {
-    this.loading = true
-    let formData = new URLSearchParams()
+  // public getCartItems() {
+  //   this.loading = true
+  //   let formData = new URLSearchParams()
 
-    this.service.postWithToken(`cart/getCartItems`, formData).subscribe({
-      next: async res => {
-        if (res.success == true) {
-          this.cartItems = res.projectData.map((project: { id: any }) => {
-            const matchingResult = res.result.find(
-              (r: { project_id: any }) => r.project_id === project.id
-            )
-            return {
-              ...project,
-              ...matchingResult
-            }
-          })
-          this.loading = false
-        } else {
-          this.loading = false
-        }
-      },
-      error: err => {
-        this.loading = false
-      }
-    })
-  }
+  //   this.service.postWithToken(`cart/getCartItems`, formData).subscribe({
+  //     next: async res => {
+  //       if (res.success == true) {
+  //         this.cartItems = res.projectData.map((project: { id: any }) => {
+  //           const matchingResult = res.result.find(
+  //             (r: { project_id: any }) => r.project_id === project.id
+  //           )
+  //           return {
+  //             ...project,
+  //             ...matchingResult
+  //           }
+  //         })
+  //         this.cartItems = [...this.cartItems]
+  //         this.loading = false
+  //       } else {
+  //         this.loading = false
+  //       }
+  //     },
+  //     error: err => {
+  //       this.loading = false
+  //     }
+  //   })
+  // }
 
   addToCart(pro_data: any) {
     const isProjectIdAvailable = (pro_data: { id: number }): boolean => {
@@ -153,7 +156,6 @@ export class ProjectOverviewComponent {
         next: async res => {
           if (res.success === true) {
             this.loading = false
-            this.getCartItems()
             this.service.AClicked(true)
           } else {
             this.loading = false

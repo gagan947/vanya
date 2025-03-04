@@ -1,7 +1,7 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="min-h-screen md:p-6 p-4 mx-auto mt-5">
       <div class="flex items-center justify-between gap-3 my-3 mb-6">
-            <h1 class="text-2xl text-[#2B2B2B]  font-semibold px-5 ">User List</h1>
+            <h1 class="text-2xl text-[#2B2B2B]  font-semibold">User List</h1>
             <button routerLink="/main/dashboard/users/add-user" *ngIf="role == 'Approver'"
                   class="text-white bg-primary px-4 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"><svg
                         xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
@@ -24,9 +24,6 @@
                               class="border border-gray-300 rounded-lg px-4 pl-8 py-2 focus:outline outline-primary text-sm bg-transparent"
                               placeholder="Search">
                   </div> -->
-                  <div>
-
-                  </div>
             </div>
             <div class="table-div">
                   <div class="overflow-y-auto max-h-[60vh]">
@@ -58,7 +55,8 @@
                                           </td>
                                           <th scope="row"
                                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                                                <img class="w-10 h-10 rounded-full" src="assets/images/profile_logo.jpg"
+                                                <img class="w-10 h-10 rounded-full"
+                                                      [src]="user.profile_image ? user.profile_image : 'assets/images/profile_logo.jpg'"
                                                       alt="Jese image">
                                                 <div class="ps-3">
                                                       <div class="text-base font-semibold">{{user.name}}</div>
@@ -77,7 +75,7 @@
                                           </td>
                                           <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex gap-3 cursor-pointer items-center">
-                                                      <svg class="hidden md:block" (click)="showDialog(user.id)"
+                                                      <svg class="" (click)="showDialog(user.id)"
                                                             xmlns="http://www.w3.org/2000/svg" width="1.5em"
                                                             height="1.5em" viewBox="0 0 256 256">
                                                             <path fill="#f87c16"

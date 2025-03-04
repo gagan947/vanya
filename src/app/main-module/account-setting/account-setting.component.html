@@ -55,39 +55,69 @@
                               <div class="flex items-center gap-3">
                                     <p class="font-medium text-gray-400 w-2/5">Profile Name</p>
                                     <input type="text"
-                                          class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                          class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                           formControlName="profile_name" [ngClass]="isEditable ? 'editable' : ''"
                                           [readonly]="!isEditable">
+                                    <p *ngIf="
+                                          updateInfoForm.controls['profile_name'].errors &&
+                                          updateInfoForm.controls['profile_name'].touched
+                                        " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                          {{ getErrorMessage('profile_name') }}
+                                    </p>
                               </div>
                               <div class="my-4 grid space-y-2">
                                     <p class="font-medium text-base text-[#1C1C1C] my-4">Address</p>
                                     <div class="flex items-center gap-3 ">
                                           <p class="font-medium text-gray-400 w-2/5">Street</p>
                                           <input type="text"
-                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                                 formControlName="address" [ngClass]="isEditable ? 'editable' : ''"
                                                 [readonly]="!isEditable">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['address'].errors &&
+                                                updateInfoForm.controls['address'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('address') }}
+                                          </p>
                                     </div>
                                     <div class="flex items-center gap-3">
                                           <p class="font-medium text-gray-400 w-2/5">City</p>
                                           <input type="text"
-                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                                 formControlName="city" [ngClass]="isEditable ? 'editable' : ''"
                                                 [readonly]="!isEditable">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['city'].errors &&
+                                                updateInfoForm.controls['city'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('city') }}
+                                          </p>
                                     </div>
                                     <div class="flex items-center gap-3 ">
                                           <p class="font-medium text-gray-400 w-2/5">State</p>
                                           <input type="text"
-                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                                 formControlName="state" [ngClass]="isEditable ? 'editable' : ''"
                                                 [readonly]="!isEditable">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['state'].errors &&
+                                                updateInfoForm.controls['state'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('state') }}
+                                          </p>
                                     </div>
                                     <div class="flex items-center gap-3 ">
                                           <p class="font-medium text-gray-400 w-2/5">Country</p>
                                           <input type="text"
-                                                class="form-control w-full py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                                 formControlName="country" [ngClass]="isEditable ? 'editable' : ''"
                                                 [readonly]="!isEditable">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['country'].errors &&
+                                                updateInfoForm.controls['country'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('country') }}
+                                          </p>
                                     </div>
                               </div>
                               <div class="grid md:grid-cols-2 grid-cols-1 gap-x-10">

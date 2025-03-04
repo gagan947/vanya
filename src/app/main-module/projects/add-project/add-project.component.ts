@@ -344,7 +344,6 @@ export class AddProjectComponent {
     this.service.upload(apiUrl, formData).subscribe(res => {
       if (res.success == true) {
         this.uploadProjectDocument()
-        this.loading = false
       } else {
         this.toastr.error(res.message)
         this.loading = false
@@ -354,7 +353,12 @@ export class AddProjectComponent {
 
   uploadProjectDocument() {
     this.loading = true
-    let apiUrl = 'projects/addProjectDocumentation'
+    let apiUrl = ''
+    if (this.project_id) {
+      apiUrl = `projects/editProjectDocumentation`
+    } else {
+      apiUrl = `projects/addProjectDocumentation`
+    }
     let formData = new FormData()
 
     this.pdfForUpload.forEach((_value: any, _index: any) => {
@@ -522,7 +526,6 @@ export class AddProjectComponent {
               url: environment.imgUrl + item.url
             }))
 
-          console.log(this.sliderImages)
 
           if (this.projectMedia.geo_json) {
             this.geoJson_or_kml = 'G'

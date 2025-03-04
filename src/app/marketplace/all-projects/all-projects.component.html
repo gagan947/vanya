@@ -4,7 +4,8 @@
       <div class="grid grid-cols-1 sm:grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             @if(projectList){
             <ng-container *ngFor="let project of projectList">
-                  <div class="projects-card shadow-md rounded-lg cursor-pointer" (click)="redirect(project)">
+                  <div class="projects-card shadow-md rounded-lg cursor-pointer bg-white p-2"
+                        (click)="redirect(project)">
                         <div class="relative">
                               <img [src]=" project.thumbnail ? imageurl + project.thumbnail : '/assets/images/about_inner_bg.jpg'"
                                     class="rounded-lg md:h-64 w-full" alt="">

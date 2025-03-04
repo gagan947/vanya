@@ -38,10 +38,9 @@ export class AllUsersComponent {
     this.ref = this.dialogService.open(ViewUserComponent, {
       data: user,
       header: 'User Information',
-      width: '50%',
       maximizable: true,
       dismissableMask: true,
-      styleClass: 'bg-white p-2 px-4 shadow-md'
+      styleClass: 'bg-white p-2 px-4 shadow-md md:w-[30rem] w-[22rem] rounded-lg',
     })
   }
 

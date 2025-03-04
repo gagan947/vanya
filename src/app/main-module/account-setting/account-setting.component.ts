@@ -55,11 +55,11 @@ export class AccountSettingComponent {
   createForm() {
     this.updateInfoForm = this.fb.group({
       user_id: [''],
-      profile_name: ['', [Validators.required, NoWhitespaceDirective.validate]],
-      address: [''],
-      city: [''],
-      state: [''],
-      country: [''],
+      profile_name: ['', [Validators.required, Validators.maxLength(30), NoWhitespaceDirective.validate]],
+      address: ['', [Validators.maxLength(100)]],
+      city: ['', [Validators.maxLength(20)]],
+      state: ['', [Validators.maxLength(20)]],
+      country: ['', [Validators.maxLength(20)]],
       profile_img: ['']
     })
   }
@@ -177,5 +177,16 @@ export class AccountSettingComponent {
       dismissableMask: true,
       showHeader: false
     })
+  }
+
+  getErrorMessage(field: string) {
+    const control = this.updateInfoForm.controls[field]
+    if (control.hasError('required')) {
+      return 'This field cannot be empty'
+    } else if (control.hasError('maxlength')) {
+      return `this field must be only ${control.getError('maxlength').requiredLength
+        } characters long`
+    }
+    return ''
   }
 }

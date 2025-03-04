@@ -12,10 +12,12 @@ export class ViewUserComponent {
   userData: any;
   ref: DynamicDialogRef | undefined
   loading: boolean = false
+  users: any;
 
   constructor(private dialogConfig: DynamicDialogConfig, private dialogService: DialogService, private service: SharedService,) { }
 
   ngOnInit() {
+    this.getUsersList()
     this.loading = true;
     let id = this.dialogConfig.data
     let apiUrl = 'selectUser';
@@ -39,5 +41,25 @@ export class ViewUserComponent {
       dismissableMask: true,
       showHeader: false
     })
+  }
+
+  getUsersList() {
+    this.loading = true
+    let formData = new URLSearchParams()
+    formData.set('page', '1')
+    formData.set('page_size', '20')
+    let apiUrl = `getAllUserList`
+    this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
+      if (res.success) {
+        this.users = res.finalList
+        this.loading = false
+      } else {
+        this.loading = false
+      }
+    })
+  }
+
+  findImg(user_id: any) {
+    return this.users.find((item: any) => item.id == user_id)?.profile_image
   }
 }

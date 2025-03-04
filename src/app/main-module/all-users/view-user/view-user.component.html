@@ -1,9 +1,9 @@
 <app-loader *ngIf="loading"></app-loader>
 <div class="max-w-4xl mx-auto bg-white rounded-lg p-6">
-    <div class="flex items-center space-x-4">
-        <div class="w-24 h-24 bg-gray-200 rounded-full border border-primary"
-            (click)="vievImage(userData?.profile_image)">
-            <img [src]="userData?.profile_image" alt="Profile Image" class="rounded-full w-full h-full">
+    <div class="flex items-center md:space-x-4 space-x-0 flex-wrap">
+        <div class="w-24 h-24 bg-gray-200 rounded-full border border-primary" (click)="vievImage(findImg(userData.id))">
+            <img [src]="findImg(userData.id) ? findImg(userData.id) : 'assets/images/profile_logo.jpg'"
+                alt="Profile Image" class="rounded-full w-full h-full">
         </div>
         <div>
             <h1 class="text-xl font-bold text-gray-800">{{ userData?.first_name }} {{ userData?.last_name }}</h1>

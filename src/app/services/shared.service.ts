@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { EventEmitter, Injectable, Output } from '@angular/core'
+import { EventEmitter, Injectable, Output, signal } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { AuthService } from './auth.service'
 import { environment } from 'src/environments/environment'
@@ -62,4 +62,11 @@ export class SharedService {
   close(value: boolean) {
     this.sidebarState.next(value);
   }
+
+  _cartItems = signal<any[]>([]);
+
+  setCartItems(items: any[]) {
+    this._cartItems.set(items);
+  }
+
 }
