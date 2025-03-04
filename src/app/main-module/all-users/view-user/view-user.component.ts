@@ -17,20 +17,20 @@ export class ViewUserComponent {
   constructor(private dialogConfig: DynamicDialogConfig, private dialogService: DialogService, private service: SharedService,) { }
 
   ngOnInit() {
-    this.getUsersList()
+    // this.getUsersList()
     this.loading = true;
-    let id = this.dialogConfig.data
-    let apiUrl = 'selectUser';
-    const formData = new URLSearchParams()
-    formData.set('id', id)
-    this.service
-      .postWithToken(apiUrl, formData.toString())
-      .subscribe((res: any) => {
-        if (res.success) {
-          this.loading = false;
-          this.userData = res.selectDetails[0]
-        }
-      })
+    this.userData = this.dialogConfig.data
+    // let apiUrl = 'selectUser';
+    // const formData = new URLSearchParams()
+    // formData.set('id', id)
+    // this.service
+    //   .postWithToken(apiUrl, formData.toString())
+    //   .subscribe((res: any) => {
+    //     if (res.success) {
+    this.loading = false;
+    //       this.userData = res.selectDetails[0]
+    //     }
+    //   })
   }
 
   vievImage(imgName: any) {
