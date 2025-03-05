@@ -5,6 +5,7 @@ import { MarketplaceComponent } from './marketplace/marketplace.component'
 import { ProjectDetailComponent } from './project-detail/project-detail.component'
 import { ProjectOverviewComponent } from './project-overview/project-overview.component'
 import { ContactUsComponent } from './contact-us/contact-us.component'
+import { ProjectCartComponent } from '../shared/project-cart/project-cart.component'
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: 'contact-us',
         component: ContactUsComponent
+      },
+      {
+        path: 'cart',
+        component: ProjectCartComponent
       },
     ]
   },

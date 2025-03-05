@@ -1,27 +1,28 @@
 <app-loader *ngIf="loading"></app-loader>
-<section class="py-8 bg-white md:py-16 antialiased">
-      <div class="px-4 2xl:px-0">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-                  <div class="shrink-0 rounded-2xl">
-                        <img class="w-full rounded-2xl" [src]="baseUrl + projectMedia?.image_1URL" alt="" />
-                  </div>
-                  <div class="mt-6 sm:mt-8 lg:mt-0">
-                        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
-                              {{projectInfo?.project_name}}
-                        </h1>
-                        <p class="font-semibold text-gray-700">Total credits : <span
-                                    class="text-black">{{projectInfo?.credits}} tCO₂e</span></p>
-                        <hr class="my-6 md:my-4 border-gray-200" />
-
-                        <p class="mb-6 text-gray-500" [innerHTML]="projectInfo?.project_short_desc">
-
-                        </p>
-                        <div class="flex items-center justify-between mt-6">
-                              <p class="font-semibold text-gray-700">Remaining credits : <span
-                                          class="text-black">{{projectInfo?.remaining_credit}} tCO₂e</span></p>
+<div class="min-h-screen md:p-6 p-4 mx-auto mt-5">
+      <section class="p-8 bg-white md:py-8 antialiased rounded-lg">
+            <div class="px-4 2xl:px-0">
+                  <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16 items-center">
+                        <div class="shrink-0 rounded-2xl">
+                              <img class="w-full rounded-2xl" [src]="baseUrl + projectMedia?.image_1URL" alt="" />
                         </div>
-                        <div class="mt-2 sm:gap-4 sm:items-center sm:flex">
-                              <div class="relative sm:w-48">
+                        <div class="mt-6 sm:mt-8 lg:mt-0">
+                              <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
+                                    {{projectInfo?.project_name}}
+                              </h1>
+                              <p class="font-semibold text-gray-700">Total credits : <span
+                                          class="text-black">{{projectInfo?.credits}} tCO₂e</span></p>
+                              <hr class="my-6 md:my-4 border-gray-200" />
+
+                              <p class="mb-6 text-gray-500" [innerHTML]="projectInfo?.project_short_desc">
+
+                              </p>
+                              <div class="flex items-center justify-between mt-6">
+                                    <p class="font-semibold text-gray-700">Remaining credits : <span
+                                                class="text-black">{{projectInfo?.remaining_credit}} tCO₂e</span></p>
+                              </div>
+                              <div class="mt-4 sm:gap-4 sm:items-center sm:flex">
+                                    <!-- <div class="relative sm:w-48">
                                     <button (click)="decrement()" class="absolute left-0"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em"
                                                 viewBox="0 0 256 256">
@@ -48,22 +49,38 @@
                                                 <path fill="#1d4700" d="M0 0h48v48H0z" mask="url(#ipSAdd0)" />
                                           </svg>
                                     </button>
-                              </div>
+                              </div> -->
+                                    <div class="relative sm:w-48"><button class="absolute left-0 w-[37px] h-[37px]">
 
-                              <a (click)="addToCart(projectInfo)" title=""
-                                    class="text-white mt-4 sm:mt-0 bg-blue-600 font-medium rounded-lg text-sm px-8 py-2 flex items-center justify-center"
-                                    role="button">
-                                    <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true"
-                                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                          viewBox="0 0 24 24">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                                    </svg>
-                                    Add to cart
-                              </a>
+                                                <i class="fa-solid fa-plus"></i>
+                                          </button>
+                                          <p class="absolute right-[40px] top-[20%]  text-gray-600 font-medium">
+                                                tCO₂e</p>
+                                          <input type="number" min="1"
+                                                class="border border-gray-300 pl-10 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full font-semibold ng-pristine ng-valid ng-touched"
+                                                ng-reflect-min="1" ng-reflect-model="1"><button
+                                                class="absolute right-0 w-[37px] h-[37px]">
+
+
+                                                <i class="fa-solid fa-minus"></i>
+
+                                          </button>
+                                    </div>
+                                    <a (click)="addToCart(projectInfo)" title=""
+                                          class="text-white bg-primary px-6 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"
+                                          role="button">
+                                          <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                                viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                      stroke-linejoin="round" stroke-width="2"
+                                                      d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
+                                          </svg>
+                                          Add to cart
+                                    </a>
+                              </div>
                         </div>
                   </div>
             </div>
-      </div>
-</section>
+      </section>
+</div>

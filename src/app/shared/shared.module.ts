@@ -22,7 +22,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog'
     HeaderComponent,
     LoaderComponent,
     CartComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
