@@ -23,7 +23,8 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     HeaderComponent,
     LoaderComponent,
     CartComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
