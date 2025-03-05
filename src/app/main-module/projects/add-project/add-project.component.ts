@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { SharedService } from 'src/app/services/shared.service'
 import { findFlagUrlByCountryName } from 'country-flags-svg'
 import { AuthService } from 'src/app/services/auth.service'
@@ -68,7 +68,7 @@ export class AddProjectComponent {
 
   constructor(
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     private router: Router,
     private route: ActivatedRoute,

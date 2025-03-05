@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { EthereumService } from 'src/app/services/ethereum.service'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { SharedService } from 'src/app/services/shared.service'
@@ -21,7 +21,7 @@ export class MainHeaderComponent {
   constructor(
     private router: Router,
     private ethereumService: EthereumService,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     public auth: AuthService
   ) {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth.service'
 
 @Component({
@@ -12,9 +12,9 @@ import { AuthService } from 'src/app/services/auth.service'
 export class ForgetPasswordComponent {
   forgetPasswordForm: FormGroup
 
-  constructor (
+  constructor(
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: AuthService,
     private router: Router
   ) {
@@ -22,7 +22,7 @@ export class ForgetPasswordComponent {
       email: ['', [Validators.required, Validators.email]]
     })
   }
-  onSubmit (form: any) {
+  onSubmit(form: any) {
     form.markAllAsTouched()
     if (form.invalid) {
       return
@@ -40,16 +40,15 @@ export class ForgetPasswordComponent {
     })
   }
 
-  getErrorMessage (field: string) {
+  getErrorMessage(field: string) {
     const control = this.forgetPasswordForm.controls[field]
     if (control.hasError('required')) {
       return 'This field cannot be empty'
     } else if (control.hasError('email')) {
       return 'Please enter a valid email address'
     } else if (control.hasError('minlength')) {
-      return `Password must be at least ${
-        control.getError('minlength').requiredLength
-      } characters long`
+      return `Password must be at least ${control.getError('minlength').requiredLength
+        } characters long`
     }
     return ''
   }

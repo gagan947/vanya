@@ -35,7 +35,7 @@ export class AllProjectsComponent {
     this.loading = true
     this.service.get(ApiUrl).subscribe({
       next: res => {
-        if (res.status == 200) {
+        if (res.success) {
           this.projectList = res.projectinfo
           this.totalCount = res.totalCount
           this.loading = false

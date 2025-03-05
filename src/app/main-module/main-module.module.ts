@@ -15,7 +15,6 @@ import { MainHeaderComponent } from './main-header/main-header.component'
 import { ViewProjectComponent } from './projects/view-project/view-project.component'
 import { AddProjectComponent } from './projects/add-project/add-project.component'
 import { MainComponent } from './main/main.component'
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { TransactionHistoryComponent } from './transaction-history/transaction-history.component'
 import { CreditHistoryComponent } from './credit-history/credit-history.component';
 import { CertificateComponent } from './certificate/certificate.component';
@@ -56,7 +55,6 @@ import { AddCertificateComponent } from './certificate/add-certificate/add-certi
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxIntlTelInputModule,
   ],
   exports: [SidebarComponent],
   providers: [ConfirmationService, DialogService]

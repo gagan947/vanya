@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog'
 import { MessageDialogComponent } from 'src/app/marketplace/message-dialog/message-dialog.component'
 import { AuthService } from 'src/app/services/auth.service'
@@ -24,7 +24,7 @@ export class CartComponent {
   constructor(
     private router: Router,
     private service: SharedService,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private dialogService: DialogService,
     private authService: AuthService,
   ) { }
@@ -42,9 +42,9 @@ export class CartComponent {
     })
     this.getCartItems()
 
-    this.service.get('getUserRoleDetails').subscribe(res2 => {
-      this.userDetails = res2.userRoles
-    })
+    // this.service.get('getUserRoleDetails').subscribe(res2 => {
+    //   this.userDetails = res2.userRoles
+    // })
   }
 
 
@@ -229,7 +229,7 @@ export class CartComponent {
         this.loading = false
         const msgData = {
           icon: 'error-outline',
-          title: "Oops somthing wen't wrong!",
+          title: "Oops something wen't wrong!",
           message_1: 'you may try again!',
           type: 'error'
         }
@@ -284,7 +284,7 @@ export class CartComponent {
         console.error('User has closed the popup or there is some payment error:', result.error);
         const msgData = {
           icon: 'error-outline',
-          title: "Oops somthing wen't wrong!",
+          title: "Oops something wen't wrong!",
           message_1: result.error.message,
           type: 'error'
         }

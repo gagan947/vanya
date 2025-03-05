@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
@@ -23,7 +23,7 @@ export class CreditHistoryComponent {
   columns: any = []
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     public dialogService: DialogService,
     private authService: AuthService,
@@ -51,16 +51,15 @@ export class CreditHistoryComponent {
       ];
 
     } else if (this.role == 'Buyer') {
-
       this.columns = [
-        // { key: 'order_id', label: 'Order Id' },
+        { key: 'order_id', label: 'Order Id' },
         { key: 'project_name', label: 'Project Name' },
+        { key: 'seller_name', label: 'Seller Name' },
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
-        // { key: 'status', label: 'Status', type: 'status' },
-        // { key: 'created_at', label: 'Date', type: 'date' },
-        // { key: 'action', label: 'Action', type: 'action' }
+        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'action', label: 'Action', type: 'action' }
       ];
 
     } else {
@@ -84,7 +83,7 @@ export class CreditHistoryComponent {
     this.ref = this.dialogService.open(HistoryInvoiceComponent, {
       data: data,
       header: '',
-      width: '70%',
+      width: '60rem',
       styleClass: 'bg-white p-2 shadow-md',
       dismissableMask: true,
       maximizable: true

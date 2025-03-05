@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { findFlagUrlByCountryName } from 'country-flags-svg'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import {
   DialogService,
   DynamicDialogConfig,
@@ -29,7 +29,7 @@ export class ViewProjectComponent {
   constructor(
     private dialogConfig: DynamicDialogConfig,
     private service: SharedService,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     public dialogService: DialogService,
     public ref: DynamicDialogRef,
     private projectDataService: ProjectDataService,

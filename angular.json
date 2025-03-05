@@ -25,9 +25,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/intl-tel-input/build/css/intlTelInput.css"
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/@iconify/iconify/dist/iconify.min.js",

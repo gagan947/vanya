@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth.service'
 import { SharedService } from 'src/app/services/shared.service'
 
@@ -17,7 +17,7 @@ export class LogInComponent {
   role: string | null | undefined
   constructor(
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: AuthService,
     private router: Router,
     private shared: SharedService
@@ -54,49 +54,31 @@ export class LogInComponent {
     formData.set('email', form.value.email);
     formData.set('password', form.value.password);
 
-    this.service.post(apiUrl, formData.toString()).subscribe(res => {
+    this.service.post(apiUrl, formData.toString()).subscribe((res: any) => {
       if (res.success && res.token) {
         this.service.setToken(res.token);
 
-        this.shared.get('getUserRoleDetails').subscribe(res2 => {
-          const roleType = res2.userRoles.role_type;
-          const userId = res2.userRoles.id;
-
-          // Store user ID and role
-          localStorage.setItem('user', userId);
-          this.service.setRole(roleType);
-
-          // Navigate based on user role
-          switch (roleType) {
-            case 'Approver':
-              this.router.navigate(['/main/dashboard/admin']);
-              break;
-            case 'Seller':
-              this.router.navigate(['/main/dashboard/seller']);
-              break;
-            default:
-              this.router.navigate(['/main/dashboard/buyer']);
-          }
-
-          // **Remember Me Functionality**
-          if (form.value.rememberMe) {
-            localStorage.setItem('savedEmail', form.value.email);
-            localStorage.setItem('savedPassword', form.value.password);
-            localStorage.setItem('rememberMe', 'true');
-          } else {
-            localStorage.removeItem('savedEmail');
-            localStorage.removeItem('savedPassword');
-            localStorage.removeItem('rememberMe');
-          }
-
-          this.toastr.success(res.message);
-          this.loading = false;
-        });
+        switch (res.userinfo.role_id) {
+          case 3:
+            this.service.setRole('Approver');
+            this.router.navigate(['/main/dashboard/admin']);
+            break;
+          case 1:
+            this.service.setRole('Seller');
+            this.router.navigate(['/main/dashboard/seller']);
+            break;
+          default:
+            this.service.setRole('Buyer');
+            this.router.navigate(['/main/dashboard/buyer']);
+        }
+        this.toastr.success(res.message);
+        this.loading = false;
       } else {
         this.toastr.error(res.message);
         this.loading = false;
       }
     });
+
   }
 
 
@@ -110,3 +92,48 @@ export class LogInComponent {
     return ''
   }
 }
+
+
+// this.service.post(apiUrl, formData.toString()).subscribe(res => {
+//   if (res.success && res.token) {
+//     this.service.setToken(res.token);
+
+//     this.shared.get('getUserRoleDetails').subscribe(res2 => {
+//       const roleType = res2.userRoles.role_type;
+//       const userId = res2.userRoles.id;
+
+//       // Store user ID and role
+//       localStorage.setItem('user', userId);
+//       this.service.setRole(roleType);
+
+//       // Navigate based on user role
+//       switch (roleType) {
+//         case 'Approver':
+//           this.router.navigate(['/main/dashboard/admin']);
+//           break;
+//         case 'Seller':
+//           this.router.navigate(['/main/dashboard/seller']);
+//           break;
+//         default:
+//           this.router.navigate(['/main/dashboard/buyer']);
+//       }
+
+//       // **Remember Me Functionality**
+//       if (form.value.rememberMe) {
+//         localStorage.setItem('savedEmail', form.value.email);
+//         localStorage.setItem('savedPassword', form.value.password);
+//         localStorage.setItem('rememberMe', 'true');
+//       } else {
+//         localStorage.removeItem('savedEmail');
+//         localStorage.removeItem('savedPassword');
+//         localStorage.removeItem('rememberMe');
+//       }
+
+//       this.toastr.success(res.message);
+//       this.loading = false;
+//     });
+//   } else {
+//     this.toastr.error(res.message);
+//     this.loading = false;
+//   }
+// });

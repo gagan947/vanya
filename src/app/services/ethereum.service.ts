@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { ethers } from 'ethers'
 import { projectContractABI, storageContractABI2 } from '../main-module/ABI/abi'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root'
@@ -157,7 +157,7 @@ export class EthereumService {
   // private contract: ethers.Contract;
   // private signer?: ethers.Signer;
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {
+  constructor(private http: HttpClient, private toastr: NzMessageService) {
     if (!this.provider) {
       this.initializeProvider()
     }

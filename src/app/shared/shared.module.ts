@@ -16,6 +16,7 @@ import { NgxEditorModule } from 'ngx-editor'
 import { PaginatorModule } from 'primeng/paginator'
 import { ImagePreviewComponent } from './image-preview/image-preview.component'
 import { DynamicDialogModule } from 'primeng/dynamicdialog'
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog'
     SidebarModule,
     NgxEditorModule,
     PaginatorModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    NgxIntlTelInputModule,
   ],
   exports: [
     HeaderComponent,
@@ -54,7 +56,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog'
     NgxEditorModule,
     PaginatorModule,
     DynamicDialogModule,
-    CartComponent
+    CartComponent,
+    NgxIntlTelInputModule
   ]
 })
 export class SharedModule { }

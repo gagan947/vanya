@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { City, Country, State } from 'country-state-city'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { SharedService } from 'src/app/services/shared.service'
 import { Location } from '@angular/common'
 import { ImageCroppedEvent } from 'ngx-image-cropper'
@@ -35,17 +35,17 @@ export class AccountSettingComponent {
   constructor(
     private _location: Location,
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     private sidebar: SidebarComponent,
     private dialogService: DialogService
   ) {
-    this.getUserInfo()
   }
 
   ngOnInit() {
     this.countries = Country.getAllCountries()
     this.createForm()
+    this.getUserInfo()
   }
 
   back() {
@@ -148,25 +148,18 @@ export class AccountSettingComponent {
   }
 
   getUserInfo() {
-    this.loading = true
-    let apiUrl = `getUserRoleProfile`
-    this.service.get(apiUrl).subscribe(res => {
-      if (res.success) {
-        this.userInfo = res.userDetails[0]
-        this.loading = false
-        this.updateInfoForm.patchValue({
-          user_id: this.userInfo.user_id,
-          profile_name: this.userInfo.profile_name,
-          address: this.userInfo.address,
-          state: this.userInfo.state,
-          city: this.userInfo.city,
-          country: this.userInfo.country
-        })
-      } else {
-        // this.toastr.error(res.msg)
-        this.loading = false
-      }
-    })
+    let data: any = localStorage.getItem('userInfo')
+    this.userInfo = JSON.parse(data)
+    if (this.userInfo) {
+      this.updateInfoForm.patchValue({
+        user_id: this.userInfo.user_id,
+        profile_name: this.userInfo.profile_name,
+        address: this.userInfo.address,
+        state: this.userInfo.state,
+        city: this.userInfo.city,
+        country: this.userInfo.country
+      })
+    }
   }
 
   vievImage(imgName: any) {

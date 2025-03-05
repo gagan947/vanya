@@ -1,67 +1,92 @@
-<div class="max-w-4xl mx-auto bg-white p-6 shadow-md rounded-lg">
+<div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg">
       <div class="col-span-2 flex justify-between items-center flex-wrap">
             <h1 class="text-2xl font-semibold text-gray-800 mb-2">Invoice</h1>
             <button (click)="exportAsPDF()" class="bg-primary text-white py-1 px-4 rounded-md hover:bg-primary">Download
                   Invoice</button>
       </div>
-      <div class="grid md:grid-cols-2 gap-6 mb-6" id="invoice">
-            <!-- <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Sale ID</label>
-                  <p class="text-gray-600">{{invoiceData.order_id}}</p>
-            </div>
-
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Sale Date</label>
-                  <p class="text-gray-600">{{invoiceData.created_at | date:'mediumDate'}}</p>
-            </div> -->
-
-            <div class="col-span-2">
-                  <label class="block font-semibold text-[#2B2B2B] mb-2">Buyer Information</label>
-                  <div class="p-2 border rounded-md">
-                        <p class="text-[#2B2B2B]">{{invoiceData.buyer_name}}</p>
-                        <!-- <p class="text-gray-500 text-sm">Doe Organization</p> -->
+      <div class="min-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8 border border-gray-300" id="invoice">
+            <!-- Invoice Header -->
+            <div class="flex justify-between items-center border-b pb-4 mb-4">
+                  <div>
+                        <h1 class="text-2xl font-bold text-gray-800">INVOICE</h1>
+                        <p class="text-gray-600">Invoice #{{ invoiceData.order_id }}</p>
+                        <p class="text-gray-600">Date: {{ invoiceData.created_at | date: 'mediumDate' }}</p>
+                  </div>
+                  <div class="text-right">
+                        <h2 class="text-xl font-bold text-green-700">VANYA Carbon Credits</h2>
+                        <a href="https://app.vanya.ai" class="text-gray-600">https://app.vanya.ai</a>
                   </div>
             </div>
 
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Project Name</label>
-                  <p class="text-gray-600">{{invoiceData.project_name}}</p>
+            <!-- Buyer Information -->
+            <div class="mb-6">
+                  <h2 class="font-semibold text-gray-800 mb-2">Billed To:</h2>
+                  <div class="p-3 border rounded-md bg-gray-50">
+                        <p class="text-gray-900 font-medium">{{ invoiceData.buyer_name }}</p>
+                  </div>
             </div>
 
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Project Type</label>
-                  <p class="text-gray-600">{{invoiceData.project_subtitle}}</p>
+            <!-- Project Details -->
+            <div class="grid grid-cols-2 gap-6 mb-6">
+                  <div>
+                        <label class="block font-semibold text-gray-800">Project Name</label>
+                        <p class="text-gray-600">{{ invoiceData.project_name }}</p>
+                  </div>
+
+                  <div>
+                        <label class="block font-semibold text-gray-800">Project Type</label>
+                        <p class="text-gray-600">{{ invoiceData.project_subtitle }}</p>
+                  </div>
             </div>
 
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Quantity Sold</label>
-                  <p class="text-gray-600">{{invoiceData.carbon_credits}}</p>
+            <!-- Sale Details -->
+            <div class="border-t pt-4 mb-6">
+                  <h2 class="font-semibold text-gray-800 mb-2">Sale Details</h2>
+                  <div class="grid grid-cols-2 gap-6">
+                        <div>
+                              <label class="block font-semibold text-gray-800">Quantity Purchased</label>
+                              <p class="text-gray-600">{{ invoiceData.carbon_credits }} tCO₂e</p>
+                        </div>
+
+                        <div>
+                              <label class="block font-semibold text-gray-800">Price per Unit</label>
+                              <p class="text-gray-600">{{ invoiceData.price_per_carbon_credit | currency: 'INR' }}</p>
+                        </div>
+
+                        <div>
+                              <label class="block font-semibold text-gray-800">Seller Name</label>
+                              <p class="text-gray-600">{{ invoiceData.seller_name }}</p>
+                        </div>
+
+                        <div class="">
+                              <label class="block font-semibold text-gray-800">Total Amount</label>
+                              <p class="text-xl font-bold text-gray-900">
+                                    {{ invoiceData.amount | currency: 'INR' }}
+                              </p>
+                        </div>
+                  </div>
             </div>
 
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Price per Unit</label>
-                  <p class="text-gray-600">{{invoiceData.price_per_carbon_credit | currency:'INR'}}</p>
+            <!-- Transaction Details -->
+            <div class="border-t pt-4">
+                  <h2 class="font-semibold text-gray-800 mb-2">Payment Details</h2>
+                  <div class="grid grid-cols-2 gap-6">
+                        <div>
+                              <label class="block font-semibold text-gray-800">Transaction Status</label>
+                              <p class="text-green-600 font-semibold">Success</p>
+                        </div>
+
+                        <div>
+                              <label class="block font-semibold text-gray-800">Payment Method</label>
+                              <p class="text-gray-600">Bank Transfer</p>
+                        </div>
+                  </div>
             </div>
 
-            <div class="col-span-2">
-                  <label class="block font-semibold text-[#2B2B2B]">Total Sale Amount</label>
-                  <p class="text-gray-600">{{invoiceData.amount | currency:'INR'}}</p>
+            <!-- Footer -->
+            <div class="mt-8 pt-6 border-t">
+                  <p class="text-sm text-gray-500">Thank you for your purchase!</p>
             </div>
-
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Transaction Status</label>
-                  <!-- <p class="text-gray-600">{{invoiceData.status}}</p> -->
-                  <p class="text-gray-600">Success</p>
-            </div>
-
-            <div>
-                  <label class="block font-semibold text-[#2B2B2B]">Payment Method</label>
-                  <p class="text-gray-600">Bank Transfer</p>
-            </div>
-
-            <!-- <div class="col-span-2">
-                  <label class="block font-semibold text-[#2B2B2B]">Net Revenue</label>
-                  <p class="text-gray-600">950</p>
-            </div> -->
       </div>
+
 </div>

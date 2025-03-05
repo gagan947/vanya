@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { ConfirmationService } from 'primeng/api'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { AuthService } from 'src/app/services/auth.service'
@@ -24,7 +24,7 @@ export class ProjectsComponent {
   loading: boolean = false
 
   constructor(
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,

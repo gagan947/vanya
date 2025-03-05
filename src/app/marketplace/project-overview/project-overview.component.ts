@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, computed, effect } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { SharedService } from 'src/app/services/shared.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
@@ -23,7 +23,7 @@ export class ProjectOverviewComponent {
   constructor(
     private route: ActivatedRoute,
     private service: SharedService,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private auth: AuthService,
     private router: Router,
   ) {

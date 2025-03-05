@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth.service'
 import { Country, State, City } from 'country-state-city'
-import { NoWhitespaceDirective, strongPasswordValidator } from '../../shared/validator'
-import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input-gg'
+import { gstValidator, NoWhitespaceDirective, strongPasswordValidator } from '../../shared/validator'
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input'
 
 @Component({
   selector: 'app-sign-up',
@@ -20,10 +20,14 @@ export class SignUpComponent {
   cities: any
   countryCode: any
   selectedRole: string
-  role: string | null | undefined
+  type: string = 'individual'
+  role: string | null | undefined;
+  SearchCountryField = SearchCountryField
+  CountryISO = CountryISO;
+  selectedCountry = CountryISO.India
   constructor(
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: AuthService,
     private router: Router
   ) {
@@ -42,12 +46,12 @@ export class SignUpComponent {
 
     this.selectedRole = '2'
     this.signUpForm = this.fb.group({
+      type: ['individual'],
       roll_id: [''],
       firstName: ['', [Validators.required, NoWhitespaceDirective.validate]],
       lastName: ['', [Validators.required, NoWhitespaceDirective.validate]],
       email: ['', [Validators.required, Validators.email]],
       phone_number: ['', [Validators.required]],
-      companyName: ['', Validators.required, NoWhitespaceDirective.validate],
       country: ['', [Validators.required]],
       state: [{ value: '', disabled: true }, [Validators.required]],
       address: ['', [Validators.required]],
@@ -55,12 +59,42 @@ export class SignUpComponent {
       password: [
         '',
         [Validators.required, Validators.minLength(8), strongPasswordValidator]
-      ]
+      ],
+      companyName: [''],
+      gst: [''],
+      vat: [''],
+      licence: [''],
     })
   }
 
   ngOnInit(): void {
     this.countries = Country.getAllCountries()
+    this.signUpForm.get('type')?.valueChanges.subscribe((value) => {
+      this.type = value
+      this.setCompanyValidators(value);
+    });
+    this.signUpForm.get('country')?.valueChanges.subscribe((isoCode) => {
+      let countryName = this.countries.find((country: { isoCode: any; }) => country.isoCode === isoCode).name
+      this.selectedCountry = CountryISO[countryName as keyof typeof CountryISO]
+    });
+  }
+
+  setCompanyValidators(type: string) {
+    const companyName = this.signUpForm.get('companyName');
+    const gst = this.signUpForm.get('gst');
+    const vat = this.signUpForm.get('vat');
+    if (type === 'company') {
+      companyName?.setValidators([Validators.required, NoWhitespaceDirective.validate]);
+      gst?.setValidators(gstValidator());
+      // vat?.setValidators();
+    } else {
+      companyName?.clearValidators();
+      gst?.clearValidators();
+      // vat?.clearValidators();
+    }
+    companyName?.updateValueAndValidity();
+    gst?.updateValueAndValidity();
+    // vat?.updateValueAndValidity();
   }
 
   onSubmit(form: any) {
@@ -108,6 +142,8 @@ export class SignUpComponent {
     } else if (control.hasError('minlength')) {
       return `Password must be at least ${control.getError('minlength').requiredLength
         } characters long`
+    } else if (control.hasError('invalidGST')) {
+      return `Invalid GST number format.`
     } else if (control.hasError('validatePhoneNumber')) {
       const errors = control.getError('validatePhoneNumber')
       if (!errors.valid) return 'Please enter a valid phone number'
@@ -143,8 +179,4 @@ export class SignUpComponent {
   selectRole(role: string) {
     this.selectedRole = role
   }
-
-  SearchCountryField = SearchCountryField
-  CountryISO = CountryISO
-  preferredCountries: CountryISO[] = [CountryISO.India]
 }

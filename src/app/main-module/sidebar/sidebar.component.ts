@@ -41,6 +41,7 @@ export class SidebarComponent {
     this.service.get(apiUrl).subscribe(res => {
       if (res.success) {
         this.userInfo = res.userDetails[0]
+        localStorage.setItem('userInfo', JSON.stringify(this.userInfo))
       } else {
         // this.toastr.error(res.message)
       }

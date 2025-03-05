@@ -30,15 +30,9 @@ export class BuyerDashboardComponent {
     this.getProjectDetails();
   }
 
-  public getUserInfo() {
-    let apiUrl = `getUserRoleProfile`
-    this.service.get(apiUrl).subscribe(res => {
-      if (res.success) {
-        this.userInfo = res.userDetails[0]
-      } else {
-        // this.toastr.error(res.message)
-      }
-    })
+  getUserInfo() {
+    let data: any = localStorage.getItem('userInfo')
+    this.userInfo = JSON.parse(data)
   }
 
   getDashboardData() {

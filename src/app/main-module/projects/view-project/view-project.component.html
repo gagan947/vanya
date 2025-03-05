@@ -85,6 +85,7 @@
             <div class="flex justify-between items-center flex-wrap">
                   <h1 class="text-3xl font-bold text-green-600 mb-2">{{ projectData.project_name }}</h1>
                   <div class="flex justify-center">
+                        @if(projectData.verification_status !== 'Approved'){
                         <div class="flex gap-4 align-center">
                               <button (click)="changeProjectStatus('Rejected')" *ngIf="role == 'Approver'"
                                     class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 text-sm">
@@ -93,6 +94,7 @@
                                     class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 text-sm">
                                     Approve</button>
                         </div>
+                        }
                   </div>
             </div>
             <p class="text-lg text-gray-600 flex items-center gap-2">{{getProjectType(projectData.project_type)}}

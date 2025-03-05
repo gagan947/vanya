@@ -1,11 +1,11 @@
 import { Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ToastrService } from 'ngx-toastr'
 import { Country, State, City } from 'country-state-city'
 import { SharedService } from 'src/app/services/shared.service'
 import { strongPasswordValidator } from 'src/app/shared/validator'
-import { SearchCountryField, CountryISO } from 'ngx-intl-tel-input'
+import { CountryISO, SearchCountryField } from 'ngx-intl-tel-input'
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-add-user',
@@ -26,7 +26,7 @@ export class AddUserComponent {
 
   constructor(
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private toastr: NzMessageService,
     private service: SharedService,
     private router: Router,
     private route: ActivatedRoute

@@ -72,10 +72,10 @@
                                     <tr *ngFor="let project of projectList; let i = index"
                                           class="bg-white border-b hover:bg-gray-50">
                                           <td class="px-6 py-4 whitespace-nowrap">
-                                                {{i+1}}
+                                                {{ first + i + 1 }}
                                           </td>
                                           <td scope="row"
-                                                class="flex items-center px-6 py-4 whitespace-nowrap text-gray-900 whitespace-nowrap">
+                                                class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                                 <div class="grid gap-1">
                                                       <div class="text-base font-semibold">{{project.project_name}}
                                                       </div>
@@ -85,7 +85,7 @@
                                                       </div>
                                                 </div>
                                           </td>
-                                          <td class="px-6 py-4 whitespace-nowrap whitespace-nowrap">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{getProjectType(project.project_type)}}
                                           </td>
                                           <td class="px-6 py-4 whitespace-nowrap">
@@ -108,7 +108,7 @@
                                                       {{getStatusLabel(project.verification_status)}}
                                                 </div>
                                           </td>
-                                          <td class="px-6 py-4 whitespace-nowrap whitespace-nowrap">
+                                          <td class="px-6 py-4 whitespace-nowrap">
                                                 {{project.created_at | date:'mediumDate'}}
                                           </td>
                                           <td class="px-6 py-4 whitespace-nowrap">

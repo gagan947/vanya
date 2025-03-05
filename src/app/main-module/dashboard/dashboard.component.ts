@@ -27,11 +27,9 @@ export class DashboardComponent {
     this.getDashboardData()
   }
 
-  public getUserInfo(): void {
-    const apiUrl = `getUserRoleProfile`;
-    this.service.get(apiUrl).subscribe(
-      (res: any) => res.success && (this.userInfo = res.userDetails[0])
-    );
+  getUserInfo(): void {
+    let data: any = localStorage.getItem('userInfo')
+    this.userInfo = JSON.parse(data)
   }
 
   getDashboardData() {
