@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 
@@ -17,8 +17,7 @@ export class AddCertificateComponent {
   certificate_id: any;
   Form!: FormGroup;
   loading: boolean = false;
-  projectList: any;
-  remaining_credits: any;
+  data: any;
   visible: boolean = false;
   file: any;
   croppedImageBlob: any;
@@ -32,7 +31,9 @@ export class AddCertificateComponent {
     private service: SharedService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialogService: DialogService,
+    private dialogConfig: DynamicDialogConfig,
+    public dialogService: DialogService,
+    public ref: DynamicDialogRef,
     private authService: AuthService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -55,45 +56,8 @@ export class AddCertificateComponent {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
-    this.getAllProjects()
-  }
+    this.data = this.dialogConfig.data
 
-  getAllProjects() {
-    let ApiUrl = ''
-
-    if (this.role == 'Buyer') {
-      ApiUrl = 'buyer/getBuyerProjects'
-    } else {
-      ApiUrl = `projects/getProjectsByLimitSeller?pageNo=${1}&pageSize=${20}&userid=${localStorage.getItem(
-        'user'
-      )}`
-    }
-
-    this.loading = true
-    this.service
-      .get(ApiUrl)
-      .subscribe({
-        next: res => {
-          if (res.status == 200) {
-            this.loading = false
-            this.projectList = res.projectinfo ? res.projectinfo : res.projectResult
-          } else {
-            this.loading = false
-            this.projectList = []
-          }
-        },
-        error: err => {
-          this.loading = false
-        }
-      })
-  }
-
-  onProjectChange(event: any) {
-    let project = this.projectList.find((item: { id: any; }) => item.id == event.target.value)
-    this.remaining_credits = project.remaining_credit ? project.remaining_credit : project.carbon_credits
-    this.Form.patchValue({
-      carbon_credits: this.remaining_credits
-    })
   }
 
   fileChangeEvent(event: any): void {

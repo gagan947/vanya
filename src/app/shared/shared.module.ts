@@ -17,6 +17,7 @@ import { PaginatorModule } from 'primeng/paginator'
 import { ImagePreviewComponent } from './image-preview/image-preview.component'
 import { DynamicDialogModule } from 'primeng/dynamicdialog'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
+import { ProjectCartComponent } from './project-cart/project-cart.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     LoaderComponent,
     CartComponent,
     ImagePreviewComponent,
-    CartComponent
+    ProjectCartComponent
   ],
   imports: [
     CommonModule,
@@ -43,6 +44,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
     NgxIntlTelInputModule,
   ],
   exports: [
+    CommonModule,
     HeaderComponent,
     LoaderComponent,
     DialogModule,

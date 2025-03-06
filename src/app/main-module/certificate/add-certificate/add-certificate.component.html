@@ -5,19 +5,10 @@
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Project</label>
-                              <select
+                              <input type="number" min="0"
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                     [ngClass]="Form.controls['project_id'].errors &&
-                                Form.controls['project_id'].touched ? 'outline-red-600' : ''"
-                                    formControlName="project_id" (change)="onProjectChange($event)">
-                                    <option disabled value="">Select</option>
-                                    @for (item of projectList; track $index) {
-                                    <option [value]="item.id">
-                                          {{ item.project_name }}
-                                          <span *ngIf="item.transaction_id">({{ item.transaction_id }})</span>
-                                    </option>
-                                    }
-                              </select>
+                          Form.controls['project_id'].touched ? 'outline-red-600' : ''" formControlName="project_id">
                               <!-- error text S -->
                               <p *ngIf="Form.controls['project_id'].errors && Form.controls['project_id'].touched"
                                     class="flex text-sm text-red-600 justify-between items-center mt-2">
@@ -30,7 +21,7 @@
                         </div>
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Carbon Credits</label>
-                              <input type="number" min="0" [max]="remaining_credits"
+                              <input type="number" min="0"
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                     [ngClass]="Form.controls['carbon_credits'].errors &&
                                 Form.controls['carbon_credits'].touched ? 'outline-red-600' : ''"

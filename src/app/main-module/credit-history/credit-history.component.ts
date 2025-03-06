@@ -4,6 +4,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { HistoryInvoiceComponent } from './history-invoice/history-invoice.component';
+import { AddCertificateComponent } from '../certificate/add-certificate/add-certificate.component';
 
 @Component({
   selector: 'app-credit-history',
@@ -81,6 +82,17 @@ export class CreditHistoryComponent {
   showDialog(data: any) {
     // this.router.navigate(['/main/dashboard/invoice'])
     this.ref = this.dialogService.open(HistoryInvoiceComponent, {
+      data: data,
+      header: '',
+      width: '60rem',
+      styleClass: 'bg-white p-2 shadow-md',
+      dismissableMask: true,
+      maximizable: true
+    })
+  }
+
+  requestDialog(data: any) {
+    this.ref = this.dialogService.open(AddCertificateComponent, {
       data: data,
       header: '',
       width: '60rem',
