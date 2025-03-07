@@ -94,9 +94,8 @@ export class CreditHistoryComponent {
   requestDialog(data: any) {
     this.ref = this.dialogService.open(AddCertificateComponent, {
       data: data,
-      header: '',
-      width: '60rem',
-      styleClass: 'bg-white p-2 shadow-md',
+      header: 'Request For Certificate',
+      styleClass: 'bg-white p-2 shadow-md w-[22rem] md:w-[40rem] lg:w-[60rem]',
       dismissableMask: true,
       maximizable: true
     })

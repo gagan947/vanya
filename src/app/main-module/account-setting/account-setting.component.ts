@@ -18,7 +18,7 @@ import { NoWhitespaceDirective } from 'src/app/shared/validator'
 export class AccountSettingComponent {
   userInfo: any
   visible: boolean = false
-  profile_img = 'assets/images/profile_logo.jpg'
+  profile_img: any
   imageChangedEvent: any = ''
   croppedImage: any = ''
   isEditable: boolean = false
@@ -80,6 +80,7 @@ export class AccountSettingComponent {
     this.file = new File([this.croppedImageBlob], 'profile_image.png', {
       type: 'image/png'
     })
+    this.uploadProfile()
   }
 
   uploadProfile() {
@@ -91,10 +92,12 @@ export class AccountSettingComponent {
     this.service.upload(apiUrl, formData).subscribe(res => {
       if (res.success) {
         this.toastr.success(res.msg)
-        this.getUserInfo()
+        this.sidebar.getUserInfo()
         this.loading = false
         this.isEditable = false
-        this.sidebar.getUserInfo()
+        setTimeout(() => {
+          this.getUserInfo()
+        }, 1000);
       } else {
         // this.toastr.error(res.message)
         this.loading = false
@@ -134,11 +137,10 @@ export class AccountSettingComponent {
 
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
-        this.uploadProfile()
-        this.getUserInfo()
+        // this.uploadProfile()
+        this.sidebar.getUserInfo()
         this.isEditable = false
         this.loading = false
-
         // this.toastr.success(res.message)
       } else {
         this.loading = false

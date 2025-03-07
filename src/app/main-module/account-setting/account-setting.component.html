@@ -20,9 +20,9 @@
                   <form [formGroup]="updateInfoForm">
                         <div class="flex justify-center items-center">
                               <div class="relative">
-                                    <img [src]="userInfo?.profile_image ? userInfo?.profile_image : profile_img"
+                                    <img [src]="profile_img ? profile_img : userInfo?.profile_image ? userInfo?.profile_image : 'assets/images/profile_logo.jpg'"
                                           class="rounded-full border border-primary h-32 w-32"
-                                          (click)="vievImage(userInfo?.profile_image ? userInfo?.profile_image : profile_img)">
+                                          (click)="vievImage(profile_img ? profile_img : userInfo?.profile_image ? userInfo?.profile_image : 'assets/images/profile_logo.jpg')">
                                     <input type="file" #file class="hidden" id="edit_profile"
                                           formControlName="profile_img" (change)="fileChangeEvent($event)">
                                     <div *ngIf="isEditable"

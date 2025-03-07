@@ -63,18 +63,34 @@
                                                       <ng-container *ngIf="column.type === 'action'; else defaultCell">
                                                             <div class="flex items-center gap-2">
                                                                   <svg (click)="showDialog(row)" class="cursor-pointer"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="1.5em"
-                                                                        height="1.5em" viewBox="0 0 256 256">
-                                                                        <path fill="#f87c16"
-                                                                              d="M251 123.13c-.37-.81-9.13-20.26-28.48-39.61C196.63 57.67 164 44 128 44S59.37 57.67 33.51 83.52C14.16 102.87 5.4 122.32 5 123.13a12.08 12.08 0 0 0 0 9.75c.37.82 9.13 20.26 28.49 39.61C59.37 198.34 92 212 128 212s68.63-13.66 94.48-39.51c19.36-19.35 28.12-38.79 28.49-39.61a12.08 12.08 0 0 0 .03-9.75m-46.06 33C183.47 177.27 157.59 188 128 188s-55.47-10.73-76.91-31.88A130.4 130.4 0 0 1 29.52 128a130.5 130.5 0 0 1 21.57-28.11C72.54 78.73 98.41 68 128 68s55.46 10.73 76.91 31.89A130.4 130.4 0 0 1 226.48 128a130.5 130.5 0 0 1-21.57 28.12ZM128 84a44 44 0 1 0 44 44a44.05 44.05 0 0 0-44-44m0 64a20 20 0 1 1 20-20a20 20 0 0 1-20 20" />
+                                                                        xmlns="http://www.w3.org/2000/svg" width="1.3em"
+                                                                        height="1.3em" viewBox="0 0 24 24">
+                                                                        <g fill="none" stroke="currentColor"
+                                                                              stroke-linecap="round"
+                                                                              stroke-linejoin="round" stroke-width="1.5"
+                                                                              color="currentColor">
+                                                                              <path
+                                                                                    d="M20.016 2C18.903 2 18 4.686 18 8h2.016c.972 0 1.457 0 1.758-.335c.3-.336.248-.778.144-1.661C21.64 3.67 20.894 2 20.016 2" />
+                                                                              <path
+                                                                                    d="M18 8.054v10.592c0 1.511 0 2.267-.462 2.565c-.755.486-1.922-.534-2.509-.904c-.485-.306-.727-.458-.996-.467c-.291-.01-.538.137-1.062.467l-1.911 1.205c-.516.325-.773.488-1.06.488s-.545-.163-1.06-.488l-1.91-1.205c-.486-.306-.728-.458-.997-.467c-.291-.01-.538.137-1.062.467c-.587.37-1.754 1.39-2.51.904C2 20.913 2 20.158 2 18.646V8.054c0-2.854 0-4.28.879-5.167C3.757 2 5.172 2 8 2h12M6 6h8m-6 4H6" />
+                                                                              <path
+                                                                                    d="M12.5 10.875c-.828 0-1.5.588-1.5 1.313c0 .724.672 1.312 1.5 1.312s1.5.588 1.5 1.313c0 .724-.672 1.312-1.5 1.312m0-5.25c.653 0 1.209.365 1.415.875m-1.415-.875V10m0 6.125c-.653 0-1.209-.365-1.415-.875m1.415.875V17" />
+                                                                        </g>
                                                                   </svg>
                                                                   <svg (click)="requestDialog(row)"
                                                                         class="cursor-pointer"
-                                                                        title="Request For Certificate"
                                                                         xmlns="http://www.w3.org/2000/svg" width="1.5em"
-                                                                        height="1.5em" viewBox="0 0 24 24">
-                                                                        <path fill="currentColor"
-                                                                              d="M4 3c-1.11 0-2 .89-2 2v10a2 2 0 0 0 2 2h8v5l3-3l3 3v-5h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm8 2l3 2l3-2v3.5l3 1.5l-3 1.5V15l-3-2l-3 2v-3.5L9 10l3-1.5zM4 5h5v2H4zm0 4h3v2H4zm0 4h5v2H4z" />
+                                                                        height="1.5em" viewBox="0 0 48 48">
+                                                                        <path fill="none" stroke="currentColor"
+                                                                              stroke-linecap="round"
+                                                                              stroke-linejoin="round"
+                                                                              d="M31.5 27.604V16.5H20.396m11.104 0l-15 15"
+                                                                              stroke-width="2" />
+                                                                        <circle cx="24" cy="24" r="21.5" fill="none"
+                                                                              stroke="currentColor"
+                                                                              stroke-linecap="round"
+                                                                              stroke-linejoin="round"
+                                                                              stroke-width="2" />
                                                                   </svg>
                                                             </div>
                                                       </ng-container>

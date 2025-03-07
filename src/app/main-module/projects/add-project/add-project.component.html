@@ -205,10 +205,15 @@
                                           </div>
                                           <div class="grid gap-1 col-span-1">
                                                 <label class="text-xs text-[#454545] font-medium" for="">Country</label>
-                                                <input type="text" placeholder="Country" formControlName="country"
+                                                <select formControlName="country"
                                                       [ngClass]="projectBasicInfoForm.controls['country'].errors && projectBasicInfoForm.controls['country'].touched ? 'outline-red-600' : ''"
-                                                      (input)="getFlag($event)"
+                                                      (change)="getFlag($event)"
                                                       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent">
+                                                      <option value="">Select Country</option>
+                                                      @for (item of countries; track $index) {
+                                                      <option [value]="item.name">{{item.name}}</option>
+                                                      }
+                                                </select>
                                                 <p *ngIf="
                                                       projectBasicInfoForm.controls['country'].errors &&
                                                       projectBasicInfoForm.controls['country'].touched"
@@ -236,6 +241,7 @@
                                                 <div class="col-span-1">
                                                       <div class="flex gap-1 items-end h-full pb-3">
                                                             <input type="checkbox" class="h-4 w-4 accent-primary"
+                                                                  [checked]="projectInfo.area_in_acres  == projectInfo.area_in_hectars"
                                                                   (change)="onAreaUnitChecked($event)" id="remember"
                                                                   name="remember">
                                                             <label for="remember"
@@ -370,10 +376,21 @@
                                                 <label class="text-xs text-[#454545] font-medium" for="">Registry
                                                       details
                                                 </label>
-                                                <input type="text" placeholder="Enter project registry details"
+                                                <select
                                                       [ngClass]="projectDetailForm.controls['registry_details'].errors && projectDetailForm.controls['registry_details'].touched ? 'outline-red-600' : ''"
                                                       formControlName="registry_details"
                                                       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent">
+                                                      <option value="" disabled>Select</option>
+                                                      <option value="Verra or Verified Carbon Standard (VCS)">Verra or
+                                                            Verified
+                                                            Carbon Standard (VCS)</option>
+                                                      <option value="Gold Standard (GS)">Gold Standard (GS)</option>
+                                                      <option value="American Carbon Registry (ACR)">American Carbon
+                                                            Registry (ACR)
+                                                      </option>
+                                                      <option value="Climate Action Reserve (CAR)">Climate Action
+                                                            Reserve (CAR)</option>
+                                                </select>
                                                 <p *ngIf="
                                           projectDetailForm.controls['registry_details'].errors &&
                                           projectDetailForm.controls['registry_details'].touched"

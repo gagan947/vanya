@@ -57,7 +57,14 @@ export class AddCertificateComponent {
       this.role = res.role
     })
     this.data = this.dialogConfig.data
-
+    if (this.data) {
+      this.Form.patchValue({
+        project_id: this.data.order_id ? this.data.order_id : this.data.project_name,
+        carbon_credits: this.data.carbon_credits,
+        standard: this.data.standard,
+        issued_on_name: this.data.buyer_name,
+      })
+    }
   }
 
   fileChangeEvent(event: any): void {

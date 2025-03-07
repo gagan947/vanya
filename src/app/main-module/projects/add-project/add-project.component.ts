@@ -9,7 +9,8 @@ import { ProjectDataService } from 'src/app/services/project-data.service'
 import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
-import { dateRangeValidator, NoWhitespaceDirective, whiteSpaceValidator } from 'src/app/shared/validator'
+import { dateRangeValidator, NoWhitespaceDirective } from 'src/app/shared/validator'
+import { Country, State, City } from 'country-state-city'
 
 @Component({
   selector: 'app-add-project',
@@ -52,7 +53,7 @@ export class AddProjectComponent {
   projectInfo: any
   projectMedia: any
   pdfForUpload: any[] = []
-
+  countries: any[] = []
   editor!: Editor
   editor2!: Editor
   toolbar: Toolbar = [
@@ -103,6 +104,7 @@ export class AddProjectComponent {
   }
 
   ngOnInit() {
+    this.countries = Country.getAllCountries()
     this.editor = new Editor()
     this.editor2 = new Editor()
     this.inItForm()
@@ -219,7 +221,7 @@ export class AddProjectComponent {
       project_type: ['', Validators.required],
       sustainableDevelopmentGoals: ['', Validators.required],
       specificSDGTargets: [''],
-      country: ['', [Validators.required, whiteSpaceValidator.cannotContainSpace]],
+      country: ['', [Validators.required]],
       projectArea: ['', [Validators.required, Validators.min(0)]],
       location: ['', Validators.required],
       address: [''],
@@ -264,9 +266,7 @@ export class AddProjectComponent {
     formData.set('project_type', data.project_type[0].id)
     formData.set(
       'area_in_acres',
-      this.originalProjectArea
-        ? this.originalProjectArea!.toString()
-        : this.project_area!.toString()
+      this.originalProjectArea!.toString()
     )
     formData.set('area_in_hectars', this.project_area!.toString())
     formData.set('location', data.location)
@@ -406,6 +406,12 @@ export class AddProjectComponent {
               location: this.projectInfo.location,
               address: this.projectInfo.address
             })
+
+            if (this.projectInfo.area_in_acres == this.projectInfo.area_in_hectars) {
+              this.landUnit = 'hectares'
+            } else {
+              this.landUnit = 'acre'
+            }
 
             this.country = this.projectInfo.country
             this.flagUrl = findFlagUrlByCountryName(this.country)
@@ -696,18 +702,15 @@ export class AddProjectComponent {
   }
 
   onAreaUnitChecked(event: any) {
-    if (event.target.checked) {
-      if (this.originalProjectArea === undefined) {
-        this.originalProjectArea = this.project_area
-      }
-      this.landUnit = 'hectares'
-      this.project_area = this.originalProjectArea! * 0.404686
-    } else {
-      if (this.originalProjectArea !== undefined) {
-        this.project_area = this.originalProjectArea
-      }
-      this.landUnit = 'acre'
+    this.landUnit = event.target.checked ? 'hectares' : 'acre'
+
+    if (this.originalProjectArea === undefined) {
+      this.originalProjectArea = this.project_area
     }
+
+    this.project_area = event.target.checked
+      ? this.originalProjectArea! * 0.404686
+      : this.originalProjectArea
   }
 
   geoJsonOrKmlChange(event: any) {
@@ -756,7 +759,7 @@ export class AddProjectComponent {
     const secretKey = 'Vanya@321'
     const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey)
     const decryptedId = bytes.toString(CryptoJS.enc.Utf8)
-    return +decryptedId
+    return + decryptedId
   }
 
   ////////////////////////////// Preview Variables ///////////////////////////////////

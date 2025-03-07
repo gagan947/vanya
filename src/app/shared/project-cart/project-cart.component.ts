@@ -76,6 +76,7 @@ export class ProjectCartComponent {
   increment(item: any) {
     if (Number(item.carbon_credits) <= item.remaining_credit) {
       item.carbon_credits = Number(item.carbon_credits) + 1
+      console.log(this.cartItems);
 
       let apiUrl = 'cart/updateCart'
       let formData = new URLSearchParams()
@@ -103,6 +104,9 @@ export class ProjectCartComponent {
   decrement(item: any) {
     if (Number(item.carbon_credits) > 1) {
       item.carbon_credits = Number(item.carbon_credits) - 1
+
+      console.log(item);
+
 
       let apiUrl = 'cart/updateCart'
       let formData = new URLSearchParams()
@@ -173,7 +177,7 @@ export class ProjectCartComponent {
           carbon_credits: Number(project.carbon_credits),
           price_per_carbon_credit: Number(project.price_per_carbon_credit),
           amount: Number(
-            project.price_per_carbon_credit * project.carbon_credits
+            (project.price_per_carbon_credit * project.carbon_credits) + (project.price_per_carbon_credit * project.carbon_credits * 0.18)
           ),
           cart_id: project.id
         }))

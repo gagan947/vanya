@@ -15,6 +15,7 @@ export class LogInComponent {
   showPassword: boolean = false
   loading: boolean = false
   role: string | null | undefined
+  selectedRole: string
   constructor(
     private fb: FormBuilder,
     private toastr: NzMessageService,
@@ -22,6 +23,7 @@ export class LogInComponent {
     private router: Router,
     private shared: SharedService
   ) {
+    this.selectedRole = '2'
     this.logInForm = this.fb.group({
       email: [localStorage.getItem('savedEmail') || '', [Validators.required, Validators.email]],
       password: [localStorage.getItem('savedPassword') || '', [Validators.required]],
@@ -53,11 +55,9 @@ export class LogInComponent {
     let formData = new URLSearchParams();
     formData.set('email', form.value.email);
     formData.set('password', form.value.password);
-
     this.service.post(apiUrl, formData.toString()).subscribe((res: any) => {
       if (res.success && res.token) {
         this.service.setToken(res.token);
-
         switch (res.userinfo.role_id) {
           case 3:
             this.service.setRole('Approver');
@@ -70,6 +70,15 @@ export class LogInComponent {
           default:
             this.service.setRole('Buyer');
             this.router.navigate(['/main/dashboard/buyer']);
+        }
+        if (form.value.rememberMe) {
+          localStorage.setItem('savedEmail', form.value.email);
+          localStorage.setItem('savedPassword', form.value.password);
+          localStorage.setItem('rememberMe', 'true');
+        } else {
+          localStorage.removeItem('savedEmail');
+          localStorage.removeItem('savedPassword');
+          localStorage.removeItem('rememberMe');
         }
         this.toastr.success(res.message);
         this.loading = false;
@@ -90,6 +99,10 @@ export class LogInComponent {
       return 'Please enter a valid email address'
     }
     return ''
+  }
+
+  selectRole(role: string) {
+    this.selectedRole = role
   }
 }
 

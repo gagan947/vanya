@@ -8,6 +8,7 @@ body {
       touch-action: manipulation;
       -webkit-user-select: none;
       user-select: none;
+      overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -218,7 +219,7 @@ body {
 }
 
 .iti.iti--allow-dropdown {
-      height: 48px !important;
+      /* height: 48px !important; */
       width: 100% !important;
 }
 
@@ -242,5 +243,5 @@ video::-webkit-media-controls {
 }
 
 .iti__selected-flag {
-      height: 80% !important;
+      height: 100% !important;
 }

@@ -1,11 +1,12 @@
-<div id="right-panel" class="container mx-auto px-5">
-      <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Request For Certificate</h1>
-      <div class="p-5 px-5 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
+<div id="right-panel" class="container mx-auto p-5">
+      <!-- <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">Request For Certificate</h1> -->
+      <hr class="mb-4">
+      <div class="md:p-5 rounded-lg">
             <form [formGroup]="Form" (ngSubmit)="onSubmit(Form)" class="">
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Project</label>
-                              <input type="number" min="0"
+                              <input type="text" readonly
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                     [ngClass]="Form.controls['project_id'].errors &&
                           Form.controls['project_id'].touched ? 'outline-red-600' : ''" formControlName="project_id">
@@ -21,7 +22,7 @@
                         </div>
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Carbon Credits</label>
-                              <input type="number" min="0"
+                              <input type="number" min="0" readonly
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                     [ngClass]="Form.controls['carbon_credits'].errors &&
                                 Form.controls['carbon_credits'].touched ? 'outline-red-600' : ''"
@@ -39,7 +40,7 @@
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Standard</label>
                               <select
-                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
                                     [ngClass]="Form.controls['standard'].errors &&
                                   Form.controls['standard'].touched ? 'outline-red-600' : ''"
                                     formControlName="standard">
@@ -81,7 +82,7 @@
                         <div class="grid gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Company Logo</label>
                               <input type="file"
-                                    class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                    class="border border-gray-300 rounded-lg px-4 py-1 focus:outline outline-primary text-sm bg-transparent w-full"
                                     [ngClass]="Form.controls['certificate'].errors &&
                                   Form.controls['certificate'].touched ? 'outline-red-600' : ''"
                                     formControlName="certificate" (change)="fileChangeEvent($event)">
@@ -95,15 +96,13 @@
                                     </svg>
                               </p>
                         </div>
-                        <div class="mt-4">
-                              <div class="pt-2 flex gap-1 align-center">
-                                    <button type="reset"
-                                          class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 font-medium"
-                                          routerLink="/main/dashboard/certificate">Cancel</button>
-                                    <button type="submit"
-                                          class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium">Save</button>
-                              </div>
-                        </div>
+                  </div>
+                  <div class="pt-2 flex gap-1 align-center justify-end mt-5">
+                        <button type="reset"
+                              class="text-white bg-red-500 px-4 py-1 hover:bg-transparent hover:text-red-500 rounded-md border border-red-500 flex items-center space-x-2 font-medium"
+                              routerLink="/main/dashboard/credit-history">Cancel</button>
+                        <button type="submit"
+                              class="text-white bg-primary px-4 py-1 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium">Save</button>
                   </div>
             </form>
       </div>
