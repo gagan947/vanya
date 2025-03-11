@@ -110,12 +110,16 @@ export class SignUpComponent {
     formData.set('last_name', this.toTitleCase(form.value.lastName))
     formData.set('email', form.value.email)
     formData.set('password', form.value.password)
-    formData.set('company_name', form.value.companyName)
+    formData.set('company_name', form.value.companyName ? form.value.companyName : '')
     formData.set('city', form.value.city)
     formData.set('state', form.value.state)
     formData.set('country', form.value.country)
     formData.set('address', form.value.address)
     formData.set('phone_number', form.value.phone_number.number)
+    formData.set('gst_number', form.value.gst ? form.value.gst : '')
+    formData.set('license_number', form.value.licence ? form.value.licence : '')
+    formData.set('vat_number', form.value.vat ? form.value.vat : '')
+    formData.set('user_type', form.value.type)
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.toastr.success(res.message)

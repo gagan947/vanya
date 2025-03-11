@@ -18,6 +18,7 @@ import { ImagePreviewComponent } from './image-preview/image-preview.component'
 import { DynamicDialogModule } from 'primeng/dynamicdialog'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
 import { ProjectCartComponent } from './project-cart/project-cart.component'
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ProjectCartComponent } from './project-cart/project-cart.component'
     PaginatorModule,
     DynamicDialogModule,
     NgxIntlTelInputModule,
+    DropdownModule
   ],
   exports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { ProjectCartComponent } from './project-cart/project-cart.component'
     PaginatorModule,
     DynamicDialogModule,
     CartComponent,
-    NgxIntlTelInputModule
+    NgxIntlTelInputModule,
+    DropdownModule
   ]
 })
 export class SharedModule { }

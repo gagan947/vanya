@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -62,7 +62,7 @@ export class AddProjectComponent {
     ['code', 'blockquote'],
     ['ordered_list', 'bullet_list'],
     [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-    ['link', 'image'],
+    // ['link', 'image'],
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ]
@@ -86,6 +86,7 @@ export class AddProjectComponent {
   }
 
   nextPage() {
+    this.topElement.nativeElement.scrollIntoView({ behavior: 'smooth' });
     if (this.activeIndex === 2) {
       const formData = {
         ...this.projectBasicInfoForm.value,
@@ -99,7 +100,9 @@ export class AddProjectComponent {
     }
   }
 
+  @ViewChild('topElement') topElement!: ElementRef;
   prevPage() {
+    this.topElement.nativeElement.scrollIntoView({ behavior: 'smooth' });
     this.activeIndex--
   }
 
@@ -725,7 +728,7 @@ export class AddProjectComponent {
     this.allSelectedSdg =
       this.sdgsByProjectType =
       this.selectedSdg =
-      event.itemValue.sdgs
+      event.value.sdgs
   }
   onSdgSelect(_event: any) {
     this.allSelectedSdg = [...this.selectedSdg, ...this.selectedSpecificSdg]

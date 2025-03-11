@@ -1,5 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 <div id="right-panel" class="container mx-auto px-5">
+      <div #topElement></div>
       <h1 class="text-2xl text-[#2B2B2B] my-3 font-semibold">{{project_id ? 'Update' : 'Add'}} Project</h1>
       <div class="p-5 mt-5 bg-[#f9f9f9] rounded-lg shadow-md">
             <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex"
@@ -134,14 +135,22 @@
                                                 <!-- <input type="text" placeholder="Enter the heading of the project"
                                                       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                                       formControlName="project_description_heading"> -->
-                                                <p-multiSelect [options]="projectTypes" [(ngModel)]="selectedProType"
+                                                <p-dropdown [options]="projectTypes" [(ngModel)]="selectedProType"
+                                                      optionLabel="name" formControlName="project_type"
+                                                      name="selectedProType" panelStyleClass="bg-white py-1 shadow-xl"
+                                                      placeholder="Select a Project Type"
+                                                      styleClass="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                                      (onChange)="onProjectTypeSelect($event)" [filter]="false"
+                                                      optionLabel="type" />
+
+                                                <!-- <p-multiSelect [options]="projectTypes" [(ngModel)]="selectedProType"
                                                       formControlName="project_type" name="selectedProType"
                                                       panelStyleClass="bg-white py-1 shadow-xl"
                                                       defaultLabel="Select a Project Type"
                                                       [selectedItemsLabel]="'ellipsis'"
                                                       styleClass="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                                       (onChange)="onProjectTypeSelect($event)" [selectionLimit]="1"
-                                                      [filter]="false" optionLabel="type"></p-multiSelect>
+                                                      [filter]="false" optionLabel="type"></p-multiSelect> -->
                                                 <p *ngIf="
                                                       projectBasicInfoForm.controls['project_type'].errors &&
                                                       projectBasicInfoForm.controls['project_type'].touched"
@@ -209,7 +218,7 @@
                                                       [ngClass]="projectBasicInfoForm.controls['country'].errors && projectBasicInfoForm.controls['country'].touched ? 'outline-red-600' : ''"
                                                       (change)="getFlag($event)"
                                                       class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent">
-                                                      <option value="">Select Country</option>
+                                                      <option value="" disabled>Select Country</option>
                                                       @for (item of countries; track $index) {
                                                       <option [value]="item.name">{{item.name}}</option>
                                                       }
@@ -241,7 +250,7 @@
                                                 <div class="col-span-1">
                                                       <div class="flex gap-1 items-end h-full pb-3">
                                                             <input type="checkbox" class="h-4 w-4 accent-primary"
-                                                                  [checked]="projectInfo.area_in_acres  == projectInfo.area_in_hectars"
+                                                                  [checked]="projectInfo?.area_in_acres  == projectInfo?.area_in_hectars && project_id"
                                                                   (change)="onAreaUnitChecked($event)" id="remember"
                                                                   name="remember">
                                                             <label for="remember"
@@ -516,14 +525,22 @@
                                           <div class="grid gap-1 col-span-1">
                                                 <label class="text-xs text-[#454545] font-medium" for="">Current Phase
                                                 </label>
-                                                <p-multiSelect [options]="projectPhases" [(ngModel)]="selectedPhase"
+
+                                                <p-dropdown [options]="projectPhases" [(ngModel)]="selectedPhase"
+                                                      formControlName="current_phase"
+                                                      panelStyleClass="bg-white py-1 shadow-xl"
+                                                      placeholder="Select Project Phase"
+                                                      styleClass="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
+                                                      [filter]="false" optionLabel="name" />
+
+                                                <!-- <p-multiSelect [options]="projectPhases" [(ngModel)]="selectedPhase"
                                                       formControlName="current_phase"
                                                       panelStyleClass="bg-white py-1 shadow-xl"
                                                       defaultLabel="Select Project Phase"
                                                       [selectedItemsLabel]="'ellipsis'"
                                                       styleClass="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
                                                       [selectionLimit]="1" [filter]="false"
-                                                      optionLabel="name"></p-multiSelect>
+                                                      optionLabel="name"></p-multiSelect> -->
                                                 <p *ngIf="
                                                 projectDetailForm.controls['current_phase'].errors &&
                                                 projectDetailForm.controls['current_phase'].touched"
@@ -809,9 +826,9 @@
                                                 </div>
                                           </div>
                                     </div>
-                                    <div class="bg-gray-400 p-7 absolute bottom-0 w-full">
+                                    <div class="bg-gray-400 p-4 absolute bottom-0 w-full">
                                           <div class="container mx-auto">
-                                                <div class="flex justify-center space-x-1 flex-wrap">
+                                                <!-- <div class="flex justify-center space-x-1 flex-wrap">
                                                       <a
                                                             class="text-sm uppercase font-medium text-white px-3 py-1 hover:bg-primary rounded-full">Overview</a>
                                                       <a
@@ -823,11 +840,11 @@
                                                       <a
                                                             class="text-sm uppercase font-medium text-white px-3 py-1 hover:bg-primary rounded-full">Beyond
                                                             Carbon</a>
-                                                </div>
+                                                </div> -->
                                           </div>
                                     </div>
                               </div>
-                              <div class="container mx-auto mt-14">
+                              <div class="container mx-auto mt-12">
                                     <div class="grid grid-cols-1 md:grid-cols-6">
                                           <div class="md:col-span-5 col-span-1">
                                                 <div class="" id="overview">
@@ -901,7 +918,7 @@
                                                 </div>
                                           </div>
                                           <div class="md:col-span-1 col-span-6">
-                                                <div class="flex items-center md:pl-8 h-full">
+                                                <div class="flex items-center md:pl-4 h-full">
                                                       <div class="grid gap-1">
                                                             <p class="font-bold text-sm text-[#6b7e7b] uppercase">
                                                                   Registry</p>
@@ -920,7 +937,7 @@
                                           </div>
                                     </div>
                               </div>
-                              <div class="mt-14" id="gallery">
+                              <div class="mt-12" id="gallery">
                                     <ng-container *ngIf="images.length > 0">
                                           <p-galleria [value]="images" [numVisible]="1"
                                                 [(activeIndex)]="imageActiveIndex" [showThumbnails]="false"
@@ -1020,7 +1037,7 @@
                                           </div>
                                     </div>
                               </div>
-                              <div class="container mx-auto mt-16">
+                              <div class="container mx-auto mt-12">
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                                           <div class="col-span-1">
                                                 <ng-container *ngIf="project_brief_detail; else DefaultDescription">

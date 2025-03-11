@@ -117,11 +117,16 @@ body {
       @apply mr-2;
 }
 
-.p-multiselect-item {
+.p-dropdown-items-wrapper {
+      @apply scroll-px-52
+}
+
+.p-multiselect-item, .p-dropdown-item {
       @apply py-1 px-5 hover:bg-primary hover:text-white;
 }
 
-.p-multiselect-item.p-highlight {
+.p-multiselect-item.p-highlight,
+.p-dropdown-item.p-highlight {
       @apply bg-primary text-white;
 }
 
@@ -165,6 +170,10 @@ input[type="number"] {
       padding: 0 !important;
       color: #2b2b2b;
       font-size: smaller;
+}
+
+.NgxEditor__Popup {
+      left: 0;
 }
 
 .NgxEditor__Seperator {
@@ -244,4 +253,8 @@ video::-webkit-media-controls {
 
 .iti__selected-flag {
       height: 100% !important;
+}
+
+.p-dropdown-label.p-inputtext.p-placeholder {
+      @apply text-[#9ba3ad]
 }
