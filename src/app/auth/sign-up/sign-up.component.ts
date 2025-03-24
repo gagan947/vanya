@@ -20,7 +20,7 @@ export class SignUpComponent {
   cities: any
   countryCode: any
   selectedRole: string
-  type: string = 'individual'
+  type: number = 1
   role: string | null | undefined;
   SearchCountryField = SearchCountryField
   CountryISO = CountryISO;
@@ -46,7 +46,7 @@ export class SignUpComponent {
 
     this.selectedRole = '2'
     this.signUpForm = this.fb.group({
-      type: ['individual'],
+      type: [1],
       roll_id: [''],
       firstName: ['', [Validators.required, NoWhitespaceDirective.validate]],
       lastName: ['', [Validators.required, NoWhitespaceDirective.validate]],
@@ -116,9 +116,15 @@ export class SignUpComponent {
     formData.set('country', form.value.country)
     formData.set('address', form.value.address)
     formData.set('phone_number', form.value.phone_number.number)
-    formData.set('gst_number', form.value.gst ? form.value.gst : '')
-    formData.set('license_number', form.value.licence ? form.value.licence : '')
-    formData.set('vat_number', form.value.vat ? form.value.vat : '')
+    if (form.value.gst) {
+      formData.set('gst_number', form.value.gst)
+    }
+    if (form.value.licence) {
+      formData.set('license_number', form.value.licence)
+    }
+    if (form.value.vat) {
+      formData.set('vat_number', form.value.vat)
+    }
     formData.set('user_type', form.value.type)
     this.service.post(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {

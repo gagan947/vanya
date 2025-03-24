@@ -58,6 +58,7 @@ export class LogInComponent {
     this.service.post(apiUrl, formData.toString()).subscribe((res: any) => {
       if (res.success && res.token) {
         this.service.setToken(res.token);
+        localStorage.setItem('user', res.userinfo.id);
         switch (res.userinfo.role_id) {
           case 3:
             this.service.setRole('Approver');
@@ -87,9 +88,7 @@ export class LogInComponent {
         this.loading = false;
       }
     });
-
   }
-
 
   getErrorMessage(field: string) {
     const control = this.logInForm.controls[field]
@@ -110,7 +109,6 @@ export class LogInComponent {
 // this.service.post(apiUrl, formData.toString()).subscribe(res => {
 //   if (res.success && res.token) {
 //     this.service.setToken(res.token);
-
 //     this.shared.get('getUserRoleDetails').subscribe(res2 => {
 //       const roleType = res2.userRoles.role_type;
 //       const userId = res2.userRoles.id;

@@ -68,5 +68,4 @@ export class SharedService {
   setCartItems(items: any[]) {
     this._cartItems.set(items);
   }
-
 }

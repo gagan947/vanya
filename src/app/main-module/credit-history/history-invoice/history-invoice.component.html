@@ -150,12 +150,11 @@
             </div>
 
             <div class="mb-6 p-5 bg-[#f4f7fc]">
-                  <p class="text-[#2b2b2b]"><strong>Amount Received (in words):</strong> Ninety-four thousand four
-                        hundred and
-                        nine point four four</p>
-                  <p class="text-[#2b2b2b]"><strong>Tax Amount (in words):</strong> Fourteen thousand four hundred and
-                        one
-                        point four four</p>
+                  <p class="text-[#2b2b2b]"><strong>Amount Received (in words):</strong>
+                        {{ (invoiceData.amount + invoiceData.amount * 0.18) | numberToWords }}
+                  </p>
+                  <p class="text-[#2b2b2b]"><strong>Tax Amount (in words):</strong>
+                        {{invoiceData.amount * 0.18 | numberToWords}}</p>
             </div>
 
             <div class="text-gray-500 text-sm text-center border-t pt-4">

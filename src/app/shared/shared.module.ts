@@ -19,6 +19,7 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog'
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input'
 import { ProjectCartComponent } from './project-cart/project-cart.component'
 import { DropdownModule } from 'primeng/dropdown';
+import { NumberToWordsPipe } from './number-to-words.pipe'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DropdownModule } from 'primeng/dropdown';
     LoaderComponent,
     CartComponent,
     ImagePreviewComponent,
-    ProjectCartComponent
+    ProjectCartComponent,
+    NumberToWordsPipe
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,7 @@ import { DropdownModule } from 'primeng/dropdown';
     PaginatorModule,
     DynamicDialogModule,
     NgxIntlTelInputModule,
-    DropdownModule
+    DropdownModule,
   ],
   exports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { DropdownModule } from 'primeng/dropdown';
     DynamicDialogModule,
     CartComponent,
     NgxIntlTelInputModule,
-    DropdownModule
+    DropdownModule,
+    NumberToWordsPipe
   ]
 })
 export class SharedModule { }

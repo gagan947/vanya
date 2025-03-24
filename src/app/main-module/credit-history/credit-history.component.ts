@@ -70,9 +70,9 @@ export class CreditHistoryComponent {
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
-        { key: '', label: 'Order By' },
-        { key: '', label: 'Order To' },
-        { key: 'status', label: 'Status', type: 'status' },
+        { key: 'buyer_name', label: 'Order By' },
+        { key: 'seller_name', label: 'Order To' },
+        // { key: 'status', label: 'Status', type: 'status' },
         { key: 'created_at', label: 'Date', type: 'date' },
         { key: 'action', label: 'Action', type: 'action' }
       ];
@@ -107,6 +107,8 @@ export class CreditHistoryComponent {
     // formData.set('page', (this.page + 1).toString() )
     const user_id: any = localStorage.getItem('user')
     formData.set('user_id', user_id)
+    formData.set('page', (this.page + 1).toString())
+    formData.set('page_size', this.rows.toString())
 
     let apiUrl = ''
     if (this.role == 'Buyer') {
@@ -114,14 +116,14 @@ export class CreditHistoryComponent {
     } else if (this.role == 'Seller') {
       apiUrl = `cart/orderHistorySeller`
     } else {
-      apiUrl = `cart/orderHistory`
+      apiUrl = `cart/orderHistoryAdmin`
     }
 
     this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
       if (res.success) {
         this.loading = false
         this.HistoryData = res.sellerDetails ? res.sellerDetails : res.historyRes
-        // this.totalCount = res.count[0].total
+        this.totalCount = res.count
       } else {
         this.toastr.error(res.message)
         this.loading = false

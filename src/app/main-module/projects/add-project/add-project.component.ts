@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment'
 import * as CryptoJS from 'crypto-js'
 import { Editor, Toolbar } from 'ngx-editor'
 import { dateRangeValidator, NoWhitespaceDirective } from 'src/app/shared/validator'
-import { Country, State, City } from 'country-state-city'
+import { Country } from 'country-state-city'
 
 @Component({
   selector: 'app-add-project',
@@ -256,6 +256,7 @@ export class AddProjectComponent {
   }
 
   submitBasicForm(data: any) {
+
     let apiUrl = ''
     let formData = new URLSearchParams()
 
@@ -266,7 +267,7 @@ export class AddProjectComponent {
     formData.set('project_brief_detail', data.project_brief_detail)
     formData.set('country', data.country)
     formData.set('registry_details', data.registry_details)
-    formData.set('project_type', data.project_type[0].id)
+    formData.set('project_type', data.project_type.id)
     formData.set(
       'area_in_acres',
       this.originalProjectArea!.toString()
@@ -277,7 +278,7 @@ export class AddProjectComponent {
     formData.set('methodology', data.methodology)
     formData.set('credits', data.credits)
     formData.set('remaining_credit', data.remaining_credit)
-    formData.set('current_phase', data.current_phase[0].id)
+    formData.set('current_phase', data.current_phase.id)
     formData.set('verification_status', data.verification_status)
     formData.set('impact_metrics', data.impact_metrics)
     formData.set('local_benefits', data.local_benefits)
@@ -551,7 +552,6 @@ export class AddProjectComponent {
           const fileURL = environment.videoUrl + this.projectMedia.video_URL
           videoElement.src = fileURL
           videoElement.classList.remove('hidden')
-
           this.loading = false
         } else {
           this.loading = false

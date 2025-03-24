@@ -22,12 +22,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private route: Router) { }
   setToken(token: string) {
-    localStorage.setItem('token', token)
+    localStorage.setItem('VanyaToken', token)
     this.updateAuthState(true, this.getRole())
   }
 
   getToken() {
-    return localStorage.getItem('token')
+    return localStorage.getItem('VanyaToken')
   }
 
   setRole(role: string) {
@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token'),
+    localStorage.removeItem('VanyaToken'),
       localStorage.removeItem('role')
     this.updateAuthState(false, null)
     this.route.navigate(['/'])

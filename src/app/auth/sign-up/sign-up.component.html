@@ -28,12 +28,12 @@
                         <div class="flex gap-5">
                               <div class="flex items-center gap-2">
                                     <input type="radio" class="h-4 w-4 accent-primary" formControlName="type"
-                                          value="individual">
+                                          [value]="1">
                                     <label class="text-sm font-normal text-gray-700">As-individual</label>
                               </div>
                               <div class="flex items-center gap-2">
                                     <input type="radio" class="h-4 w-4 accent-primary" formControlName="type"
-                                          value="company">
+                                          [value]="2">
                                     <label class="text-sm font-normal text-gray-700">As-company</label>
                               </div>
                         </div>
@@ -173,7 +173,7 @@
                                     </svg>
                               </p>
                         </div>
-                        @if(type == 'company'){
+                        @if(type == 2){
                         <p class="text-md font-medium text-gray-700">Company Details</p>
                         <div class="grid gap-1">
                               <label class="text-sm text-gray-700">*Company</label>

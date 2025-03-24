@@ -40,7 +40,7 @@ export class AllUsersComponent {
       header: 'User Information',
       maximizable: true,
       dismissableMask: true,
-      styleClass: 'bg-white p-2 px-4 shadow-md md:w-[30rem] w-[22rem] rounded-lg',
+      styleClass: 'bg-white p-2 px-4 shadow-md md:w-[40rem] w-[22rem] rounded-lg',
     })
   }
 

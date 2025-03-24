@@ -28,4 +28,4 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     MainModuleModule
   ]
 })
-export class MarketplaceModule {}
+export class MarketplaceModule { }

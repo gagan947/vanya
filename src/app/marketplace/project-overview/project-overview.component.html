@@ -40,7 +40,9 @@
                               <p class="mb-2 text-gray-500" [innerHTML]="projectInfo?.project_short_desc">
                               </p>
 
-                              <h3><span class="text-2xl font-bold">₹7000</span> <span class="font-medium">
+                              <h3><span
+                                          class="text-2xl font-bold">{{projectInfo?.price_per_carbon_credit | currency:'INR'}}</span>
+                                    <span class="font-medium">
                                           per credit</span></h3>
                               <div class="mt-8 sm:gap-4 sm:items-center sm:flex grid gap-2">
                                     <a (click)="addToCart(projectInfo)" title=""
