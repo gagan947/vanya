@@ -2,4 +2,14 @@
       background: #fff;
       border: 1px solid #54a557;
       border-radius: 7px;
+      width: 228px;
+
+}
+
+select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: white;
+      padding: 8px;
 }

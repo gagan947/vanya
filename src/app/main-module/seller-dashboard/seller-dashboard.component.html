@@ -1,7 +1,9 @@
 <div class="min-h-screen p-6 ">
       <!-- Header -->
       <div class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-gray-800">Welcome, {{userInfo?.profile_name}}</h1>
+            <h1 class="text-2xl font-bold text-gray-800">Welcome,
+                  {{userInfo?.profile_name ? userInfo?.profile_name : userInfo?.first_name + ' ' + userInfo?.last_name}}
+            </h1>
             <div class="flex items-center gap-4">
                   <!-- <button
                         class="px-4 py-2 text-sm font-medium text-[#252525] rounded border border-[#CDCDCD] flex items-center gap-1 hover:bg-primary hover:text-white">
@@ -74,7 +76,8 @@
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">CO₂ Credits</h2>
                   <div class="flex items-baseline gap-1">
-                        <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.carbon_credits_sold}} T</p>
+                        <p class="text-3xl font-bold text-[#252525] mt-1">
+                              {{data?.carbon_credits_sold ? data?.carbon_credits_sold : 0}} T</p>
                         <!-- <p class="text-xs font-bold text-[#252525]">(₹3,20,000)</p> -->
                   </div>
             </div>
@@ -92,7 +95,8 @@
                         </div>
                   </div>
                   <h2 class="text-sm font-semibold text-[#252525] mt-3">Revenue</h2>
-                  <p class="text-3xl font-bold text-[#252525] mt-1">{{data?.revenue | currency:'INR'}}</p>
+                  <p class="text-3xl font-bold text-[#252525] mt-1">
+                        {{data?.revenue ? data?.revenue : 0 | currency:'INR'}}</p>
             </div>
       </div>
 

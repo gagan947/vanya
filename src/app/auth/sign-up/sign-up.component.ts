@@ -20,7 +20,7 @@ export class SignUpComponent {
   cities: any
   countryCode: any
   selectedRole: string
-  type: number = 1
+  type: string = 'I'
   role: string | null | undefined;
   SearchCountryField = SearchCountryField
   CountryISO = CountryISO;
@@ -46,7 +46,7 @@ export class SignUpComponent {
 
     this.selectedRole = '2'
     this.signUpForm = this.fb.group({
-      type: [1],
+      type: ['I'],
       roll_id: [''],
       firstName: ['', [Validators.required, NoWhitespaceDirective.validate]],
       lastName: ['', [Validators.required, NoWhitespaceDirective.validate]],
@@ -79,11 +79,11 @@ export class SignUpComponent {
     });
   }
 
-  setCompanyValidators(type: string) {
+  setCompanyValidators(type: number) {
     const companyName = this.signUpForm.get('companyName');
     const gst = this.signUpForm.get('gst');
     const vat = this.signUpForm.get('vat');
-    if (type === 'company') {
+    if (type === 2) {
       companyName?.setValidators([Validators.required, NoWhitespaceDirective.validate]);
       gst?.setValidators(gstValidator());
       // vat?.setValidators();
@@ -110,7 +110,9 @@ export class SignUpComponent {
     formData.set('last_name', this.toTitleCase(form.value.lastName))
     formData.set('email', form.value.email)
     formData.set('password', form.value.password)
-    formData.set('company_name', form.value.companyName ? form.value.companyName : '')
+    if (form.value.companyName) {
+      formData.set('company_name', form.value.companyName)
+    }
     formData.set('city', form.value.city)
     formData.set('state', form.value.state)
     formData.set('country', form.value.country)

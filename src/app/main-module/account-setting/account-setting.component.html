@@ -46,14 +46,13 @@
                                           ? 'Edit' : 'Register'}}</button>
                               </ng-container>
                               <ng-container *ngIf="isEditable">
-                                    <button [disabled]="updateInfoForm.invalid" (click)="updateInfo()"
-                                          [ngClass]="updateInfoForm.invalid ? 'cursor-not-allowed':'cursor-pointer'"
+                                    <button (click)="updateInfo()"
                                           class="bg-primary border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Save</button>
                               </ng-container>
                         </div>
                         <div class="mt-5">
                               <div class="flex items-center gap-3">
-                                    <p class="font-medium text-gray-400 w-2/5">Profile Name</p>
+                                    <p class="font-medium text-gray-400 md:w-2/5">Profile Name</p>
                                     <input type="text"
                                           class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                           formControlName="profile_name" [ngClass]="isEditable ? 'editable' : ''"
@@ -66,9 +65,62 @@
                                     </p>
                               </div>
                               <div class="my-4 grid space-y-2">
-                                    <p class="font-medium text-base text-[#1C1C1C] my-4">Address</p>
+                                    <p class="font-medium text-base text-[#1C1C1C] my-4">Address Detail</p>
                                     <div class="flex items-center gap-3 ">
-                                          <p class="font-medium text-gray-400 w-2/5">Street</p>
+                                          <p class="font-medium text-gray-400 md:w-2/5">Country</p>
+                                          <select type="text"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="country" [ngClass]="isEditable ? 'editable' : ''"
+                                                [disabled]="!isEditable" (change)="getStates($event)">
+                                                <option value='' disabled>Select Country</option>
+                                                <option *ngFor="let country of countries" [value]="country.isoCode">
+                                                      {{country.name}}
+                                                </option>
+                                          </select>
+                                          <p *ngIf="
+                                                updateInfoForm.controls['country'].errors &&
+                                                updateInfoForm.controls['country'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('country') }}
+                                          </p>
+                                    </div>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 md:w-2/5">State</p>
+                                          <select
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="state" [ngClass]="isEditable ? 'editable' : ''"
+                                                [disabled]="!isEditable" (change)="getCities($event)">
+                                                <option [value]="''" disabled>Select State</option>
+                                                <option *ngFor="let state of states" [value]="state.isoCode">
+                                                      {{state.name}}
+                                                </option>
+                                          </select>
+                                          <p *ngIf="
+                                                updateInfoForm.controls['state'].errors &&
+                                                updateInfoForm.controls['state'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('state') }}
+                                          </p>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                          <p class="font-medium text-gray-400 md:w-2/5">City</p>
+                                          <select
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="city" [ngClass]="isEditable ? 'editable' : ''"
+                                                [disabled]="!isEditable">
+                                                <option [value]="''" disabled>Select City</option>
+                                                <option *ngFor="let city of cities" [value]="city.name">{{city.name}}
+                                                </option>
+                                          </select>
+                                          <p *ngIf="
+                                                updateInfoForm.controls['city'].errors &&
+                                                updateInfoForm.controls['city'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('city') }}
+                                          </p>
+                                    </div>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 md:w-2/5">Street</p>
                                           <input type="text"
                                                 class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
                                                 formControlName="address" [ngClass]="isEditable ? 'editable' : ''"
@@ -80,46 +132,8 @@
                                                 {{ getErrorMessage('address') }}
                                           </p>
                                     </div>
-                                    <div class="flex items-center gap-3">
-                                          <p class="font-medium text-gray-400 w-2/5">City</p>
-                                          <input type="text"
-                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
-                                                formControlName="city" [ngClass]="isEditable ? 'editable' : ''"
-                                                [readonly]="!isEditable">
-                                          <p *ngIf="
-                                                updateInfoForm.controls['city'].errors &&
-                                                updateInfoForm.controls['city'].touched
-                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
-                                                {{ getErrorMessage('city') }}
-                                          </p>
-                                    </div>
-                                    <div class="flex items-center gap-3 ">
-                                          <p class="font-medium text-gray-400 w-2/5">State</p>
-                                          <input type="text"
-                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
-                                                formControlName="state" [ngClass]="isEditable ? 'editable' : ''"
-                                                [readonly]="!isEditable">
-                                          <p *ngIf="
-                                                updateInfoForm.controls['state'].errors &&
-                                                updateInfoForm.controls['state'].touched
-                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
-                                                {{ getErrorMessage('state') }}
-                                          </p>
-                                    </div>
-                                    <div class="flex items-center gap-3 ">
-                                          <p class="font-medium text-gray-400 w-2/5">Country</p>
-                                          <input type="text"
-                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
-                                                formControlName="country" [ngClass]="isEditable ? 'editable' : ''"
-                                                [readonly]="!isEditable">
-                                          <p *ngIf="
-                                                updateInfoForm.controls['country'].errors &&
-                                                updateInfoForm.controls['country'].touched
-                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
-                                                {{ getErrorMessage('country') }}
-                                          </p>
-                                    </div>
                               </div>
+                              @if(type === 'I'){
                               <div class="grid md:grid-cols-2 grid-cols-1 gap-x-10">
                                     <div class="">
                                           <p class="text-sm font-normal text-gray-400">
@@ -130,7 +144,7 @@
                                           </p>
                                     </div>
                                     <div class="flex justify-end items-center">
-                                          <a
+                                          <button (click)="type = 'C'; isEditable2 = true"
                                                 class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary hover:text-white flex items-center space-x-2 cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em"
                                                       viewBox="0 0 24 24">
@@ -139,21 +153,96 @@
                                                 </svg>
                                                 Upgrade
                                                 to Business
-                                                Account</a>
+                                                Account</button>
                                     </div>
                                     <!-- <div class="my-4 md:col-span-2">
-                                          <p class="font-medium text-base text-[#1C1C1C] my-4">Banking Account</p>
-                                    </div>
-                                    <div class="md:col-span-2 flex justify-end items-center">
-                                          <a
-                                                class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary hover:text-white flex items-center space-x-2 cursor-pointer">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
-                                                      viewBox="0 0 24 24">
-                                                      <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
-                                                </svg>Add banking account
-                                          </a>
-                                    </div> -->
+                                                <p class="font-medium text-base text-[#1C1C1C] my-4">Banking Account</p>
+                                          </div>
+                                          <div class="md:col-span-2 flex justify-end items-center">
+                                                <a
+                                                      class="border rounded-lg text-sm font-medium border-primary text-primary py-1 px-4 hover:bg-primary hover:text-white flex items-center space-x-2 cursor-pointer">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em"
+                                                            viewBox="0 0 24 24">
+                                                            <path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z" />
+                                                      </svg>Add banking account
+                                                </a>
+                                          </div> -->
                               </div>
+                              }
+                              @if(type === 'C'){
+                              <div class="my-4 grid space-y-2">
+                                    <div class="flex justify-between items-center mt-5">
+                                          <p class="font-medium text-base text-[#1C1C1C]">Company Details</p>
+                                          <ng-container *ngIf="!isEditable2">
+                                                <button (click)="isEditable2 = true"
+                                                      class="bg-primary border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Edit</button>
+                                          </ng-container>
+                                          <ng-container *ngIf="isEditable2">
+                                                <button (click)="updateCompanyInfo()"
+                                                      class="bg-primary border border-primary hover:bg-transparent hover:text-primary rounded text-sm py-1 px-3 text-white">Save</button>
+                                          </ng-container>
+                                    </div>
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 md:w-2/5">Company Name</p>
+                                          <input type="text"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="companyName" [ngClass]="isEditable2 ? 'editable' : ''"
+                                                [readonly]="!isEditable2"
+                                                [placeholder]="isEditable2 ? 'Enter Company Name' : ''">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['companyName'].errors &&
+                                                updateInfoForm.controls['companyName'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('companyName') }}
+                                          </p>
+                                    </div>
+                                    @if(selectedCountry == 'in'){
+                                    <div class="flex items-center gap-3">
+                                          <p class="font-medium text-gray-400 md:w-2/5">GST</p>
+                                          <input type="text"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="gst" [ngClass]="isEditable2 ? 'editable' : ''"
+                                                [readonly]="!isEditable2"
+                                                [placeholder]="isEditable2 ? 'Enter GST Number' : ''">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['gst'].errors &&
+                                                updateInfoForm.controls['gst'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('gst') }}
+                                          </p>
+                                    </div>
+                                    } @else {
+                                    <div class="flex items-center gap-3">
+                                          <p class="font-medium text-gray-400 md:w-2/5">VAT</p>
+                                          <input type="text"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="vat" [ngClass]="isEditable2 ? 'editable' : ''"
+                                                [readonly]="!isEditable2"
+                                                [placeholder]="isEditable2 ? 'Enter VAT Number' : ''">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['vat'].errors &&
+                                                updateInfoForm.controls['vat'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('vat') }}
+                                          </p>
+                                    </div>
+                                    }
+                                    <div class="flex items-center gap-3 ">
+                                          <p class="font-medium text-gray-400 md:w-2/5">Licence</p>
+                                          <input type="text"
+                                                class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                                formControlName="licence" [ngClass]="isEditable2 ? 'editable' : ''"
+                                                [readonly]="!isEditable2"
+                                                [placeholder]="isEditable2 ? 'Enter Licence Number' : ''">
+                                          <p *ngIf="
+                                                updateInfoForm.controls['licence'].errors &&
+                                                updateInfoForm.controls['licence'].touched
+                                              " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                                {{ getErrorMessage('licence') }}
+                                          </p>
+                                    </div>
+                              </div>
+                              }
                         </div>
                         <p-dialog styleClass="bg-white p-2 rounded-lg shadow-md w-[22rem] md:w-[25rem]" [modal]="true"
                               [(visible)]="visible">

@@ -23,21 +23,23 @@
                 userData?.country }}</p>
         </div>
         <div>
+            @if(userData?.company_name && userData?.company_name !== 'undefined'){
             <h2 class="text-lg font-semibold text-gray-700">Company Detail</h2>
             <p class="mt-1 text-sm text-gray-700"><span class="font-medium">Company Name : </span>
                 {{ userData?.company_name }}
             </p>
-            @if(userData?.gst_number){
+            }
+            @if(userData?.gst_number && userData?.gst_number !== 'undefined'){
             <p class="mt-1 text-sm text-gray-700"><span class="font-medium">GST Number: </span>
                 {{ userData?.gst_number }}
             </p>
             }
-            @if(userData?.license_number){
+            @if(userData?.license_number && userData?.license_number !== 'undefined'){
             <p class="mt-1 text-sm text-gray-700"><span class="font-medium">License Number : </span>
                 {{ userData?.license_number }}
             </p>
             }
-            @if(userData?.vat_number){
+            @if(userData?.vat_number && userData?.vat_number !== 'undefined'){
             <p class="mt-1 text-sm text-gray-700"><span class="font-medium">VAT Number : </span>
                 {{ userData?.vat_number }}
             </p>

@@ -193,7 +193,30 @@ export class ProjectOverviewComponent {
         }
       })
     } else {
-      this.toastr.error('Project is already in your cart')
+
+      const item = this.cartItems.find((project: { project_id: number }) => project.project_id === pro_data.id)
+      item.carbon_credits = Number(item.carbon_credits) + this.value
+
+      let apiUrl = 'cart/updateCart'
+      let formData = new URLSearchParams()
+      formData.set('project_id', item.project_id)
+      formData.set('carbon_credits', item.carbon_credits)
+      formData.set('price_per_carbon_credit', '2000')
+      formData.set('total_price_of_project', '1000')
+      formData.set('cart_id', item.id)
+
+      this.service.postWithToken(apiUrl, formData).subscribe({
+        next: async res => {
+          if (res.success === true) {
+            this.loading = false
+          } else {
+            this.loading = false
+          }
+        },
+        error: err => {
+          this.loading = false
+        }
+      })
     }
   }
 

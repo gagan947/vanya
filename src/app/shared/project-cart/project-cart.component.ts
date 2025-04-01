@@ -104,7 +104,6 @@ export class ProjectCartComponent {
   decrement(item: any) {
     if (Number(item.carbon_credits) > 1) {
       item.carbon_credits = Number(item.carbon_credits) - 1
-
       let apiUrl = 'cart/updateCart'
       let formData = new URLSearchParams()
       formData.set('project_id', item.project_id)

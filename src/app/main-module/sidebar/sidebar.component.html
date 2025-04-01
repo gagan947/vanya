@@ -45,7 +45,7 @@
                               <div>
                                     <p [ngClass]="isSidebarShow ? 'block':'hidden'"
                                           class="font-bold text-md text-[#121111] whitespace-nowrap max-w-24 overflow-hidden text-ellipsis">
-                                          {{userInfo?.profile_name}}
+                                          {{userInfo?.profile_name ? userInfo?.profile_name : userInfo?.first_name + ' ' + userInfo?.last_name}}
                                     </p>
                                     <p [ngClass]="isSidebarShow ? 'block':'hidden'" class="text-xs">{{role}}</p>
                               </div>

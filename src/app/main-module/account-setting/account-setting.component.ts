@@ -8,7 +8,8 @@ import { ImageCroppedEvent } from 'ngx-image-cropper'
 import { SidebarComponent } from '../sidebar/sidebar.component'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { ImagePreviewComponent } from 'src/app/shared/image-preview/image-preview.component'
-import { NoWhitespaceDirective } from 'src/app/shared/validator'
+import { gstValidator, NoWhitespaceDirective } from 'src/app/shared/validator'
+import { CountryISO } from 'ngx-intl-tel-input';
 
 @Component({
   selector: 'app-account-setting',
@@ -22,6 +23,7 @@ export class AccountSettingComponent {
   imageChangedEvent: any = ''
   croppedImage: any = ''
   isEditable: boolean = false
+  isEditable2: boolean = false
   countries: any
   states: any
   cities: any
@@ -31,6 +33,8 @@ export class AccountSettingComponent {
   loading: boolean = false
   file: any
   ref: DynamicDialogRef | undefined
+  type: string = 'I';
+  selectedCountry = CountryISO.India
 
   constructor(
     private _location: Location,
@@ -40,12 +44,37 @@ export class AccountSettingComponent {
     private sidebar: SidebarComponent,
     private dialogService: DialogService
   ) {
+    this.createForm()
   }
 
   ngOnInit() {
     this.countries = Country.getAllCountries()
-    this.createForm()
     this.getUserInfo()
+    if (this.type === 'C') {
+      this.setCompanyValidators(this.type)
+    }
+    this.updateInfoForm.get('country')?.valueChanges.subscribe((isoCode) => {
+      let countryName = this.countries.find((country: { isoCode: any; }) => country.isoCode === isoCode).name
+      this.selectedCountry = CountryISO[countryName as keyof typeof CountryISO]
+    });
+  }
+
+  setCompanyValidators(type: string) {
+    const companyName = this.updateInfoForm.get('companyName');
+    const gst = this.updateInfoForm.get('gst');
+    const vat = this.updateInfoForm.get('vat');
+    if (type === 'C') {
+      companyName?.setValidators([Validators.required, NoWhitespaceDirective.validate]);
+      gst?.setValidators(gstValidator());
+      // vat?.setValidators();
+    } else {
+      companyName?.clearValidators();
+      gst?.clearValidators();
+      // vat?.clearValidators();
+    }
+    companyName?.updateValueAndValidity();
+    gst?.updateValueAndValidity();
+    // vat?.updateValueAndValidity();
   }
 
   back() {
@@ -56,11 +85,16 @@ export class AccountSettingComponent {
     this.updateInfoForm = this.fb.group({
       user_id: [''],
       profile_name: ['', [Validators.required, Validators.maxLength(30), NoWhitespaceDirective.validate]],
-      address: ['', [Validators.maxLength(100)]],
+      address: ['', [Validators.required, Validators.maxLength(100)]],
       city: ['', [Validators.maxLength(20)]],
       state: ['', [Validators.maxLength(20)]],
       country: ['', [Validators.maxLength(20)]],
-      profile_img: ['']
+      profile_img: [''],
+      companyName: ['', Validators.required],
+      gst: [''],
+      vat: [''],
+      licence: [''],
+      type: [''],
     })
   }
 
@@ -149,17 +183,59 @@ export class AccountSettingComponent {
     })
   }
 
+  updateCompanyInfo() {
+    // advanceIndividualToCorporate
+    this.loading = true
+    let formData = new URLSearchParams()
+
+    if (this.updateInfoForm.get('gst')!.value) {
+      formData.set('gst_number', this.updateInfoForm.get('gst')!.value)
+    }
+
+    if (this.updateInfoForm.get('licence')!.value) {
+      formData.set('license_number', this.updateInfoForm.get('licence')!.value)
+    }
+    if (this.updateInfoForm.get('vat')!.value) {
+      formData.set('vat_number', this.updateInfoForm.get('vat')!.value)
+    }
+    formData.set('user_type', this.type)
+    formData.set('company_name', this.updateInfoForm.get('companyName')!.value)
+
+    let apiUrl = 'advanceIndividualToCorporate'
+
+    this.service.postWithToken(apiUrl, formData.toString()).subscribe(res => {
+      if (res.success) {
+        // this.uploadProfile()
+        this.sidebar.getUserInfo()
+        this.isEditable2 = false
+        this.loading = false
+        this.toastr.success(res.message)
+      } else {
+        this.loading = false
+        this.toastr.error(res.message)
+      }
+    })
+  }
+
   getUserInfo() {
     let data: any = localStorage.getItem('userInfo')
     this.userInfo = JSON.parse(data)
     if (this.userInfo) {
+      this.type = this.userInfo.user_type
+      this.countryCode = this.userInfo.country
+      this.getStates({ target: { value: this.userInfo.country } })
+      this.getCities({ target: { value: this.userInfo.state } })
       this.updateInfoForm.patchValue({
         user_id: this.userInfo.user_id,
-        profile_name: this.userInfo.profile_name,
+        profile_name: this.userInfo.profile_name ? this.userInfo.profile_name : this.userInfo.first_name + ' ' + this.userInfo.last_name,
         address: this.userInfo.address,
         state: this.userInfo.state,
         city: this.userInfo.city,
-        country: this.userInfo.country
+        country: this.userInfo.country,
+        companyName: this.userInfo.company_name !== 'undefined' ? this.userInfo.company_name : '',
+        gst: this.userInfo.gst_number !== 'undefined' ? this.userInfo.gst_number : '',
+        vat: this.userInfo.vat_number !== 'undefined' ? this.userInfo.vat_number : '',
+        licence: this.userInfo.license_number !== 'undefined' ? this.userInfo.license_number : '',
       })
     }
   }
@@ -181,6 +257,8 @@ export class AccountSettingComponent {
     } else if (control.hasError('maxlength')) {
       return `this field must be only ${control.getError('maxlength').requiredLength
         } characters long`
+    } else if (control.hasError('invalidGST')) {
+      return `Invalid GST number format.`
     }
     return ''
   }
