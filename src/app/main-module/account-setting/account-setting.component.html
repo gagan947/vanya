@@ -20,9 +20,9 @@
                   <form [formGroup]="updateInfoForm">
                         <div class="flex justify-center items-center">
                               <div class="relative">
-                                    <img [src]="profile_img ? profile_img : userInfo?.profile_image ? userInfo?.profile_image : 'assets/images/profile_logo.jpg'"
+                                    <img [src]="profile_img ? profile_img : userInfo?.profile_image && userInfo?.profile_image !== '0' ? baseUrl + userInfo?.profile_image : 'assets/images/profile_logo.jpg'"
                                           class="rounded-full border border-primary h-32 w-32"
-                                          (click)="vievImage(profile_img ? profile_img : userInfo?.profile_image ? userInfo?.profile_image : 'assets/images/profile_logo.jpg')">
+                                          (click)="vievImage(profile_img ? profile_img : userInfo?.profile_image && userInfo?.profile_image !== '0' ? baseUrl + userInfo?.profile_image  : 'assets/images/profile_logo.jpg')">
                                     <input type="file" #file class="hidden" id="edit_profile"
                                           formControlName="profile_img" (change)="fileChangeEvent($event)">
                                     <div *ngIf="isEditable"
@@ -51,17 +51,30 @@
                               </ng-container>
                         </div>
                         <div class="mt-5">
-                              <div class="flex items-center gap-3">
-                                    <p class="font-medium text-gray-400 md:w-2/5">Profile Name</p>
+                              <div class="flex items-center gap-3 mb-2">
+                                    <p class="font-medium text-gray-400 md:w-2/5">First Name</p>
                                     <input type="text"
                                           class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
-                                          formControlName="profile_name" [ngClass]="isEditable ? 'editable' : ''"
+                                          formControlName="first_name" [ngClass]="isEditable ? 'editable' : ''"
                                           [readonly]="!isEditable">
                                     <p *ngIf="
-                                          updateInfoForm.controls['profile_name'].errors &&
-                                          updateInfoForm.controls['profile_name'].touched
+                                          updateInfoForm.controls['first_name'].errors &&
+                                          updateInfoForm.controls['first_name'].touched
                                         " class="flex text-xs text-red-600 justify-between items-center mt-2">
-                                          {{ getErrorMessage('profile_name') }}
+                                          {{ getErrorMessage('first_name') }}
+                                    </p>
+                              </div>
+                              <div class="flex items-center gap-3">
+                                    <p class="font-medium text-gray-400 md:w-2/5">Last Name</p>
+                                    <input type="text"
+                                          class="form-control py-1 px-2 bg-transparent outline-none text-sm font-medium text-[#1C1C1C]"
+                                          formControlName="last_name" [ngClass]="isEditable ? 'editable' : ''"
+                                          [readonly]="!isEditable">
+                                    <p *ngIf="
+                                          updateInfoForm.controls['last_name'].errors &&
+                                          updateInfoForm.controls['last_name'].touched
+                                        " class="flex text-xs text-red-600 justify-between items-center mt-2">
+                                          {{ getErrorMessage('last_name') }}
                                     </p>
                               </div>
                               <div class="my-4 grid space-y-2">

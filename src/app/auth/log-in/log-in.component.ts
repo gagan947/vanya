@@ -63,14 +63,20 @@ export class LogInComponent {
           case 3:
             this.service.setRole('Approver');
             this.router.navigate(['/main/dashboard/admin']);
+            this.toastr.success(res.message);
+            this.loading = false;
             break;
           case 1:
             this.service.setRole('Seller');
             this.router.navigate(['/main/dashboard/seller']);
+            this.toastr.success(res.message);
+            this.loading = false;
             break;
           default:
             this.service.setRole('Buyer');
             this.router.navigate(['/main/dashboard/buyer']);
+            this.toastr.success(res.message);
+            this.loading = false;
         }
         if (form.value.rememberMe) {
           localStorage.setItem('savedEmail', form.value.email);
@@ -81,8 +87,6 @@ export class LogInComponent {
           localStorage.removeItem('savedPassword');
           localStorage.removeItem('rememberMe');
         }
-        this.toastr.success(res.message);
-        this.loading = false;
       } else {
         this.toastr.error(res.message);
         this.loading = false;

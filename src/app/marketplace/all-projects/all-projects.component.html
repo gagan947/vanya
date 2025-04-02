@@ -28,19 +28,21 @@
                                     </p>
                               </div>
                               <div class="flex justify-between items-center">
-                                    <p class="flex items-center text-gray-400"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="1em" height="1em" viewBox="0 0 256 256">
+                                    <p class="flex items-center text-gray-400 gap-1">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                                viewBox="0 0 256 256">
                                                 <path fill="currentColor"
                                                       d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m0 192a88 88 0 1 1 88-88a88.1 88.1 0 0 1-88 88m64-88a8 8 0 0 1-8 8h-56a8 8 0 0 1-8-8V72a8 8 0 0 1 16 0v48h48a8 8 0 0 1 8 8" />
                                           </svg>
-                                          <span class="font-normal text-sm">Lasts 100+ years</span>
+                                          <span class="font-normal text-sm"> Remaining Credits</span>
                                     </p>
-                                    <p class="flex items-center text-gray-400"><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                                    <p class="flex items-center text-gray-400 gap-1"><svg
+                                                xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em"
+                                                viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                       d="M3 19V5h18v14zm1-1h16V6H4zm0 0V6zm4.5-1.5h1v-1h1.23q.328 0 .549-.221t.221-.548v-2.462q0-.327-.221-.548t-.548-.221H7.5v-2h4v-1h-2v-1h-1v1H7.27q-.328 0-.549.221T6.5 9.27v2.462q0 .327.221.548t.548.221H10.5v2h-4v1h2zm7.5-.52l1.539-1.538H14.46zm-1.538-6.172h3.077L16 8.269z" />
                                           </svg>
-                                          <span class="font-normal text-sm">Price not available</span>
+                                          <span class="font-normal text-sm">{{project.remaining_credit}} tCO₂e</span>
                                     </p>
                               </div>
                         </div>
@@ -52,10 +54,17 @@
                                           d="M17 9V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2c-1.7 0-3 1.3-3 3v7c0 1.7 1.3 3 3 3h10c1.7 0 3-1.3 3-3v-7c0-1.7-1.3-3-3-3M9 7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9z" />
                               </svg>
                         </div> -->
+                        @if(project.remaining_credit > 0) {
                         <div
                               class="flex justify-between items-center bg-primary text-white text-base font-medium p-2 rounded-lg">
                               <span>Available</span>
                         </div>
+                        } @else {
+                        <div
+                              class="flex justify-between items-center bg-red-500 text-white text-base font-medium p-2 rounded-lg">
+                              <span>Unavailable</span>
+                        </div>
+                        }
                   </div>
             </ng-container>
             } @else {

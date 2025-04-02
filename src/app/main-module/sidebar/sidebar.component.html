@@ -40,7 +40,7 @@
                   <div class="shadow-md p-2 rounded-lg absolute bottom-5 border"
                         [ngClass]="isSidebarShow ? 'left-5':'left-2'" #targetEl>
                         <div class="flex space-x-2 items-center" (click)="op.show($event,targetEl)">
-                              <img [src]="userInfo?.profile_image ? userInfo?.profile_image : imageUrl"
+                              <img [src]="userInfo?.profile_image && userInfo?.profile_image !== '0' ? baseUrl + userInfo?.profile_image : imageUrl"
                                     class="h-10 w-10 rounded-full border border-primary">
                               <div>
                                     <p [ngClass]="isSidebarShow ? 'block':'hidden'"

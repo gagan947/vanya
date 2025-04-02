@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { AuthService } from 'src/app/services/auth.service'
 import { SharedService } from 'src/app/services/shared.service'
 import { SidebarDataService } from 'src/app/services/sidebar-data.service'
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,7 @@ export class SidebarComponent {
   isSidebarShow: boolean = true
   sidebarItems: any
   role: string | null | undefined
-
+  baseUrl = environment.imgUrl
   constructor(
     private service: SharedService,
     public authService: AuthService,

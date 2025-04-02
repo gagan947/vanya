@@ -10,6 +10,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog'
 import { ImagePreviewComponent } from 'src/app/shared/image-preview/image-preview.component'
 import { gstValidator, NoWhitespaceDirective } from 'src/app/shared/validator'
 import { CountryISO } from 'ngx-intl-tel-input';
+import { environment } from 'src/environments/environment'
 
 @Component({
   selector: 'app-account-setting',
@@ -35,6 +36,7 @@ export class AccountSettingComponent {
   ref: DynamicDialogRef | undefined
   type: string = 'I';
   selectedCountry = CountryISO.India
+  baseUrl = environment.imgUrl
 
   constructor(
     private _location: Location,
@@ -84,7 +86,8 @@ export class AccountSettingComponent {
   createForm() {
     this.updateInfoForm = this.fb.group({
       user_id: [''],
-      profile_name: ['', [Validators.required, Validators.maxLength(30), NoWhitespaceDirective.validate]],
+      first_name: ['', [Validators.required, Validators.maxLength(30), NoWhitespaceDirective.validate]],
+      last_name: ['', [Validators.required, Validators.maxLength(30), NoWhitespaceDirective.validate]],
       address: ['', [Validators.required, Validators.maxLength(100)]],
       city: ['', [Validators.maxLength(20)]],
       state: ['', [Validators.maxLength(20)]],
@@ -156,7 +159,8 @@ export class AccountSettingComponent {
         ? this.updateInfoForm.get('user_id')!.value
         : localStorage.getItem('user')
     )
-    formData.set('profile_name', this.updateInfoForm.get('profile_name')!.value)
+    formData.set('first_name', this.updateInfoForm.get('first_name')!.value)
+    formData.set('last_name', this.updateInfoForm.get('last_name')!.value)
     formData.set('address', this.updateInfoForm.get('address')!.value)
     formData.set('city', this.updateInfoForm.get('city')!.value)
     formData.set('state', this.updateInfoForm.get('state')!.value)
@@ -227,7 +231,8 @@ export class AccountSettingComponent {
       this.getCities({ target: { value: this.userInfo.state } })
       this.updateInfoForm.patchValue({
         user_id: this.userInfo.user_id,
-        profile_name: this.userInfo.profile_name ? this.userInfo.profile_name : this.userInfo.first_name + ' ' + this.userInfo.last_name,
+        first_name: this.userInfo.first_name,
+        last_name: this.userInfo.last_name,
         address: this.userInfo.address,
         state: this.userInfo.state,
         city: this.userInfo.city,
