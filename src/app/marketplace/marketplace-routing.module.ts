@@ -6,6 +6,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { ProjectOverviewComponent } from './project-overview/project-overview.component'
 import { ContactUsComponent } from './contact-us/contact-us.component'
 import { ProjectCartComponent } from '../shared/project-cart/project-cart.component'
+import { PaymentOptionComponent } from './payment-option/payment-option.component'
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: 'cart',
         component: ProjectCartComponent
+      },
+      {
+        path: 'payment-option',
+        component: PaymentOptionComponent
       },
     ]
   },

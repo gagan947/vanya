@@ -1,0 +1,106 @@
+<div class="min-h-screen md:p-6 p-4 mx-auto">
+
+    <div class="block xl:flex gap-4 ">
+        <div class="relative bg-white p-6 xl:w-[70%] w-full rounded shadow">
+            <div class="flex-wrap">
+                <h4 class="text-2xl font-semibold">Select Payment Method</h4>
+
+                <div class="mt-6">
+                    <label class="flex items-start space-x-3 mb-4">
+                        <input type="radio" name="payment" class="mt-1 accent-blue-600 w-[18px]  h-[18px]">
+                        <div>
+                            <p class="text-[18px] font-semibold">Credit or debit card</p>
+                            <div class="flex space-x-3 mt-3">
+                                <img src="assets/images/RuPay.svg.png" class="w-[60px] object-contain" alt="RuPay">
+                                <img src="assets/images/mastercard.png" class="w-[60px] object-contain"
+                                    alt="MasterCard">
+                                <img src="assets/images/8388-maestro_102458.webp" class="w-[60px] object-contain"
+                                    alt="Maestro">
+                                <img src="assets/images/paypal.webp" class="w-[60px] object-contain" alt="PayPal">
+                            </div>
+                        </div>
+                    </label>
+
+                    <!-- Net Banking -->
+                    <label class="flex items-start space-x-3 mb-4">
+                        <input type="radio" name="payment" class="mt-1 accent-blue-600 w-[18px]  h-[18px]">
+                        <div class="w-full">
+                            <p class="font-medium text-[18px]">Net Banking</p>
+                            <select class="w-full mt-1 p-2 border rounded-lg mt-3">
+                                <option>Choose an Option</option>
+                            </select>
+                        </div>
+                    </label>
+
+                    <!-- EMI -->
+                    <label class="flex items-center space-x-3 mb-4">
+                        <input type="radio" name="payment" class="accent-blue-600 w-[18px]  h-[18px]">
+                        <p class="font-medium text-[18px]">EMI</p>
+                    </label>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="relative bg-white p-6 xl:w-[30%] w-full rounded shadow shrink-0 h-max  mt-4 xl:mt-0">
+            <div class="">
+                <h4 class="mb-4 font-semibold text-2xl">Order Summary</h4>
+                <div class="space-y-4">
+                    <!-- Product 1 -->
+                    <div class="flex items-center space-x-4">
+                        <img src="http://34.71.149.83:5000/images/jUMdw2y7z6.webp" alt="Gaming Headphone"
+                            class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold">Gaming Headphone</h3>
+                            <p class="text-gray-500 text-sm">Qty : 1</p>
+                        </div>
+                        <p class="text-lg font-bold text-gray-900">₹ 75,00</p>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="flex items-center space-x-4">
+                        <img src="http://34.71.149.83:5000/images/jUMdw2y7z6.webp" alt="Super Laptop"
+                            class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold">Super Laptop</h3>
+                            <p class="text-gray-500 text-sm">Qty : 1</p>
+                        </div>
+                        <p class="text-lg font-bold text-gray-900">₹ 98,86</p>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="flex items-center space-x-4">
+                        <img src="http://34.71.149.83:5000/images/jUMdw2y7z6.webp" alt="Apple Watch 8"
+                            class="w-16 h-16 rounded-lg object-cover">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold">Apple Watch 8</h3>
+                            <p class="text-gray-500 text-sm">Qty : 1</p>
+                        </div>
+                        <p class="text-lg font-bold text-gray-900">₹ 267,50</p>
+                    </div>
+                </div>
+                <hr class="mt-3">
+                <div class="flex items-center gap-3 justify-between py-2">
+                    <p class="mb-0 font-semibold">Subtotal (1 Projects)</p>
+                    <p class="mb-0">₹2,000.00</p>
+                </div>
+                <div class="flex items-center gap-3 justify-between py-2">
+                    <p class="mb-0 font-semibold">GST 18%</p>
+                    <p class="mb-0">₹360.00</p>
+                </div>
+                <div class="flex items-center gap-3 justify-between py-2">
+                    <p class="mb-0 font-semibold">Grand Total</p>
+                    <p class="mb-0">₹2,360.00</p>
+                </div>
+                <div class="mt-5">
+                    <a class="text-white bg-primary px-6 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center justify-center space-x-2 font-medium"
+                        role="button">
+                        Proceed to Pay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

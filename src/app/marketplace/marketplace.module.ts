@@ -10,6 +10,7 @@ import { ProjectOverviewComponent } from './project-overview/project-overview.co
 import { FormsModule } from '@angular/forms';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { PaymentOptionComponent } from './payment-option/payment-option.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     ProjectOverviewComponent,
     MessageDialogComponent,
     ContactUsComponent,
+    PaymentOptionComponent
   ],
   imports: [
     FormsModule,
