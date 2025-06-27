@@ -93,7 +93,7 @@ export class AccountSettingComponent {
       state: ['', [Validators.maxLength(20)]],
       country: ['', [Validators.maxLength(20)]],
       profile_img: [''],
-      companyName: ['', Validators.required],
+      companyName: [''],
       gst: [''],
       vat: [''],
       licence: [''],

@@ -59,7 +59,7 @@ export class AddCertificateComponent {
     this.data = this.dialogConfig.data
     if (this.data) {
       this.Form.patchValue({
-        project_id: this.data.order_id ? this.data.order_id : this.data.project_name,
+        project_id: this.data.project_id,
         carbon_credits: this.data.carbon_credits,
         standard: this.data.standard,
         issued_on_name: this.data.buyer_name,
@@ -98,7 +98,7 @@ export class AddCertificateComponent {
     let formData = new FormData()
     formData.append('project_id', form.value.project_id)
     formData.append('carbon_credits', form.value.carbon_credits)
-    formData.append('standard', form.value.standard)
+    formData.append('standard', 'Verra or Verified Carbon Standard (VCS)')
     formData.append('issued_on_name', form.value.issued_on_name)
     formData.append('certificate', this.file)
 
@@ -108,6 +108,7 @@ export class AddCertificateComponent {
           this.loading = false
           this.toastr.success(res.message)
           this.router.navigate(['/main/dashboard/certificate'])
+          this.ref.close()
         } else {
           this.loading = false
           this.toastr.error(res.message)

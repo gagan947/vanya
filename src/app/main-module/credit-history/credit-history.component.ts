@@ -59,7 +59,7 @@ export class CreditHistoryComponent {
         { key: 'carbon_credits', label: 'Total Credits' },
         { key: 'price_per_carbon_credit', label: 'Price/Credits', type: 'price' },
         { key: 'amount', label: 'Amount', type: 'price' },
-        { key: 'created_at', label: 'Date', type: 'date' },
+        { key: 'transaction_date', label: 'Date', type: 'date' },
         { key: 'action', label: 'Action', type: 'action' }
       ];
 
@@ -95,7 +95,7 @@ export class CreditHistoryComponent {
     this.ref = this.dialogService.open(AddCertificateComponent, {
       data: data,
       header: 'Request For Certificate',
-      styleClass: 'bg-white p-2 shadow-md w-[22rem] md:w-[40rem] lg:w-[60rem]',
+      styleClass: 'bg-white p-2 shadow-md w-[22rem] md:w-[40rem] lg:w-[40rem]',
       dismissableMask: true,
       maximizable: true
     })

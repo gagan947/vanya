@@ -74,7 +74,7 @@ export class ProjectCartComponent {
   }
 
   increment(item: any) {
-    if (Number(item.carbon_credits) <= item.remaining_credit) {
+    if (Number(item.carbon_credits) < item.remaining_credit) {
       item.carbon_credits = Number(item.carbon_credits) + 1
       console.log(this.cartItems);
 

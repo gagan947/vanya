@@ -42,15 +42,16 @@ export class ProjectOverviewComponent {
     })
   }
 
-  decrement() {
-    this.value = this.value !== 1 ? this.value - 1 : this.value
+  increment(item: any) {
+    if (Number(this.value) < item.remaining_credit) {
+      this.value = Number(this.value) + 1
+    }
   }
 
-  increment() {
-    this.value =
-      this.value < this.projectInfo.remaining_credit
-        ? this.value + 1
-        : this.projectInfo.remaining_credit
+  decrement(item: any) {
+    if (Number(this.value) > 1) {
+      this.value = Number(this.value) - 1
+    }
   }
 
   checkValue() {
@@ -220,10 +221,50 @@ export class ProjectOverviewComponent {
     }
   }
 
+  BuyNow(data: any) {
+
+    if (!this.auth.isLogedIn()) {
+      this.router.navigate(['/auth'])
+      return
+    }
+
+    let apiUrl = 'cart/addToCart'
+    let formData = new URLSearchParams()
+    formData.set('project_id', data.id)
+    formData.set('carbon_credits', this.value)
+    formData.set('price_per_carbon_credit', '2000')
+    formData.set('total_price_of_project', '1000')
+
+    this.service.postWithToken(apiUrl, formData).subscribe({
+      next: async res => {
+        if (res.success === true) {
+          this.loading = false
+          const encryptedId = this.encryptId(data.id);
+          this.router.navigate(['/marketplace/projects/payment-option'], { queryParams: { id: encryptedId } });
+        } else {
+          this.loading = false
+        }
+      },
+      error: err => {
+        this.loading = false
+      }
+    })
+  }
+
+  encryptId(id: number): string {
+    const secretKey = 'Vanya@321'
+    return CryptoJS.AES.encrypt(id?.toString(), secretKey).toString()
+  }
   decryptId(encryptedId: string): number {
     const secretKey = 'Vanya@321'
     const bytes = CryptoJS.AES.decrypt(encryptedId, secretKey)
     const decryptedId = bytes.toString(CryptoJS.enc.Utf8)
     return +decryptedId
+  }
+
+  imageLoaded: boolean = false;
+
+  onImageLoad() {
+    this.imageLoaded = true;
   }
 }

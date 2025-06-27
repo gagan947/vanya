@@ -223,7 +223,7 @@ export class AddProjectComponent {
       ],
       project_type: ['', Validators.required],
       sustainableDevelopmentGoals: ['', Validators.required],
-      specificSDGTargets: [''],
+      // specificSDGTargets: [''],
       country: ['', [Validators.required]],
       projectArea: ['', [Validators.required, Validators.min(0)]],
       location: ['', Validators.required],
@@ -268,10 +268,17 @@ export class AddProjectComponent {
     formData.set('country', data.country)
     formData.set('registry_details', data.registry_details)
     formData.set('project_type', data.project_type.id)
-    formData.set(
-      'area_in_acres',
-      this.originalProjectArea!.toString()
-    )
+    if (this.originalProjectArea) {
+      formData.set(
+        'area_in_acres',
+        this.originalProjectArea!.toString()
+      )
+    } else {
+      formData.set(
+        'area_in_acres',
+        this.project_area!.toString()
+      )
+    }
     formData.set('area_in_hectars', this.project_area!.toString())
     formData.set('location', data.location)
     formData.set('new_or_existing_project', this.selectedType)
@@ -401,7 +408,6 @@ export class AddProjectComponent {
               project_subtitle_2: this.projectInfo.project_subtitle_2,
               project_short_desc: this.projectInfo.project_short_desc,
               project_brief_detail: this.projectInfo.project_brief_detail,
-              specificSDGTargets: '',
               verification_status: this.projectInfo.verification_status,
               country: this.projectInfo.country,
               projectArea:
@@ -435,18 +441,18 @@ export class AddProjectComponent {
             })
 
             this.total_credits = this.projectInfo.credits
-
-            this.selectedPhase = this.projectPhases.filter(
-              phase => phase.id == this.projectInfo.current_phase
+            this.selectedProType = this.projectTypes.find(
+              type => type.id == Number(this.projectInfo.project_type)
             )
 
-            this.selectedProType = this.projectTypes.filter(
-              type => type.id == this.projectInfo.project_type
+            this.selectedPhase = this.projectPhases.find(
+              phase => phase.id == Number(this.projectInfo.current_phase)
             )
+
             this.allSelectedSdg =
               this.sdgsByProjectType =
               this.selectedSdg =
-              this.selectedProType[0].sdgs
+              this.selectedProType.sdgs
 
             this.impactBenefitsForm.patchValue({
               impact_metrics: this.projectInfo.impact_metrics,

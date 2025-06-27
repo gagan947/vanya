@@ -93,7 +93,7 @@
                     <p class="mb-0">{{getTotal(cartItems) + (getTotal(cartItems) * 0.18) | currency:'INR'}}</p>
                 </div>
                 <div class="mt-5">
-                    <a (click)="checkOut(cartItems)"
+                    <a routerLink="/marketplace/projects/payment-option"
                         class="text-white bg-primary px-6 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center justify-center space-x-2 font-medium"
                         role="button">
                         Proceed to Buy

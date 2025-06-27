@@ -87,24 +87,37 @@
                         <!-- <h1 class="text-2xl font-bold text-gray-700">Invoice</h1> -->
                         <p class="text-gray-500"><strong class="text-[#2b2b2b]">Receipt :</strong> #{{
                               invoiceData.order_id }}</p>
-                        <p class="text-gray-500"><strong class="text-[#2b2b2b]">Date :</strong> Nov 12, 2021</p>
+                        <p class="text-gray-500"><strong class="text-[#2b2b2b]">Date :</strong>
+                              {{ (invoiceData.transaction_date ? invoiceData.transaction_date  : invoiceData.created_at) | date}}
+                        </p>
                   </div>
             </div>
 
             <div class="flex justify-between p-5 bg-[#f4f7fc] gap-10">
                   <div class="mb-6">
                         <h2 class="text-lg font-bold text-[#2b2b2b] mb-3">Billing Details</h2>
-                        <p class="text-[#2b2b2b] font-semibold">Mahendra Badjatya & Co</p>
-                        <p class="text-[#2b2b2b] text-sm">208, Morya Centre, 16 Race Course Road, Anand Park</p>
+                        @if(userInfo.user_type == 'C'){
+                        <p class="text-[#2b2b2b] font-semibold">{{userInfo.company_name}}</p>
+                        } @else {
+                        <p class="text-[#2b2b2b] font-semibold">{{userInfo.first_name + ' ' + userInfo.last_name}}</p>
+                        }
+                        <p class="text-[#2b2b2b] text-sm">{{userInfo.address}}</p>
                         <p class="text-[#2b2b2b] text-sm">Indore, Madhya Pradesh 452003, India</p>
-                        <p class="text-[#2b2b2b] text-sm"><strong>GSTIN : </strong>23AAVFM8487C1ZS</p>
+                        @if(userInfo.user_type == 'C'){
+                        @if(userInfo.gst_number !== 'undefined' && userInfo.gst_number){
+                        <p class="text-[#2b2b2b] text-sm"><strong>GSTIN : </strong>{{ userInfo.gst_number}}</p>
+                        }
+                        }
                   </div>
 
                   <div class="mb-6">
                         <h2 class="text-lg font-bold text-[#2b2b2b] mb-3">Payment To</h2>
-                        <p class="text-[#2b2b2b] font-semibold">Engineer.ai India Private Limited</p>
-                        <p class="text-[#2b2b2b] text-sm">77B, Ground Floor, Sector-18, Iffco Road, Gurgaon 122015</p>
+                        <p class="text-[#2b2b2b] font-semibold">Vanya.ai India Private Limited</p>
+                        <p class="text-[#2b2b2b] text-sm">Shekhar central, 519, New Palasia, Indore, Madhya Pradesh
+                              452001</p>
+                        @if(userInfo.user_type == 'C'){
                         <p class="text-[#2b2b2b] text-sm"><strong>GSTIN : </strong>06AAHCS3816N1Z</p>
+                        }
                   </div>
             </div>
 
@@ -130,7 +143,7 @@
                                           {{invoiceData.price_per_carbon_credit | currency:'INR'}}
                                     </td>
                                     <td class="border border-gray-300 px-4 py-2 text-right">
-                                          {{ invoiceData.amount | currency: 'INR' }}
+                                          {{ (invoiceData.amount / 1.18) | currency: 'INR' }}
                                     </td>
                               </tr>
                         </tbody>
@@ -140,24 +153,25 @@
             <div class="mb-6 flex justify-end">
                   <div class="pr-4">
                         <p class="text-[#2b2b2b] flex justify-between gap-5"><strong>GST (18%) : </strong>
-                              <span>{{invoiceData.amount * 0.18 | currency: 'INR'}}</span>
+                              <span>{{ (invoiceData.amount / 1.18) * 0.18 | currency: 'INR' }}</span>
                         </p>
                         <p class="text-[#2b2b2b] flex justify-between gap-5"><strong class="w-full text-end">Total :
                               </strong>
-                              <span>{{(invoiceData.amount + invoiceData.amount * 0.18) | currency: 'INR'}}</span>
+                              <span>{{((invoiceData.amount / 1.18) + ((invoiceData.amount / 1.18) * 0.18)) | currency: 'INR'}}</span>
                         </p>
                   </div>
             </div>
 
             <div class="mb-6 p-5 bg-[#f4f7fc]">
                   <p class="text-[#2b2b2b]"><strong>Amount Received (in words):</strong>
-                        {{ (invoiceData.amount + invoiceData.amount * 0.18) | numberToWords }}
+                        {{ ((invoiceData.amount / 1.18) + ((invoiceData.amount / 1.18) * 0.18)) | numberToWords }}
                   </p>
                   <p class="text-[#2b2b2b]"><strong>Tax Amount (in words):</strong>
-                        {{invoiceData.amount * 0.18 | numberToWords}}</p>
+                        {{(invoiceData.amount / 1.18) * 0.18 | numberToWords}}
+                  </p>
             </div>
 
             <div class="text-gray-500 text-sm text-center border-t pt-4">
-                  <p>SAC: 999799 - Vanya Environmental Protection and Carbon Credit Trading Services.</p>
+                  <p>Vanya Environmental Protection and Carbon Credit Trading Services.</p>
             </div>
       </div>

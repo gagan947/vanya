@@ -3,9 +3,15 @@
       <section class="md:p-8 bg-white p-4 antialiased rounded-lg h-full">
             <div class="2xl:px-0">
                   <div class="lg:grid lg:grid-cols-3 lg:gap-8 xl:gap-16">
-                        <div class="shrink-0 rounded-2xl ">
-                              <img class="w-full rounded-2xl h-[400px] object-cover
-                              " [src]="baseUrl + projectMedia?.image_1URL" alt="" />
+                        <div class="shrink-0 rounded-2xl relative">
+                              <img src="assets/images/placeholder.jpg" alt="Loading..."
+                                    class="w-full h-[400px] rounded-2xl object-cover transition-opacity duration-500"
+                                    [ngClass]="{'opacity-0': imageLoaded, 'opacity-100': !imageLoaded}" />
+
+                              <img [src]="baseUrl + projectMedia?.image_1URL" alt="Project Media"
+                                    class="w-full h-[400px] rounded-2xl object-cover transition-opacity duration-500 absolute top-0 left-0"
+                                    (load)="onImageLoad()"
+                                    [ngClass]="{'opacity-100': imageLoaded, 'opacity-0': !imageLoaded}" />
                         </div>
                         <div class="mt-6 sm:mt-8 lg:mt-0 col-span-2">
                               <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl mb-0">
@@ -43,8 +49,27 @@
                               <h3><span
                                           class="text-2xl font-bold">{{projectInfo?.price_per_carbon_credit | currency:'INR'}}</span>
                                     <span class="font-medium">
-                                          per credit</span></h3>
+                                          per credit</span>
+                              </h3>
                               <div class="mt-8 sm:gap-4 sm:items-center sm:flex grid gap-2">
+                                    <div class="relative sm:w-[180px]"><button (click)="decrement(projectInfo)"
+                                                class="absolute left-0 w-[29px] h-[29px] bg-[#eef1f9] m-1 rounded-md  hover:bg-primary hover:text-white">
+                                                <i class="fa-solid fa-minus"></i>
+                                          </button>
+                                          <p class="absolute right-[55px] top-[20%]  text-gray-600 font-medium">
+                                                {{
+                                          value
+                                          }} &nbsp;
+                                                tCO₂e
+                                          </p>
+                                          <input type="number" min="1" value="1"
+                                                class="border border-gray-300 pl-10 rounded-lg px-4 py-2 focus:outline outline-primary ps-3 text-sm bg-transparent w-full font-semibold ng-pristine ng-valid ng-touched"
+                                                ng-reflect-min="1" ng-reflect-model="1">
+                                          <button (click)="increment(projectInfo)"
+                                                class="absolute right-0 w-[29px] h-[29px] bg-[#eef1f9] m-1 rounded-md hover:bg-primary hover:text-white">
+                                                <i class="fa-solid fa-plus"></i>
+                                          </button>
+                                    </div>
                                     <a (click)="addToCart(projectInfo)" title=""
                                           class="text-primary bg-transparent px-6 py-2 hover:bg-primary hover:text-white rounded-md border border-primary flex items-center space-x-2 font-medium"
                                           role="button">
@@ -57,7 +82,7 @@
                                           </svg>
                                           Add to cart
                                     </a>
-                                    <a (click)="addToCart(projectInfo)" title=""
+                                    <a (click)="BuyNow(projectInfo)" title=""
                                           class="text-white bg-primary px-6 py-2 hover:bg-transparent hover:text-primary rounded-md border border-primary flex items-center space-x-2 font-medium"
                                           role="button">
                                           Buy Now

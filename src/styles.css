@@ -8,7 +8,7 @@ body {
       touch-action: manipulation;
       -webkit-user-select: none;
       user-select: none;
-      overflow: hidden;
+      /* overflow: hidden; */
 }
 
 ::-webkit-scrollbar {

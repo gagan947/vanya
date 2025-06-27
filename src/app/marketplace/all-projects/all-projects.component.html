@@ -5,11 +5,20 @@
       <div class="grid grid-cols-1 sm:grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             @if(projectList){
             <ng-container *ngFor="let project of projectList">
-                  <div class="projects-card shadow-md rounded-lg cursor-pointer bg-white p-2"
-                        (click)="redirect(project)">
+                  <div (click)="redirect(project)"
+                        class="projects-card shadow-md rounded-lg cursor-pointer bg-white p-2">
                         <div class="relative">
-                              <img [src]=" project.thumbnail ? imageurl + project.thumbnail : '/assets/images/about_inner_bg.jpg'"
-                                    class="rounded-lg md:h-64 w-full" alt="">
+                              <!-- Placeholder image is always present but hidden when the real image loads -->
+                              <img src="assets/images/placeholder.jpg" alt="Loading..."
+                                    class="rounded-lg md:h-64 w-full transition-opacity duration-500"
+                                    [ngClass]="{'opacity-0': imageLoaded, 'opacity-100': !imageLoaded}" />
+
+                              <!-- Actual image that smoothly fades in -->
+                              <img [src]="project.thumbnail ? imageurl + project.thumbnail : '/assets/images/about_inner_bg.jpg'"
+                                    alt="Project Thumbnail"
+                                    class="rounded-lg md:h-64 w-full transition-opacity duration-500 absolute top-0 left-0"
+                                    (load)="onImageLoad()"
+                                    [ngClass]="{'opacity-100': imageLoaded, 'opacity-0': !imageLoaded}" />
                         </div>
                         <div class="p-2 grid gap-y-2">
                               <div class="flex justify-between items-center">
@@ -56,12 +65,12 @@
                         </div> -->
                         @if(project.remaining_credit > 0) {
                         <div
-                              class="flex justify-between items-center bg-primary text-white text-base font-medium p-2 rounded-lg">
+                              class="flex justify-center items-center bg-primary text-white text-base font-medium p-2 rounded-lg">
                               <span>Available</span>
                         </div>
                         } @else {
                         <div
-                              class="flex justify-between items-center bg-red-500 text-white text-base font-medium p-2 rounded-lg">
+                              class="flex justify-center items-center bg-red-500 text-white text-base font-medium p-2 rounded-lg">
                               <span>Unavailable</span>
                         </div>
                         }

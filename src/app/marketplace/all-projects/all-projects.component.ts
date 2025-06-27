@@ -58,4 +58,10 @@ export class AllProjectsComponent {
     const secretKey = 'Vanya@321'
     return CryptoJS.AES.encrypt(id?.toString(), secretKey).toString()
   }
+
+  imageLoaded: boolean = false;
+
+  onImageLoad() {
+    this.imageLoaded = true;
+  }
 }

@@ -4,7 +4,7 @@
       <div class="md:p-5 rounded-lg">
             <form [formGroup]="Form" (ngSubmit)="onSubmit(Form)" class="">
                   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
-                        <div class="grid gap-1 col-span-1">
+                        <div class=" gap-1 col-span-1 hidden">
                               <label for="" class="text-sm text-gray-700">*Project</label>
                               <input type="text" readonly
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
@@ -20,7 +20,7 @@
                                     </svg>
                               </p>
                         </div>
-                        <div class="grid gap-1 col-span-1">
+                        <div class=" gap-1 col-span-1 hidden">
                               <label for="" class="text-sm text-gray-700">*Carbon Credits</label>
                               <input type="number" min="0" readonly
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
@@ -37,7 +37,7 @@
                                     </svg>
                               </p>
                         </div>
-                        <div class="grid gap-1 col-span-1">
+                        <div class="hidden gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Standard</label>
                               <select
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent w-full"
@@ -62,7 +62,7 @@
                                     </svg>
                               </p>
                         </div>
-                        <div class="grid gap-1 col-span-1">
+                        <div class="hidden gap-1 col-span-1">
                               <label for="" class="text-sm text-gray-700">*Name</label>
                               <input type="text"
                                     class="border border-gray-300 rounded-lg px-4 py-2 focus:outline outline-primary text-sm bg-transparent"
@@ -79,7 +79,7 @@
                                     </svg>
                               </p>
                         </div>
-                        <div class="grid gap-1 col-span-1">
+                        <div class="grid gap-1 col-span-3">
                               <label for="" class="text-sm text-gray-700">*Company Logo</label>
                               <input type="file"
                                     class="border border-gray-300 rounded-lg px-4 py-1 focus:outline outline-primary text-sm bg-transparent w-full"

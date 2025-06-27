@@ -44,11 +44,11 @@ export class SidebarDataService {
         link: '/main/dashboard/certificate',
         icon: 'certificate'
       },
-      {
-        label: 'Marketplace',
-        link: '/marketplace/projects',
-        icon: 'marketplace-outline'
-      },
+      // {
+      //   label: 'Marketplace',
+      //   link: '/marketplace/projects',
+      //   icon: 'marketplace-outline'
+      // },
       {
         label: 'Profile',
         link: '/main/dashboard/account-setting',
@@ -68,7 +68,7 @@ export class SidebarDataService {
         icon: 'view-dashboard-outline'
       },
       {
-        label: 'Project List',
+        label: 'My Projects',
         link: '/main/dashboard/projects',
         icon: 'clipboard-list-outline'
       },
@@ -92,11 +92,11 @@ export class SidebarDataService {
         link: '/main/dashboard/certificate',
         icon: 'certificate'
       },
-      {
-        label: 'Marketplace',
-        link: '/marketplace/projects',
-        icon: 'marketplace-outline'
-      },
+      // {
+      //   label: 'Marketplace',
+      //   link: '/marketplace/projects',
+      //   icon: 'marketplace-outline'
+      // },
       {
         label: 'Profile',
         link: '/main/dashboard/account-setting',

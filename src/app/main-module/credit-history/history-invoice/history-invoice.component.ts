@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HistoryInvoiceComponent {
   invoiceData: any;
   role: string | null | undefined
+  userInfo: any;
 
   constructor(
     private dialogConfig: DynamicDialogConfig,
@@ -23,13 +24,14 @@ export class HistoryInvoiceComponent {
     this.authService.authState$.subscribe(res => {
       this.role = res.role
     })
+    let data: any = localStorage.getItem('userInfo')
+    this.userInfo = JSON.parse(data)
 
     this.invoiceData = this.dialogConfig.data
   }
 
   exportAsPDF(): void {
     const invoiceElement = document.getElementById('invoice');
-
     const options = {
       margin: 10,
       filename: 'invoice.pdf',
